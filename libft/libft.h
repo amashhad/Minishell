@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:57:01 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 20:01:52 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/01 21:01:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	**ft_split(char *s, char c);
 char	**ft_cpyarr(char **arr);
+char	*ft_joinstrjoin(char *left, char *middle, char *right);
 //voids
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
