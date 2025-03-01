@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 22:26:39 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/01 23:06:17 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,18 @@ int		main(void)
 	char	*prompt;
 
 	prompt = ft_get_prompt();
-	line = readline(prompt);
-	ft_rev_str(line);
-	free(line);
+	while (1)
+	{
+		line = readline(prompt);
+		if (!ft_exit_shell(line))
+		{
+			free(line);
+			break;
+		}
+		add_history(line);
+		ft_rev_str(line);
+		free(line);
+	}
 	free(prompt);
 	return (0);
 }

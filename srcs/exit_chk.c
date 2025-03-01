@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exit_chk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 23:08:02 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/01 22:59:08 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/01 23:43:17 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
+int	ft_exit_shell(char *line)
+{
+	int	i;
 
-# ifndef PATH_MAX
-# define PATH_MAX 4096
-# endif
-
-int	ft_exit_shell(char *line);
-
-#endif
+	i = 0;
+	while (ft_isspace(line[i]))
+		i++;
+	return (ft_strncmp(line + i, "exit", 4));
+}
