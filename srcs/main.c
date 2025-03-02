@@ -6,11 +6,17 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 23:06:17 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/02 16:01:47 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	initalization(t_read *line)
+{
+	line->line = NULL;
+	line->prompt = NULL;
+}
 
 void	ft_rev_str(char *str)
 {
@@ -28,39 +34,39 @@ void	ft_rev_str(char *str)
 	return ;
 }
 
-char	*ft_get_prompt(void)
+void	ft_get_prompt(t_read *line)
 {
-	char	*prompt;
 	char	temp[PATH_MAX];
 
 	getcwd(temp, sizeof(temp));
-	prompt = ft_joinstrjoin("Minishell>:", temp, "$ ");
-	if (!prompt)
+	line->prompt = ft_joinstrjoin("Minishell>:", temp, "$ ");
+	if (!line->prompt)
 	{
 		ft_putendl_fd("Unable to get prompt", 2);
+		free(line->line);
 		exit(0);
 	}
-	return (prompt);
 }
 
 int		main(void)
 {
-	char	*line;
-	char	*prompt;
+	t_read	line;
 
-	prompt = ft_get_prompt();
+	initalization(&line);
+	ft_get_prompt(&line);
 	while (1)
 	{
-		line = readline(prompt);
-		if (!ft_exit_shell(line))
+		line.line = readline(line.prompt);
+		if (!ft_exit_shell(line.line))
 		{
-			free(line);
+			free(line.line);
 			break;
 		}
-		add_history(line);
-		ft_rev_str(line);
-		free(line);
+		add_history(line.line);
+		ft_rev_str(line.line);
+		free(line.line);
 	}
-	free(prompt);
+	rl_clear_history();
+	free(line.prompt);
 	return (0);
 }
