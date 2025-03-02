@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_engine_start.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/02 23:24:30 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/02 23:45:28 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
-# include "../libft/ft_printf.h"
-
-# ifndef PATH_MAX
-# define PATH_MAX 4096
-# endif
-
-typedef struct s_read
+int	minipipex(t_read line)
 {
-	char	*prompt;
-	char	*line;
-	char	**enviro;
-	int		pipes[2];
-}				t_read;
-
-int	ft_exit_shell(char *line);
-
-#endif
+	if (!line.line)
+		return (0);
+}

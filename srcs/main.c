@@ -6,16 +6,24 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/02 16:01:47 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/02 23:57:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	initalization(t_read *line)
+void	initalization(t_read *line, char **envp)
 {
 	line->line = NULL;
 	line->prompt = NULL;
+	line->pipes[0] = 0;
+	line->pipes[1] = 0;
+	line->enviro = ft_cpyarr(envp);
+	if (!line->enviro)
+	{
+		ft_putendl_fd("Enviro err: no ENV variable", 2);
+		exit (1);
+	}
 }
 
 void	ft_rev_str(char *str)
@@ -44,15 +52,18 @@ void	ft_get_prompt(t_read *line)
 	{
 		ft_putendl_fd("Unable to get prompt", 2);
 		free(line->line);
+		ft_farray(line->enviro);
 		exit(0);
 	}
 }
 
-int		main(void)
+int		main(int argc,char **argv, char **envp)
 {
 	t_read	line;
 
-	initalization(&line);
+	(void) argc;
+	(void) argv;
+	initalization(&line, envp);
 	ft_get_prompt(&line);
 	while (1)
 	{
@@ -64,9 +75,11 @@ int		main(void)
 		}
 		add_history(line.line);
 		ft_rev_str(line.line);
+		minipipex();
 		free(line.line);
 	}
 	rl_clear_history();
 	free(line.prompt);
+	ft_farray(line.enviro);
 	return (0);
 }

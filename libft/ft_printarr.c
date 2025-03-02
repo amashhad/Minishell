@@ -1,47 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cpyarr.c                                        :+:      :+:    :+:   */
+/*   ft_printarr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 08:24:53 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/02 21:02:54 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/02 20:41:34 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/02 20:48:31 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	arr_size(char **arr)
+//Prints array and returns the number of elements that would've been written//
+//returns 0 in case of error with error message, doesn't exit//
+int	ft_printarr(char **arr)
 {
-	int		i;
+	int	i;
+	int	count;
 
 	i = 0;
-	if (!arr)
-		return (0);
-	while (arr[i] != NULL)
-		i++;
-	return (i);
-}
-
-char	**ft_cpyarr(char **arr)
-{
-	int		size;
-	int		i;
-	char	**temp;
-
-	i = 0;
-	size = arr_size(arr);
-	if (!size)
-		return (NULL);
-	temp = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!temp)
-		return (NULL);
-	while (arr[i] != NULL)
+	count = 0;
+	if (!arr || *arr == NULL)
 	{
-		temp[i] = ft_strdup(arr[i]);
+		ft_putendl_fd("Printarr: Array doesn't exit\n", 2);
+		return (0);
+	}
+	while (arr[i])
+	{
+		count += ft_strlen(arr[i]);
+		ft_putendl_fd(arr[i], 1);
 		i++;
 	}
-	temp[size] = NULL;
-	return (temp);
+	return (count);
 }
