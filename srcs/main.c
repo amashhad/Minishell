@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/03 16:01:40 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/03 23:48:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ void	initalization(t_read *line, char **envp)
 {
 	line->line = NULL;
 	line->prompt = NULL;
-	line->pipes[0] = 0;
-	line->pipes[1] = 0;
-	line->enviro = ft_cpyarr(envp);
 	line->tokens = NULL;
+	line->cwd = NULL;
+	line->enviro = ft_cpyarr(envp);
 	if (!line->enviro)
 	{
 		ft_putendl_fd("Enviro err: no ENV variable", 2);
@@ -48,11 +47,17 @@ void	ft_get_prompt(t_read *line)
 	char	temp[PATH_MAX];
 
 	getcwd(temp, sizeof(temp));
-	line->prompt = ft_joinstrjoin("Minishell>:", temp, "$ ");
+	if (line->cwd)
+		free(line->cwd);
+	if (line->prompt)
+		free(line->prompt);
+	line->cwd = ft_strdup(temp);
+	line->prompt = ft_joinstrjoin("Minishell>: ~", temp, "$ ");
 	if (!line->prompt)
 	{
 		ft_putendl_fd("Unable to get prompt", 2);
 		free(line->line);
+		free(line->cwd);
 		ft_farray(line->enviro);
 		exit(0);
 	}
@@ -61,6 +66,7 @@ void	ft_get_prompt(t_read *line)
 int		main(int argc,char **argv, char **envp)
 {
 	t_read	line;
+	//char	**new_arr;
 
 	(void) argc;
 	(void) argv;
@@ -76,6 +82,7 @@ int		main(int argc,char **argv, char **envp)
 		}
 		add_history(line.line);
 		line.tokens = history_tokenize(line.line);
+		builtin(&line);
 		//minipipex(&line);
 		//ft_rev_str(line.line);
 		ft_printarr(line.tokens);
@@ -84,6 +91,7 @@ int		main(int argc,char **argv, char **envp)
 	}
 	rl_clear_history();
 	free(line.prompt);
+	free(line.cwd);
 	ft_farray(line.enviro);
 	return (0);
 }
