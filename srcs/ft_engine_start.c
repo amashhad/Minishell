@@ -6,14 +6,14 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/02 23:45:28 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:08:45 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	minipipex(t_read line)
+int	minipipex(t_read *line)
 {
-	if (!line.line)
+	if (!line->line)
 		return (0);
 }
