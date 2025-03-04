@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printarr.c                                      :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/02 20:41:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/04 16:40:53 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/04 22:13:52 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/04 22:16:32 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//Prints array and returns the number of elements that would've been
-//written, returns 0 in case of error with an error message
-int	ft_printarr(char **arr)
+//calculates size of array, returns size of arr on success, 0 on NULL arr
+//ARRAY MUST BE NULL TERMINATED!!!!!!!!
+size_t	ft_arrlen(char **arr)
 {
-	int	i;
-	int	count;
+	int	len;
 
-	i = 0;
-	count = 0;
+	len = 0;
 	if (!arr || *arr == NULL)
-	{
-		ft_putendl_fd("Printarr: Array doesn't exit\n", 2);
 		return (0);
-	}
-	while (arr[i])
-	{
-		count += ft_strlen(arr[i]);
-		ft_putendl_fd(arr[i], 1);
-		i++;
-	}
-	return (count);
+	while (arr[len] != NULL)
+		len++;
+	return (len);
 }

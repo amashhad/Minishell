@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_handle.c                                  :+:      :+:    :+:   */
+/*   ft_addarr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 22:47:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/04 17:15:48 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/04 21:27:08 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/04 22:26:30 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	builtin(t_read *line)
+char	**ft_addarr(char *str, char **arr)
 {
-	if (line->tokens != NULL && (ft_strncmp(line->tokens[0], "env", 3) == 0))
-		ft_printarr(line->enviro);
-	if (line->tokens != NULL && (ft_strncmp(line->tokens[0], "pwd", 3) == 0))
+	int	i;
+	char	**new_arr;
+
+	i = 0;
+	if (!str)
 	{
-		ft_get_prompt(line);
-		ft_putendl_fd(line->cwd, 1);
+		ft_putendl_fd("addarr error, no str present, nothing to add", 2);
+		return (NULL);
 	}
-	if (line->tokens != NULL && (ft_strncmp(line->tokens[0], "export", 6) == 0))
-		ft_addprintarr("declare -x ", line->enviro);
+	if (!arr || *arr == NULL)
+	{
+		ft_putendl_fd("addarr error, no arr present, nothing to edit", 2);
+		return (NULL);
+	}
+	i = ft_arrlen(arr);
+	new_arr = malloc(sizeof(char *) + i + 2);
+	return (new_arr);
 }

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/03 23:48:05 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/04 22:46:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_get_prompt(t_read *line)
 int		main(int argc,char **argv, char **envp)
 {
 	t_read	line;
-	//char	**new_arr;
 
 	(void) argc;
 	(void) argv;
@@ -82,9 +81,6 @@ int		main(int argc,char **argv, char **envp)
 		}
 		add_history(line.line);
 		line.tokens = history_tokenize(line.line);
-		builtin(&line);
-		//minipipex(&line);
-		//ft_rev_str(line.line);
 		ft_printarr(line.tokens);
 		ft_farray(line.tokens);
 		free(line.line);

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:57:01 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/02 20:48:59 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/04 22:20:57 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
+size_t	ft_arrlen(char **arr);
 int		ft_lstsize(t_list *lst);
 int		ft_printarr(char **arr);
+int		ft_addprintarr(char *print, char **arr);
 //chars
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
@@ -61,6 +63,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	**ft_split(char *s, char c);
 char	**ft_cpyarr(char **arr);
 char	*ft_joinstrjoin(char *left, char *middle, char *right);
+char	**ft_addarr(char *str, char **arr);
 //voids
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
