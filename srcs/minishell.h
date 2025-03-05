@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/03 23:24:09 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:24:48 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_read
 	char	*cwd;
 	char	**enviro;
 	char	**tokens;
+	char	**expo;
 }				t_read;
 
 int	ft_exit_shell(char *line);

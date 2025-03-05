@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 20:37:27 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/04 21:26:24 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:29:08 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	**edit_arr(char *str, char **arr, char mode)
 		ft_addprintarr(str, arr);
 	else if (mode == '+')
 		return (ft_addarr(str, arr));
+	else if (mode == '-')
+		return (ft_subarr(str, arr));
 	else
 		return (NULL);
 	return (arr);

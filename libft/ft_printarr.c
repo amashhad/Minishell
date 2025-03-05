@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 20:41:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/04 16:40:53 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/04 23:20:06 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_printarr(char **arr)
 	count = 0;
 	if (!arr || *arr == NULL)
 	{
-		ft_putendl_fd("Printarr: Array doesn't exit\n", 2);
+		ft_putendl_fd("Printarr: Array doesn't exist\n", 2);
 		return (0);
 	}
 	while (arr[i])

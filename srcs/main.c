@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/04 22:46:20 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:50:34 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	initalization(t_read *line, char **envp)
 		ft_putendl_fd("Enviro err: no ENV variable", 2);
 		exit (1);
 	}
+	line->expo = ft_cpyarr(line->enviro);
 }
 
 void	ft_rev_str(char *str)
@@ -66,7 +67,9 @@ void	ft_get_prompt(t_read *line)
 int		main(int argc,char **argv, char **envp)
 {
 	t_read	line;
+	char	**new_arr;
 
+	(void) new_arr;
 	(void) argc;
 	(void) argv;
 	initalization(&line, envp);
@@ -81,13 +84,16 @@ int		main(int argc,char **argv, char **envp)
 		}
 		add_history(line.line);
 		line.tokens = history_tokenize(line.line);
-		ft_printarr(line.tokens);
+		builtin(&line);
+		//line.expo = ft_subarr("USER", line.expo);
+		//ft_printarr(line.expo);
 		ft_farray(line.tokens);
 		free(line.line);
 	}
 	rl_clear_history();
 	free(line.prompt);
 	free(line.cwd);
+	ft_farray(line.expo);
 	ft_farray(line.enviro);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:57:01 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/04 22:20:57 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:34:54 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	**ft_split(char *s, char c);
 char	**ft_cpyarr(char **arr);
 char	*ft_joinstrjoin(char *left, char *middle, char *right);
 char	**ft_addarr(char *str, char **arr);
+char	**ft_subarr(char *str, char **old_arr);
 //voids
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
