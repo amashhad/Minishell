@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:30:10 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/05 23:46:28 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:19:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@ static char	**rm_arr(char *str, char **old_arr)
 		i++;
 	}
 	new_arr[j] = NULL;
-	ft_farray(old_arr);
 	return (new_arr);
 }
 
 //Subtracts string (str) from array (old_arr) and returns the array (new_arr)
-//returns the array (old_arr) in case empty str
+//returns the array (old_arr) in case of empty str or str not found
 //returns NULL with error msg in case of empty/wrong array
 //ONLY ACCEPTS NULL TERMINATED ARRAYS!!!
 //Frees old_arr after use, must assign to same arr
@@ -63,12 +62,10 @@ char	**ft_subarr(char *str, char **old_arr)
 			break;
 	}
 	if (old_arr[i] == NULL)
-	{
-		ft_putendl_fd("subarr error, cannot find str in arr", 2);
 		return (old_arr);
-	}
 	new_arr = rm_arr(str, old_arr);
 	if (!new_arr)
 		return (NULL);
+	ft_farray(old_arr);
 	return (new_arr);
 }

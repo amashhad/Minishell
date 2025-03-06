@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 05:21:05 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 20:19:58 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:57:15 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)(s) + i);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

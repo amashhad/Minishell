@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/05 23:50:34 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:02:13 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ int		main(int argc,char **argv, char **envp)
 		add_history(line.line);
 		line.tokens = history_tokenize(line.line);
 		builtin(&line);
-		//line.expo = ft_subarr("USER", line.expo);
-		//ft_printarr(line.expo);
 		ft_farray(line.tokens);
 		free(line.line);
 	}
