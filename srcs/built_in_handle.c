@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:47:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/06 17:53:38 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/06 22:15:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,7 @@ void	ft_handle_export(t_read *line)
 			return ;
 	}
 }
-void	ft_handle_cd(t_read *line)
-{
-	if (line->tokens[1] != NULL)
-	{
-		if (ft_strchr(line->tokens[1], '|') == NULL)
-		{
-		}
-	}
-}
+
 void	builtin(t_read *line)
 {
 	if (line->tokens == NULL)
