@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/06 20:37:43 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:41:52 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,11 @@ int		main(int argc,char **argv, char **envp)
 		}
 		add_history(line.line);
 		line.tokens = history_tokenize(line.line);
+		ft_printarr(line.tokens);
 		builtin(&line);
 		ft_farray(line.tokens);
 		free(line.line);
 	}
-	rl_clear_history();
-	free(line.prompt);
-	free(line.cwd);
-	ft_farray(line.expo);
-	ft_farray(line.enviro);
+	ft_exit_with_error(&line ,NULL);
 	return (0);
 }

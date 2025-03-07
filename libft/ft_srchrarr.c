@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:03:03 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/06 21:59:08 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:27:34 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 //and returns the array.
 //returns null if no array, returns array if no fnd or rplc exist
 //MUST SEND NULL TERMINATED ARRAY
-//OLD_ARR WILL BE FREED
+//OLD_ARR WILL BE FREED AT SUCCESS
 char	**ft_srchrarr(char *fnd, char **old_arr, char *rplc)
 {
 	char	**new_arr;

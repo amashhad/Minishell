@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:14:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/07 00:00:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:32:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,25 @@ static	void	ft_chng_pwd(t_read *line)
 	ft_get_prompt(line);
 	line->enviro = ft_srchrarr("PWD=", line->enviro, line->cwd);
 	if (!line->enviro)
-		ft_exit_with_error("Malloc Error");
+		ft_exit_with_error(line, "Malloc Error");
 	line->expo = ft_srchrarr("PWD=", line->expo, line->cwd);
 	if (!line->enviro)
-		ft_exit_with_error("Malloc Error");
+		ft_exit_with_error(line, "Malloc Error");
 }
 
 static	void	ft_get_new_cwd(t_read *line, char *srch)
 {
-	static int	dir;
+	int	dir;
 	int	i;
 
-	i = -1;
+	i = 0;
+	dir = 0;
 	while (line->enviro[i] != NULL)
-		if (ft_strnstr(line->enviro[++i], srch, ft_strlen(srch)))
+	{
+		if (ft_strnstr(line->enviro[i], srch, ft_strlen(srch)))
 			break;
+		i++;
+	}
 	if (line->enviro[i] == NULL)
 	{
 		ft_printf("Minishell: cd: %s: No such file or directory\n", srch);
@@ -52,13 +56,13 @@ static	void	ft_old_cwd(t_read *line)
 
 	old_pwd = ft_strjoin("OLD_PWD=", line->cwd);
 	if (!old_pwd)
-		ft_exit_with_error("Strjoin Error w/PWD");
+		ft_exit_with_error(line, "Strjoin Error w/PWD");
 	line->enviro = ft_srchrarr("OLD_PWD", line->enviro, old_pwd);
 	if (!line->enviro || *line->expo == NULL)
-		ft_exit_with_error("");
+		ft_exit_with_error(line, "old CWD err");
 	line->expo = ft_srchrarr("OLD_PWD", line->expo, old_pwd);
 	if (!line->expo || *line->expo == NULL)
-		ft_exit_with_error("");
+		ft_exit_with_error(line, "old CWD err");
 	free(old_pwd);
 	ft_get_new_cwd(line, "HOME=");
 }
@@ -70,18 +74,18 @@ static	void	ft_path(t_read *line)
 	dir = chdir(line->tokens[1]);
 	if (dir < 0)
 	{
-		ft_printf("Minishell: cd: %s: No such file or directory\n");
+		ft_printf("Minishell: cd: %s: No such file or directory\n", line->tokens[1]);
 		return ;
 	}
 	old_pwd = ft_strjoin("OLD_PWD=", line->cwd);
 	if (!old_pwd)
-		ft_exit_with_error("strjoin Error w/PWD");
+		ft_exit_with_error(line, "strjoin Error w/PWD");
 	line->enviro = ft_srchrarr("OLD_PWD=", line->enviro, old_pwd);
 	if (!line->enviro || *line->enviro == NULL)
-		ft_exit_with_error("srchrarr error");
-	line->expo = ft_srchrarr("OLD_PWD=", line->enviro, old_pwd);
+		ft_exit_with_error(line ,"srchrarr error");
+	line->expo = ft_srchrarr("OLD_PWD=", line->expo, old_pwd);
 	if (!line->expo || *line->expo == NULL)
-		ft_exit_with_error("srchrarr error");
+		ft_exit_with_error(line, "srchrarr error");
 	free(old_pwd);
 	ft_chng_pwd(line);
 }
@@ -90,9 +94,9 @@ void	ft_handle_cd(t_read *line)
 {
 	if (line->tokens[1] == NULL)
 		ft_old_cwd(line);
-	else if (ft_strncmp(line->tokens[1], "~", 1))
+	else if (ft_strcmp("~", line->tokens[1]) == 0)
 		ft_old_cwd(line);
-	else if (ft_strncmp(line->tokens[1], "|", 1))
+	else if (ft_strcmp(line->tokens[1], "|") != 0)
 		ft_path(line);
 	else
 		return ;

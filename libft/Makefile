@@ -35,7 +35,7 @@ SRC	=	ft_atoi ft_bzero			\
 		ft_atol ft_isspace	ft_cpyarr	\
 		ft_joinstrjoin	ft_printarr ft_addprintarr \
 		ft_arrlen	ft_addarr	ft_subarr	\
-		ft_srchrarr	\
+		ft_srchrarr	ft_strcmp	\
 
 
 SRCS	= $(addsuffix .c, $(SRC))
