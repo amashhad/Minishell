@@ -6,12 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:47:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/07 17:28:49 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:00:16 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	builtin(t_read *line)
 {
@@ -30,6 +29,13 @@ void	builtin(t_read *line)
 		ft_handle_unset(line);
 	else if (ft_strncmp(line->tokens[0], "cd", 2) == 0)
 		ft_handle_cd(line);
+	else if (ft_strncmp(line->tokens[0], "echo", 5) == 0)
+	{
+		if (!line->tokens[1])
+			ft_putstr("");
+		else
+			ft_handle_echo(line);
+	}
 	else
-		return ;
+		ft_printf("%s: command not found\n", line->tokens[0]);
 }

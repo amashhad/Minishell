@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/07 17:41:52 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/10 22:40:12 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,19 @@ void	initalization(t_read *line, char **envp)
 	line->tokens = NULL;
 	line->cwd = NULL;
 	line->enviro = ft_cpyarr(envp);
+	line->exit_status = 0;
 	if (!line->enviro)
 	{
-		ft_putendl_fd("Enviro err: no ENV variable", 2);
+		ft_putendl_fd("Enviro err: no ENV variable or no memory", 2);
 		exit (1);
 	}
 	line->expo = ft_cpyarr(line->enviro);
+	if (!line->expo)
+	{
+		ft_putendl_fd("Expo err: no Memory for expo", 2);
+		ft_farray(line->enviro);
+		exit (1);
+	}
 }
 
 void	ft_rev_str(char *str)
@@ -67,9 +74,7 @@ void	ft_get_prompt(t_read *line)
 int		main(int argc,char **argv, char **envp)
 {
 	t_read	line;
-	char	**new_arr;
 
-	(void) new_arr;
 	(void) argc;
 	(void) argv;
 	initalization(&line, envp);
@@ -84,8 +89,10 @@ int		main(int argc,char **argv, char **envp)
 		}
 		add_history(line.line);
 		line.tokens = history_tokenize(line.line);
-		ft_printarr(line.tokens);
+		ft_expander(&line, line.exit_status);
+		//ft_printarr(line.tokens);
 		builtin(&line);
+		//ft_putnbr_fd(ft_arr_srch("|", line.tokens), 1);
 		ft_farray(line.tokens);
 		free(line.line);
 	}

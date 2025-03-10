@@ -2,7 +2,8 @@ NAME		=	Minishell
 CC		=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 RM		=	rm -rf
-SRC		= 	main exit_chk built_in_handle ft_exit_error chg_dir export_unset
+SRC		= 	main exit_chk built_in_handle ft_exit_error \
+			chg_dir export_unset echo expander 
 SRC_DIR		= 	srcs
 SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC)))
 OBJ_DIR		=	obj

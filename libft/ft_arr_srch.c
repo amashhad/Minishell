@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_arr_srch.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 06:08:46 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/08 15:18:03 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/07 20:27:15 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/08 15:58:15 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+//searches the array, and returns the number of times str is repeated in it
+//returns (-1) on error
+//MUST SEND NULL TERMINATED ARRAY!!!!!
+int	ft_arr_srch(char *str, char **arr)
 {
-	size_t	i;
-	size_t	c;
+	int	i;
+	int	size;
 
 	i = 0;
-	if (!big)
+	size = 0;
+	if (!str || !arr)
+		return (-1);
+	size = ft_arrlen(arr);
+	while (i < size)
 	{
-		ft_putendl_fd("(Strnstr error, no 'big')", 2);
-		exit(1);
-	}
-	if (!*little)
-		return (NULL);
-	if (len == 0)
-		return (NULL);
-	while (i < len && big[i])
-	{
-		c = 0;
-		while (big[i + c] == little[c] && (i + c) < len && big[i + c])
-			c++;
-		if (little[c] == '\0')
-			return ((char *)(big + i));
+		if (ft_strncmp(arr[i], str, ft_strlen(str)) == 0)
+			break;
 		i++;
 	}
-	return (0);
+	if (arr[i] == NULL)
+		return (0);
+	else
+		return (i);
 }
