@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/10 22:40:12 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/19 23:25:53 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,8 @@ void	ft_get_prompt(t_read *line)
 		free(line->prompt);
 	line->cwd = ft_strdup(temp);
 	line->prompt = ft_joinstrjoin("Minishell>: ~", temp, "$ ");
-	if (!line->prompt)
-	{
-		ft_putendl_fd("Unable to get prompt", 2);
-		free(line->line);
-		free(line->cwd);
-		ft_farray(line->enviro);
-		exit(0);
-	}
+	if (!line->prompt || !line->cwd)
+		ft_exit_with_error(line, "Unable to get prompt");
 }
 
 int		main(int argc,char **argv, char **envp)
@@ -88,9 +82,8 @@ int		main(int argc,char **argv, char **envp)
 			break;
 		}
 		add_history(line.line);
-		line.tokens = history_tokenize(line.line);
-		ft_expander(&line, line.exit_status);
-		//ft_printarr(line.tokens);
+		line.tokens = ft_tokenizer(line.line);
+		//ft_expander(&line, line.exit_status);
 		builtin(&line);
 		//ft_putnbr_fd(ft_arr_srch("|", line.tokens), 1);
 		ft_farray(line.tokens);

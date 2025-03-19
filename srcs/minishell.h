@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/09 20:55:23 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/17 00:00:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
+# include "../tokenizer/tokenizer.h"
 
 # ifndef PATH_MAX
 # define PATH_MAX 4096

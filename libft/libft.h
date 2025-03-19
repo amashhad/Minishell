@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:57:01 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/10 21:08:20 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/19 23:24:12 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "get_next_line.h"
-# include "printf.h"
+# include "ft_printf.h"
 
 //structs
 typedef struct s_list
@@ -52,6 +52,7 @@ int		ft_lstsize(t_list *lst);
 int		ft_printarr(char **arr);
 int		ft_addprintarr(char *print, char **arr);
 int		ft_arr_srch(char *str, char **arr);
+int		ft_arrcmp(char **arr1, char **arr2, int mode);
 //chars
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
@@ -64,6 +65,7 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_locate_str(char *str, char **arr);
 char	*rev_strchr(char *str, int c);
+char	*ft_remove_str(char *str, char *rm);
 char	**ft_split(char *s, char c);
 char	**ft_cpyarr(char **arr);
 char	*ft_joinstrjoin(char *left, char *middle, char *right);

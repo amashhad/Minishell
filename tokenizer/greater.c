@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit_error.c                                    :+:      :+:    :+:   */
+/*   greater.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/19 20:44:50 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/19 17:55:17 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/19 17:55:43 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tokenizer.h"
 
-void	ft_exit_with_error(t_read *line ,char *str)
+void	greater(t_tok *token)
 {
-	if (line->prompt != NULL)
-		free(line->prompt);
-	if (line->cwd != NULL)
-		free(line->cwd);
-	if (line->enviro != NULL)
-		ft_farray(line->enviro);
-	if (line->expo != NULL)
-		ft_farray(line->expo);
-	rl_clear_history();
-	if (str)
-	{
-		ft_farray(line->tokens);
-		free(line->line);
-		ft_putendl_fd(str, 2);
-	}
-	exit(1);
+	while (token->input[token->i] == '>' || token->input[token->i] == '<')
+		{
+			if (token->input[token->i] == token->input[token->i + 1])
+			{
+				token->i++;
+				token->index++;
+			}
+			else
+				token->index++;
+			token->i++;
+		}
 }
