@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 22:47:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/19 20:50:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:51:15 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	builtin(t_read *line)
 		return ;
 	else if (ft_strcmp(line->tokens[0], "env") == 0)
 		ft_printarr(line->enviro);
+	else if (ft_strcmp(line->tokens[0], "clear") == 0)
+	{
+		rl_clear_display(0, 0);
+		ft_putendl_fd("", 1);
+	}
 	else if (ft_strcmp(line->tokens[0], "pwd") == 0)
 	{
 		ft_get_prompt(line);

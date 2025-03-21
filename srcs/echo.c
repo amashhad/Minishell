@@ -6,11 +6,31 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/09 16:00:45 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/21 21:19:13 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_findquote(t_read *line, char *token)
+{
+	//int	i;
+	//int	count;
+	char	*str;
+
+	//i = 0;
+	(void )line;
+	if (!token)
+		return (NULL);
+	str = ft_strtrim(token, "\"");
+	if (!str)
+	{
+		free(token);
+		return (NULL);
+	}
+	free(token);
+	return (str);
+}
 
 void	ft_handle_echo(t_read *line)
 {
@@ -24,14 +44,12 @@ void	ft_handle_echo(t_read *line)
 		mode++;
 		i++;
 	}
-	while (line->tokens[i] != NULL)
+	while (line->tokens[i] && ft_strcmp(line->tokens[i], "|") != 0)
 	{
-		if (ft_strcmp(line->tokens[i], "|") == 0)
-			return ;
-		else if (line->tokens[i + 1] == NULL)
-			ft_putstr_fd(line->tokens[i], 1);
-		else
-			ft_printf("%s ", line->tokens[i]);
+		line->tokens[i] = ft_findquote(line, line->tokens[i]);
+		//ft_fill_echo(line, line->tokens[i]);
+		ft_putstr(line->tokens[i]);
+		ft_putchar(' ');
 		i++;
 	}
 	if (mode == 0)

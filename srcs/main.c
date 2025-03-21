@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/19 23:25:53 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:57:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_get_prompt(t_read *line)
 		ft_exit_with_error(line, "Unable to get prompt");
 }
 
-int		main(int argc,char **argv, char **envp)
+int		main(int argc, char **argv, char **envp)
 {
 	t_read	line;
 
@@ -83,6 +83,7 @@ int		main(int argc,char **argv, char **envp)
 		}
 		add_history(line.line);
 		line.tokens = ft_tokenizer(line.line);
+		ft_printarr(line.tokens);
 		//ft_expander(&line, line.exit_status);
 		builtin(&line);
 		//ft_putnbr_fd(ft_arr_srch("|", line.tokens), 1);
