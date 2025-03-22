@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 17:51:07 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/10 21:16:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 11:08:25 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_expander(t_read *line, int exit_status)
 		{
 			line->tokens[i] = ft_expand(line->tokens[i], line->expo);
 			if (!line->tokens[i])
-				ft_exit_with_error(line, "Error with Malloc");
+				ft_exit_with_error(line, "Error with Malloc", 1);
 		}
 		i++;
 	}

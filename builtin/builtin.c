@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 06:16:16 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 13:37:18 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ void	builtin(t_read *line)
 			ft_handle_echo(line);
 	}
 	else
+	{
 		ft_printf("%s: command not found\n", line->tokens[0]);
+		line->exit_status = 127;
+	}
 }

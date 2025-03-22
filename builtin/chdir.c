@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:14:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 07:19:44 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 11:09:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static	void	ft_chng_pwd(t_read *line)
 	ft_get_prompt(line);
 	line->enviro = ft_srchrarr("PWD=", line->enviro, line->cwd);
 	if (!line->enviro)
-		ft_exit_with_error(line, "Malloc Error");
+		ft_exit_with_error(line, "Malloc Error", 1);
 	line->expo = ft_srchrarr("PWD=", line->expo, line->cwd);
 	if (!line->enviro)
-		ft_exit_with_error(line, "Malloc Error");
+		ft_exit_with_error(line, "Malloc Error", 1);
 }
 
 static	void	ft_get_new_cwd(t_read *line, char *srch)
@@ -56,13 +56,13 @@ static	void	ft_old_cwd(t_read *line)
 
 	old_pwd = ft_strjoin("OLD_PWD=", line->cwd);
 	if (!old_pwd)
-		ft_exit_with_error(line, "Strjoin Error w/PWD");
+		ft_exit_with_error(line, "Strjoin Error w/PWD", 1);
 	line->enviro = ft_srchrarr("OLD_PWD", line->enviro, old_pwd);
 	if (!line->enviro || *line->expo == NULL)
-		ft_exit_with_error(line, "old CWD err");
+		ft_exit_with_error(line, "old CWD err", 1);
 	line->expo = ft_srchrarr("OLD_PWD", line->expo, old_pwd);
 	if (!line->expo || *line->expo == NULL)
-		ft_exit_with_error(line, "old CWD err");
+		ft_exit_with_error(line, "old CWD err", 1);
 	free(old_pwd);
 	ft_get_new_cwd(line, "HOME=");
 }
@@ -79,13 +79,13 @@ static	void	ft_path(t_read *line)
 	}
 	old_pwd = ft_strjoin("OLD_PWD=", line->cwd);
 	if (!old_pwd)
-		ft_exit_with_error(line, "strjoin Error w/PWD");
+		ft_exit_with_error(line, "strjoin Error w/PWD", 1);
 	line->enviro = ft_srchrarr("OLD_PWD=", line->enviro, old_pwd);
 	if (!line->enviro || *line->enviro == NULL)
-		ft_exit_with_error(line ,"srchrarr error");
+		ft_exit_with_error(line ,"srchrarr error", 1);
 	line->expo = ft_srchrarr("OLD_PWD=", line->expo, old_pwd);
 	if (!line->expo || *line->expo == NULL)
-		ft_exit_with_error(line, "srchrarr error");
+		ft_exit_with_error(line, "srchrarr error", 1);
 	free(old_pwd);
 	ft_chng_pwd(line);
 }
