@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/20 16:57:51 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 03:50:34 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ void	initalization(t_read *line, char **envp)
 		ft_farray(line->enviro);
 		exit (1);
 	}
-}
-
-void	ft_rev_str(char *str)
-{
-	int	i;
-
-	i = ft_strlen(str);
-	if (i == 0)
-		return ;
-	while (i >= 0)
-	{
-		write(1, &str[i], 1);
-		i--;
-	}
-	write(1, "\n", 1);
-	return ;
 }
 
 void	ft_get_prompt(t_read *line)
@@ -76,20 +60,19 @@ int		main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line.line = readline(line.prompt);
-		if (!ft_exit_shell(line.line))
+		line.tokens = ft_tokenizer(line.line);
+		if (ft_exit_shell(&line))
 		{
 			free(line.line);
 			break;
 		}
 		add_history(line.line);
-		line.tokens = ft_tokenizer(line.line);
-		ft_printarr(line.tokens);
-		//ft_expander(&line, line.exit_status);
+		ft_expander(&line, line.exit_status);
 		builtin(&line);
-		//ft_putnbr_fd(ft_arr_srch("|", line.tokens), 1);
+		//ft_executables();
 		ft_farray(line.tokens);
 		free(line.line);
 	}
 	ft_exit_with_error(&line ,NULL);
-	return (0);
+	return (line.exit_status);
 }

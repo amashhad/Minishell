@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/19 20:44:50 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 02:21:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	ft_exit_with_error(t_read *line ,char *str)
 		free(line->line);
 		ft_putendl_fd(str, 2);
 	}
-	exit(1);
+	exit(line->exit_status);
 }

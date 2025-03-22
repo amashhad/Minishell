@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/07 17:32:39 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 00:10:33 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_handle_export(t_read *line)
 	if (line->tokens[1] != NULL)
 	{
 		if (ft_strcmp(line->tokens[1], "|"))
+		{
 			line->expo = ft_addarr(line->tokens[1], line->expo);
+			line->enviro = ft_addarr(line->tokens[1], line->enviro);
+		}
 		else if(ft_strcmp(line->tokens[1], "|") == 0)
 			return ;
 	}
