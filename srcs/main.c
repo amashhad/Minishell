@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 11:08:18 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:30:11 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@ void	ft_get_prompt(t_read *line)
 	if (line->prompt)
 		free(line->prompt);
 	line->cwd = ft_strdup(temp);
-	line->cwd = ft_remove_str(line->cwd ,(ft_fetcharr(line->enviro, "HOME=") + 5));
-	line->prompt = ft_joinstrjoin("Minishell>: ~", line->cwd, "$ ");
+	if (ft_fetcharr(line->enviro, "HOME="))
+	{
+		line->cwd = ft_remove_str(line->cwd ,(ft_fetcharr(line->enviro, "HOME=") + 5));
+		line->prompt = ft_joinstrjoin("Minishell>: ~", line->cwd, "$ ");
+	}
+	else
+		line->prompt = ft_joinstrjoin("Minishell>: ~", temp, "$ ");
 	if (!line->prompt || !line->cwd)
 		ft_exit_with_error(line, "Unable to get prompt", 1);
 }

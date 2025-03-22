@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 21:40:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 08:38:16 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:30:36 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ char	*ft_remove_str(char *str, char *rm)
 	fnd = 0;
 	if (!str)
 		return (NULL);
-	if (!rm || rm[0] == '\0')
+	if (!rm && !*rm)
 		return (str);
-	while (str[srch])
+	while (str[srch] != '\0')
 	{
-		if (str[srch] != '\0' && rm[fnd] == '\0' )
+		if (rm[fnd] == '\0')
 		{
 			ret = ft_strdup(str + srch);
 			free(str);

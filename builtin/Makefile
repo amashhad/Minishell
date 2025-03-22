@@ -6,7 +6,7 @@ ARFLAGS	= rcs
 RM	= rm -rf
 
 SRC	=	builtin	chdir	echo\
-		export unset
+		export	unset
 
 SRCS	= $(addsuffix .c, $(SRC))
 OBJ_DIR	= obj

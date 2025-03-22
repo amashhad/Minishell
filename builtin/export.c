@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_unset.c                                     :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 15:44:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 16:34:48 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_handle_export(t_read *line)
 
 	i = 1;
 	if (!line->tokens[1])
-		ft_addprintarr("declare -x", line->expo);
+		ft_addprintarr("declare -x ", line->expo);
 	if (ft_fetcharr(line->tokens, "|"))
 		return ;
 	while (line->tokens[i])

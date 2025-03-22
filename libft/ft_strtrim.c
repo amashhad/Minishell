@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:36:07 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 20:27:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:08:53 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,24 @@ static	size_t	ft_lastpart(char const *s1, char const *set)
 	}
 	return (i);
 }
+static char	*ft_trimmed(char *s1, size_t p1, size_t p2, size_t i)
+{
+	char	*trim;
 
-char	*ft_strtrim(char const *s1, char const *set)
+	trim = malloc(sizeof(char) * ((p2 - p1) + 1));
+	if (!trim)
+		return (NULL);
+	while ((p2 - p1) != 0)
+	{
+		trim[i] = s1[p1];
+		p1++;
+		i++;
+	}
+	trim[i] = '\0';
+	return (trim);
+}
+
+char	*ft_strtrim(char *s1, char const *set)
 {
 	size_t	p1;
 	size_t	p2;
@@ -72,15 +88,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	if (!set)
 		return (ft_strdup(""));
-	trim = malloc(sizeof(char) * ((p2 - p1) + 1));
+	trim = ft_trimmed(s1, p1, p2, i);
 	if (!trim)
-		return (NULL);
-	while ((p2 - p1) != 0)
 	{
-		trim[i] = s1[p1];
-		p1++;
-		i++;
+		free(s1);
+		return (NULL);
 	}
-	trim[i] = '\0';
+	free(s1);
 	return (trim);
 }
