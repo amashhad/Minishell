@@ -6,13 +6,13 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/21 21:19:13 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 06:39:10 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
 
-char	*ft_findquote(t_read *line, char *token)
+static char	*ft_findquote(t_read *line, char *token)
 {
 	//int	i;
 	//int	count;

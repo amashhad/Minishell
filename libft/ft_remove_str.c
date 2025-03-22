@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 21:40:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/20 14:24:36 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 08:38:16 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,29 @@
 //returns the string if rm is empty
 char	*ft_remove_str(char *str, char *rm)
 {
-	int	i;
-	char	*found;
+	int	srch;
+	int	fnd;
+	char	*ret;
 
-	i = 0;
+	srch = 0;
+	fnd = 0;
 	if (!str)
 		return (NULL);
-	if (!rm)
+	if (!rm || rm[0] == '\0')
 		return (str);
-	found = ft_strnstr(str, rm, ft_strlen(str));
-	if (!found)
-		return (NULL);
-	free(str);
-	return (found);
+	while (str[srch])
+	{
+		if (str[srch] != '\0' && rm[fnd] == '\0' )
+		{
+			ret = ft_strdup(str + srch);
+			free(str);
+			return (ret);
+		}
+		if (str[srch] && str[srch] == rm[fnd])
+			fnd++;
+		else
+			fnd = 0;
+		srch++;
+	}
+	return (str);
 }

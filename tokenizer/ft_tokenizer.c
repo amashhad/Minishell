@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:56:57 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/19 20:10:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 08:57:32 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	**ft_tokenizer(char *input)
 	fill_tokens(token);
 	token->tokens[i] = NULL;
 	ret = ft_cpyarr(token->tokens);
-	ft_free(token);
+	ft_farray(token->tokens);
+	free(token);
 	return (ret);
 }

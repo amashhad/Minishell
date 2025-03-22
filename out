@@ -1,0 +1,12 @@
+total 68$
+drwxr-xr-x 3 amashhad 2024_42campus   137 Mar 22 07:19 builtin$
+-rw-r--r-- 1 amashhad 2024_42campus     0 Mar 22 07:33 infile$
+drwxr-xr-x 4 amashhad 2024_42campus  4096 Mar 22 07:19 libft$
+-rw-r--r-- 1 amashhad 2024_42campus  1076 Mar  1 19:50 LICENSE$
+-rw-r--r-- 1 amashhad 2024_42campus  1153 Mar 22 06:42 Makefile$
+-rwxr-xr-x 1 amashhad 2024_42campus 50072 Mar 22 07:19 Minishell$
+drwxr-xr-x 2 amashhad 2024_42campus    79 Mar 22 07:19 obj$
+-rw-r--r-- 1 amashhad 2024_42campus     0 Mar 22 07:33 out$
+-rw-r--r-- 1 amashhad 2024_42campus    48 Mar  1 19:50 README.md$
+drwxr-xr-x 2 amashhad 2024_42campus   123 Mar 22 06:37 srcs$
+drwxr-xr-x 4 amashhad 2024_42campus   182 Mar 22 07:19 tokenizer$

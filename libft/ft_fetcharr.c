@@ -1,47 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cpyarr.c                                        :+:      :+:    :+:   */
+/*   ft_fetcharr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 08:24:53 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 08:49:37 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/22 06:53:51 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/22 06:59:09 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int	arr_size(char **arr)
+//fetches the string from the array and returns a pointer to it
+//if no such string exists within array returns null
+//no array or fetch exist returns null
+//MUST SEND NULL TERMINATED ARRAY
+//no need to free memory
+char	*ft_fetcharr(char **arr, char *fetch)
 {
-	int		i;
+	int	i;
 
 	i = 0;
+	if (!fetch)
+		return (NULL);
 	if (!arr)
-		return (0);
-	while (arr[i] != NULL)
-		i++;
-	return (i);
-}
-
-char	**ft_cpyarr(char **arr)
-{
-	int		size;
-	int		i;
-	char	**temp;
-
-	i = 0;
-	size = arr_size(arr);
-	if (!size)
 		return (NULL);
-	temp = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!temp)
-		return (NULL);
-	while (arr[i] != NULL)
+	while (arr[i])
 	{
-		temp[i] = ft_strdup(arr[i]);
+		if (ft_strnstr(arr[i], fetch, ft_strlen(fetch)))
+			return (ft_strnstr(arr[i], fetch, ft_strlen(fetch)));
 		i++;
 	}
-	temp[size] = NULL;
-	return (temp);
+	return (NULL);
 }

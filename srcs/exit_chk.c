@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:59:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 03:56:40 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 04:54:34 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_exit_shell(t_read *line)
 	if (!line->tokens)
 		return (0);
 	if (ft_strcmp(line->tokens[i], "exit") == 0
-			|| ft_strcmp(line->tokens[i], "'exit'"))
+			|| ft_strcmp(line->tokens[i], "'exit'") == 0)
 	{
 		i++;
 		i = ft_numeric(i, line);

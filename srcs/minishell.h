@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 03:51:03 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/22 06:43:28 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,8 @@ typedef struct s_read
 }				t_read;
 
 int		ft_exit_shell(t_read *line);
-void	builtin(t_read *line);
 void	ft_get_prompt(t_read *line);
 void	ft_exit_with_error(t_read *line, char *str);
-void	ft_handle_cd(t_read *line);
-void	ft_handle_export(t_read *line);
-void	ft_handle_unset(t_read *line);
-void	ft_handle_echo(t_read *line);
 void	ft_expander(t_read *line, int exit_status);
 
 #endif
