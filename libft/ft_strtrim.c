@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:36:07 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 17:08:53 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:19:24 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static	size_t	ft_lastpart(char const *s1, char const *set)
 	}
 	return (i);
 }
+
 static char	*ft_trimmed(char *s1, size_t p1, size_t p2, size_t i)
 {
 	char	*trim;

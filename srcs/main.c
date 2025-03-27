@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 17:30:11 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:17:58 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_get_prompt(t_read *line)
 		line->prompt = ft_joinstrjoin("Minishell>: ~", line->cwd, "$ ");
 	}
 	else
-		line->prompt = ft_joinstrjoin("Minishell>: ~", temp, "$ ");
+		line->prompt = ft_joinstrjoin("Minishell>:", temp, "$ ");
 	if (!line->prompt || !line->cwd)
 		ft_exit_with_error(line, "Unable to get prompt", 1);
 }
@@ -74,7 +74,6 @@ int		main(int argc, char **argv, char **envp)
 			break;
 		}
 		add_history(line.line);
-		//ft_expander(&line, line.exit_status);
 		builtin(&line);
 		//ft_executables();
 		ft_farray(line.tokens);

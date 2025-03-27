@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:39:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/10 21:15:35 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:22:48 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 //till the pointer (but not the int itself)
 //returns NULL on error or if i doesn't exist in the str
 //must be freed from your side
-char *rev_strchr(char *str, int c)
+char	*rev_strchr(char *str, int c)
 {
 	char	*ret;
-	int	i;
+	int		i;
 
 	i = -1;
 	if (!str)
@@ -27,7 +27,7 @@ char *rev_strchr(char *str, int c)
 	while (str[++i] != '\0')
 	{
 		if (str[i] == c)
-			break;
+			break ;
 	}
 	if (str[i] == '\0')
 		return ("No int found\n");
@@ -38,7 +38,7 @@ char *rev_strchr(char *str, int c)
 	while (str[++i] != '\0')
 	{
 		if (str[i] == c)
-			break;
+			break ;
 		ret[i] = str[i];
 	}
 	ret[i] = '\0';

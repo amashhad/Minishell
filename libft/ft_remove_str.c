@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 21:40:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 17:30:36 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:23:11 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 //returns the string if rm is empty
 char	*ft_remove_str(char *str, char *rm)
 {
-	int	srch;
-	int	fnd;
+	int		srch;
+	int		fnd;
 	char	*ret;
 
 	srch = 0;

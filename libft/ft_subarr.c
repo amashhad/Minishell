@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:30:10 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 16:26:52 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:20:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**ft_subarr(char *str, char **old_arr)
 	while (old_arr[++i] != NULL)
 	{
 		if (ft_strnstr(old_arr[i], str, ft_strlen(str)))
-			break;
+			break ;
 	}
 	if (old_arr[i] == NULL)
 		return (old_arr);

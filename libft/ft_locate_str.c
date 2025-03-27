@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 16:13:12 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/08 16:20:58 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:22:12 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_locate_str(char *str, char **arr)
 	while (i < size)
 	{
 		if (ft_strnstr(arr[i], str, ft_strlen(str)))
-			break;
+			break ;
 		i++;
 	}
 	if (arr[i] == NULL)

@@ -1,12 +1,11 @@
-NAME	= builtin.a
+NAME	= executer.a
 CC	= cc
 CFLAGS	= -Wall -Wextra -Werror -g
 AR	= ar
 ARFLAGS	= rcs
 RM	= rm -rf
 
-SRC	=	builtin	chdir	echo\
-		export	unset	env  \
+SRC	=	ft_execute \
 
 SRCS	= $(addsuffix .c, $(SRC))
 OBJ_DIR	= obj

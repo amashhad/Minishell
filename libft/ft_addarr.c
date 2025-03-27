@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 21:27:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/05 23:34:31 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:19:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static char	**arr_cpy(char *str, char **old_arr)
 	return (arr);
 }
 
-//adds string(str) to arr(old_arr) as its last element before NULL terminating it
-//returns NULL in case of empty str or empty arr (old_arr) with error msg
+//adds string(str) to arr(old_arr) as its last
+//element before NULL terminating it
+//returns NULL in case of empty str or
+//empty arr (old_arr) with error msg
 //MUST SEND NULL TERMINATED ARRAY!!!!
 //Frees Original arr, need to reuse same arr
 char	**ft_addarr(char *str, char **old_arr)

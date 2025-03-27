@@ -12,7 +12,7 @@
 
 #include "tokenizer.h"
 
-void	greater(t_tok *token)
+void	greater(t_Tok *token)
 {
 	while (token->input[token->i] == '>' || token->input[token->i] == '<')
 		{
