@@ -6,18 +6,14 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 21:26:42 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/27 22:09:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:46:42 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_EXPANDER_H
-#define FT_EXPANDER_H
+# define FT_EXPANDER_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include "../srcs/minishell.h"
 
 typedef struct s_expander
 {
@@ -34,6 +30,14 @@ typedef struct s_expander
 	char	*var_name;
 	char	*var_value;
 	char	*result;
-}			t_Band;
-char	*ft_expander(char *input, char *last_exit_code, char *argv, t_Band *pand);
+}			t_expand;
+
+//int
+int	comper_expander(char c);
+int string_expander(char c);
+//char
+char	*ft_expander(char *input, char *last_exit_code, char *argv);
+char	*get_string_expander(t_expand *pand);
+//void
+void	ft_free_expander(t_expand *pand, int error);
 #endif

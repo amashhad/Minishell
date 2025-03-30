@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 16:29:38 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/30 21:35:06 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/30 21:35:42 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "tokenizer.h"
 
-void	ft_handle_echo(t_read *line)
+void	ft_free_tokenizer(t_tok *token, int error)
 {
-	int i;
-	int	endl;
+	int	i;
 
-	i = 1;
-	endl = 0;
-	if (!line->tokens[i])
+	if (token)
 	{
-		ft_putchar('\n');
-		return ;
+		if (token->tokens)
+		{
+			i = 0;
+			while (token->tokens[i])
+			{
+				free(token->tokens[i]);
+				i++;
+			}
+		}
+		free(token->tokens);
+		free (token);
 	}
-	if (ft_arr_srch("|", line->tokens) > 1)
-		return ;
-	if (line->tokens[i] && ft_strcmp(line->tokens[i], "-n") == 0)
+	if (error == 0)
 	{
-		i++;
-		endl++;
+		printf("The Malloc Not Located\n");
+		exit (0);
 	}
-	while (line->tokens[i])
-	{
-		ft_putstr(line->tokens[i]);
-		i++;
-	}
-	// if (endl == 0)
-	// 	ft_putchar('\n');
 }

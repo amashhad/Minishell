@@ -6,38 +6,32 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 17:30:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/19 18:03:38 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:13:57 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZER_H
-#define TOKENIZER_H
+# define TOKENIZER_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../srcs/minishell.h"
+# include "../srcs/minishell.h"
 
 typedef struct s_token
 {
-	int		j;
-	int		index;
-	size_t		i;
-	size_t		count;
-	int		k;
-	char		c;
-	char		*input;
-	char		**tokens;
+	size_t	j;
+	size_t	index;
+	size_t	i;
+	size_t	count;
+	size_t	k;
+	int		error_token;
+	char	c;
+	char	*input;
+	char	**tokens;
 }			t_tok;
 
 char	**ft_tokenizer(char *input);
-void	fill_tokens(t_tok *token);
-void	quoted(t_tok *token);
-void	fill_token(t_tok *token);
-int		comper(char c);
-void	string(t_tok *token);
-void	piipe(t_tok *token);
-void	greater(t_tok *token);
-void	ft_free(t_tok *token);
-
+void	ft_free_tokenizer(t_tok *token, int error);
+void	greater_tokenizer(t_tok *token);
+void	pipe_tokenizer(t_tok *token);
+void	dollar_tokenizer(t_tok *token);
+void	string_tokenizer(t_tok *token);
 #endif

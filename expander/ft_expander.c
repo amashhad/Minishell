@@ -6,65 +6,13 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 21:26:45 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/27 21:39:58 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:45:09 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_expander.h"
 
-static size_t  ft_strlen(char *str)
-{
-   size_t   i;
-
-    i = 0;
-    if (!str)
-        return (0);
-    while (str[i] != '\0')
-        i++;
-    return (i);
-}
-
-static void    *ft_calloc(size_t count, size_t size)
-{
-    unsigned char   *p;
-    void    		*pa;
-    size_t			i;
-
-    i = 0;
-    pa = malloc(count * size);
-    if (!pa)
-        return (NULL);
-    p = pa;
-    while (i < (count * size))
-    {
-        p[i] = 0;
-        i++;
-    }
-    return (pa);
-}
-
-static void	ft_free(t_Band *pand, int error)
-{
-	if (pand)
-	{
-		if (pand->var_name)
-			free (pand->var_name);
-		if (pand->string)
-			free (pand->string);
-		if (pand->quoted)
-			free (pand->quoted);
-		if (pand->result)
-			free (pand->result);
-		free(pand);
-	}
-	if (error == 0)
-	{
-		printf("The Malloc Not Located\n");
-		exit (0);
-	}
-}
-
-static void	initialize(t_Band *pand)
+static void	initialize(t_expand *pand)
 {
 	pand->i = 0;
 	pand->i_result = 0;
@@ -82,18 +30,11 @@ static void	initialize(t_Band *pand)
 	pand->result = NULL;
 }
 
-static int	ft_is_digit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-static char	*get_string(t_Band *pand)
+char	*get_string_expander(t_expand *pand)
 {
 	pand->string = ft_calloc(pand->k + 1, sizeof(char));
 	if (!pand->string)
-		ft_free(pand, 0);
+		ft_free_expander(pand, 0);
 	pand->k = 0;
 	while (pand->j <= pand->i)
 	{
@@ -105,55 +46,7 @@ static char	*get_string(t_Band *pand)
 	return (pand->string);
 }
 
-static void	fill_value(t_Band *pand, char *value)
-{
-	int	i;
-
-	if (value)
-	{
-		i = 0;
-		while (value[i] != '\0')
-		{
-			pand->result[pand->i_result] = value[i];
-			i++;
-			pand->i_result++;
-		}
-	}
-}
-
-static int	comper(char c)
-{
-	if (c == '|')
-		return (1);
-	if (c == '>')
-		return (1);
-	if (c == '<')
-		return (1);
-	if (c == ' ')
-		return (1);
-	if (c == '\0')
-		return (1);
-	if (c == '$')
-		return (1);
-    if (c == '"' || c == '\'')
-		return (1);
-	return (0);
-}
-
-static int string(char c)
-{
-    if (c >= 'A' && c <= 'Z')
-        return (1);
-    if (c >= 'a' && c <= 'z')
-        return (1);
-    if (c >= '0' && c <= '9')
-        return (1);
-    if (c == '_')
-        return (1);
-    return (0);
-}
-
-static void	single_quoted(t_Band *pand)
+static void	single_quoted(t_expand *pand)
 {
 	if (pand->input[pand->i] == '\'')
 	{
@@ -171,12 +64,12 @@ static void	single_quoted(t_Band *pand)
 			pand->count--;
 			pand->i--;
 		}
-		pand->quoted = get_string(pand);
+		pand->quoted = get_string_expander(pand);
 		pand->string = NULL;
 	}
 }
 
-static void	var(t_Band *pand)
+void	var_expander(t_expand *pand)
 {
     pand->j = pand->i + 1;
 	while (string(pand->input[pand->i + 1]))
@@ -193,7 +86,7 @@ static void	var(t_Band *pand)
         pand->count--;
 }
 
-static void	dollar_malloc(t_Band *pand)
+void	dollar_malloc_expander(t_expand *pand)
 {
 	if (pand->input[pand->i + 1] == '?')
 	{
@@ -229,7 +122,7 @@ static void	dollar_malloc(t_Band *pand)
 		var(pand);
 }
 
-static size_t	count_malloc(t_Band *pand)
+size_t	count_malloc(t_expand *pand)
 {
 	while (pand->input[pand->i] != '\0')
 	{
@@ -247,51 +140,7 @@ static size_t	count_malloc(t_Band *pand)
 	return (pand->count);
 }
 
-static void	dollar_fill(t_Band *pand)
-{
-	if (pand->input[pand->i + 1] == '?')
-	{
-		pand->i += 2;
-		fill_value(pand, pand->last_exit_code);
-	}
-	else if (pand->input[pand->i + 1] == '$')
-	{
-		pand->i += 2;
-		fill_value(pand, "$$");
-	}
-	else if (pand->input[pand->i + 1] == '0')
-	{
-		pand->i += 2;
-		fill_value(pand, pand->argv);
-	}
-	else if (ft_is_digit(pand->input[pand->i + 1]))
-		pand->i += 2;
-	else if (!(string(pand->input[pand->i + 1])))
-	{
-		if (comper(pand->input[pand->i + 1]))
-		{
-			pand->result[pand->i_result] = pand->input[pand->i];
-			pand->i_result++;
-			pand->i++;
-		}
-		else
-			pand->i += 2;
-	}
-	else if (!(comper(pand->input[pand->i + 1])))
-	{
-		var(pand);
-		pand->i++;
-		fill_value(pand, pand->var_value);
-	}
-	else
-	{
-		pand->result[pand->i_result] = pand->input[pand->i];
-		pand->i_result++;
-		pand->i++;
-	}
-}
-
-static void	fill_pands(t_Band *pand)
+static void	fill_expander(t_expand *pand)
 {
 	while (pand->input[pand->i] != '\0')
 	{
@@ -314,42 +163,42 @@ static void	fill_pands(t_Band *pand)
 	}
 }
 
-char	*ft_expander(char *input, char *last_exit_code, char *argv, t_Band *pand)
+char	*ft_expander(char *input, char *last_exit_code, char *argv)
 {
-	//t_Band	*pand;
+	t_expand	*pand;
 	size_t	i;
 
-	//pand = (t_Band *)malloc(sizeof(t_Band));
-    //if (!pand)
-		//exit (0);
+	pand = (t_expand *)malloc(sizeof(t_expand));
+    if (!pand)
+		exit (0);
 	i = 0;
 	initialize(pand);
 	pand->last_exit_code = last_exit_code;
 	pand->argv = argv;
 	pand->input = input;
 	i = count_malloc(pand);
-	printf("%ld\n", i);
 	initialize(pand);
 	pand->result = ft_calloc(i + 1, sizeof(char));
 	if (!(pand->result))
-		ft_free(pand, 0);
+		ft_free_expander(pand, 0);
 	pand->last_exit_code = last_exit_code;
 	pand->argv = argv;
 	pand->input = input;
-	fill_pands(pand);
+	fill_expander(pand);
 	pand->result[i] = '\0';
+	free(input);
 	return (pand->result);
 }
 
 // int main(void)
 // {
-// 	t_Band	*pand;
-// 	pand = (t_Band *)malloc(sizeof(t_Band));
+// 	t_expand	*pand;
+// 	pand = (t_expand *)malloc(sizeof(t_expand));
 //     if (!pand)
 // 		exit (0);
 //     ft_expander("  $$!$@$USER$ ali", "0", "dd", pand);
 // 	printf("%s\n", pand->result);
-// 	ft_free(pand, 1);
+// 	ft_free_expander(pand, 1);
 //     return 0;
 // }
 /*int	main(int argc, char **argv)

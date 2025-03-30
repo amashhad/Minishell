@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_expander_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 16:29:38 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/30 22:31:31 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/30 22:40:50 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "ft_expander.h"
 
-void	ft_handle_echo(t_read *line)
+void	fill_value_expander(t_expand *pand, char *value)
 {
-	int i;
-	int	endl;
+	int	i;
 
-	i = 1;
-	endl = 0;
-	if (!line->tokens[i])
+	if (value)
 	{
-		ft_putchar('\n');
-		return ;
+		i = 0;
+		while (value[i] != '\0')
+		{
+			pand->result[pand->i_result] = value[i];
+			i++;
+			pand->i_result++;
+		}
 	}
-	if (ft_arr_srch("|", line->tokens) > 1)
-		return ;
-	if (line->tokens[i] && ft_strcmp(line->tokens[i], "-n") == 0)
-	{
-		i++;
-		endl++;
-	}
-	while (line->tokens[i])
-	{
-		ft_putstr(line->tokens[i]);
-		i++;
-	}
-	// if (endl == 0)
-	// 	ft_putchar('\n');
 }

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/27 22:08:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:11:53 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
-# include "../tokenizer/tokenizer.h"
 # include "../expander/ft_expander.h"
+# include "../tokenizer/tokenizer.h"
 
 # ifndef PATH_MAX
 # define PATH_MAX 4096
@@ -34,6 +34,7 @@ typedef struct s_read
 	char	**enviro;
 	char	**tokens;
 	char	**expo;
+
 }				t_read;
 
 int		ft_exit_shell(t_read *line);

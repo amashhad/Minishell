@@ -5,7 +5,7 @@ AR	= ar
 ARFLAGS	= rcs
 RM	= rm -rf
 
-SRC	=	ft_tokenizer greater quoted string tokenizer_utils \
+SRC	=	ft_tokenizer tokenizer_utils free_tokens \
 
 SRCS	= $(addsuffix .c, $(SRC))
 OBJ_DIR	= obj

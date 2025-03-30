@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   greater.c                                          :+:      :+:    :+:   */
+/*   expander_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 17:55:17 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/19 17:55:43 by amashhad         ###   ########.fr       */
+/*   Created: 2025/03/30 22:27:31 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/30 22:39:17 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "ft_expander.h"
 
-void	greater(t_Tok *token)
+void	ft_free_expander(t_expand *pand, int error)
 {
-	while (token->input[token->i] == '>' || token->input[token->i] == '<')
-		{
-			if (token->input[token->i] == token->input[token->i + 1])
-			{
-				token->i++;
-				token->index++;
-			}
-			else
-				token->index++;
-			token->i++;
-		}
+	if (pand)
+	{
+		if (pand->var_name)
+			free (pand->var_name);
+		if (pand->string)
+			free (pand->string);
+		if (pand->quoted)
+			free (pand->quoted);
+		if (pand->result)
+			free (pand->result);
+	}
+	if (error == 0)
+	{
+		printf("The Malloc Not Located\n");
+		exit (0);
+	}
 }
