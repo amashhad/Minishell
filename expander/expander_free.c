@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:27:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 22:39:17 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 18:53:37 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	ft_free_expander(t_expand *pand, int error)
 {
+	if (error < 0)
+	{
+		ft_putendl_fd("Malloc Error at opening act", 2);
+		exit(1);
+	}
 	if (pand)
 	{
 		if (pand->var_name)
@@ -27,7 +32,7 @@ void	ft_free_expander(t_expand *pand, int error)
 	}
 	if (error == 0)
 	{
-		printf("The Malloc Not Located\n");
-		exit (0);
+		ft_putendl_fd("Malloc Error at proccess", 2);
+		exit (2);
 	}
 }

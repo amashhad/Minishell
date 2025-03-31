@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:34:37 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 22:16:43 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:02:26 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ char	**ft_tokenizer(char *input)
 	initialize(token);
 	token->input = input;
 	i = count(token);
-	printf("%ld\n", i);
-	printf("%i\n", token->error_token);
 	initialize(token);
 	token->tokens = ft_calloc(i + 1, sizeof(char *));
 	if (!(token->tokens))

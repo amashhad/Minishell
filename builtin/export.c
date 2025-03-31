@@ -6,11 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 21:44:48 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:37:48 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../srcs/minishell.h"
 
 static void add_export(t_read *line, char *srch, char *rplc)
 {

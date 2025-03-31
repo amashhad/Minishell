@@ -6,11 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 16:29:38 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:37:40 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../srcs/minishell.h"
 
 void	ft_handle_echo(t_read *line)
 {
@@ -36,6 +36,6 @@ void	ft_handle_echo(t_read *line)
 		ft_putstr(line->tokens[i]);
 		i++;
 	}
-	// if (endl == 0)
-	// 	ft_putchar('\n');
+	if (endl == 0)
+		ft_putchar('\n');
 }

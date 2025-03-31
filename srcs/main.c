@@ -6,12 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 21:31:48 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:46:31 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "../builtin/builtin.h"
 
 void	initalization(t_read *line, char **envp)
 {
@@ -69,17 +68,12 @@ int		main(int argc, char **argv, char **envp)
 	{
 		line.line = readline(line.prompt);
 		add_history(line.line);
-		line.line = ft_expander(line.line, "0", argv[0]);
+		line.line = ft_expander(line.line, ft_itoa(line.exit_status), argv[0]);
 		line.tokens = ft_tokenizer(line.line);
 		if (ft_exit_shell(&line))
-		{
-			free(line.line);
 			break;
-		}
-		builtin(&line);
-		//ft_executables();
+		terminal_shell(&line);
 		ft_farray(line.tokens);
-		//free(line.line);
 	}
 	ft_exit_with_error(&line , NULL, 0);
 	return (line.exit_status);

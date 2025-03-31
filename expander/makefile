@@ -1,11 +1,12 @@
 NAME	= expander.a
 CC	= cc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 AR	= ar
 ARFLAGS	= rcs
 RM	= rm -rf
 
-SRC	=	ft_expander \
+SRC	=	ft_expander expander_compare expander_fill_utils \
+		expander_free ft_expander_utils \
 
 SRCS	= $(addsuffix .c, $(SRC))
 OBJ_DIR	= obj

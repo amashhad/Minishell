@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 21:26:45 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 22:45:09 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:13:29 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,15 @@ char	*get_string_expander(t_expand *pand)
 	return (pand->string);
 }
 
-static void	single_quoted(t_expand *pand)
-{
-	if (pand->input[pand->i] == '\'')
-	{
-		pand->j = pand->i;
-		pand->i++;
-		pand->count++;
-		while (pand->input[pand->i] != '\'' && pand->input[pand->i] != '\0')
-		{
-			pand->count++;
-			pand->i++;
-			pand->k++;
-		}
-		if (pand->input[pand->i] == '\0')
-		{
-			pand->count--;
-			pand->i--;
-		}
-		pand->quoted = get_string_expander(pand);
-		pand->string = NULL;
-	}
-}
-
 void	var_expander(t_expand *pand)
 {
     pand->j = pand->i + 1;
-	while (string(pand->input[pand->i + 1]))
+	while (string_expander(pand->input[pand->i + 1]))
 		{
 			pand->k++;
             pand->i++;
 		}
-        pand->var_name = get_string(pand);
+        pand->var_name = get_string_expander(pand);
 		pand->var_value = getenv(pand->var_name);
 		free (pand->var_name);
 		pand->var_name = NULL;
@@ -86,71 +63,17 @@ void	var_expander(t_expand *pand)
         pand->count--;
 }
 
-void	dollar_malloc_expander(t_expand *pand)
-{
-	if (pand->input[pand->i + 1] == '?')
-	{
-		pand->count += ft_strlen(pand->last_exit_code);
-		pand->count -= 1;
-		pand->i++;
-	}
-	else if (pand->input[pand->i + 1] == '$')
-	{
-		pand->count += 1;
-		pand->i++;
-	}
-	else if (pand->input[pand->i + 1] == '0')
-	{
-		pand->count += ft_strlen(pand->argv);
-		pand->count -= 1;
-		pand->i++;
-	}
-	else if (ft_is_digit(pand->input[pand->i + 1]))
-	{
-		pand->count -= 1;
-		pand->i += 1;
-	}
-	else if (!(string(pand->input[pand->i + 1])))
-	{
-		if (!(comper(pand->input[pand->i + 1])))
-		{
-			pand->count -= 1;
-			pand->i += 1;
-		}
-	}
-	else if (!(comper(pand->input[pand->i + 1])))
-		var(pand);
-}
-
-size_t	count_malloc(t_expand *pand)
+void	fill_expander(t_expand *pand)
 {
 	while (pand->input[pand->i] != '\0')
 	{
 		if (pand->input[pand->i] == '$')
-            dollar_malloc(pand);
-		single_quoted(pand);
-		if (pand->quoted)
-		{
-			free (pand->quoted);
-			pand->quoted = NULL;
-		}
-        pand->count++;
-        pand->i++;
-	}
-	return (pand->count);
-}
-
-static void	fill_expander(t_expand *pand)
-{
-	while (pand->input[pand->i] != '\0')
-	{
-		if (pand->input[pand->i] == '$')
-			dollar_fill(pand);
+			dollar_fill_expander(pand);
 		else if (pand->input[pand->i] == '\'')
 		{
 			single_quoted(pand);
 			pand->i++;
-			fill_value(pand, pand->quoted);
+			fill_value_expander(pand, pand->quoted);
 			free (pand->quoted);
 			pand->quoted = NULL;
 		}
@@ -170,7 +93,7 @@ char	*ft_expander(char *input, char *last_exit_code, char *argv)
 
 	pand = (t_expand *)malloc(sizeof(t_expand));
     if (!pand)
-		exit (0);
+		ft_free_expander(pand, -1);
 	i = 0;
 	initialize(pand);
 	pand->last_exit_code = last_exit_code;
@@ -187,6 +110,7 @@ char	*ft_expander(char *input, char *last_exit_code, char *argv)
 	fill_expander(pand);
 	pand->result[i] = '\0';
 	free(input);
+	free(last_exit_code);
 	return (pand->result);
 }
 

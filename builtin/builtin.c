@@ -6,13 +6,18 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 23:14:26 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:36:58 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../srcs/minishell.h"
 
-void	builtin(t_read *line)
+// void	builtin_part2(t_read *line)
+// {
+
+// }
+
+void	builtin_part1(t_read *line)
 {
 	if (line->tokens == NULL)
 		return ;
@@ -42,3 +47,4 @@ void	builtin(t_read *line)
 		line->exit_status = 127;
 	}
 }
+

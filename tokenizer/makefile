@@ -1,6 +1,6 @@
 NAME	= tokenizer.a
 CC	= cc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 AR	= ar
 ARFLAGS	= rcs
 RM	= rm -rf

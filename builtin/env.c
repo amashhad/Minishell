@@ -6,11 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 21:09:59 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 21:18:36 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:37:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../srcs/minishell.h"
 
 void	ft_handle_env(t_read *line)
 {
