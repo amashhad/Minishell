@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute.c                                       :+:      :+:    :+:   */
+/*   minishell_execute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 23:06:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/27 23:36:37 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:00:06 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-ft_executer(char **line, char **env, )
-{
+#include "../srcs/minishell.h"
 
+int ft_execute_parser(t_read *line)
+{
+	
 }

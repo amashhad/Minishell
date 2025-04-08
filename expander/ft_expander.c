@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 21:26:45 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/31 21:13:29 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:06:52 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*ft_expander(char *input, char *last_exit_code, char *argv)
 	t_expand	*pand;
 	size_t	i;
 
+	if (!input)
+		return (NULL);
 	pand = (t_expand *)malloc(sizeof(t_expand));
     if (!pand)
 		ft_free_expander(pand, -1);

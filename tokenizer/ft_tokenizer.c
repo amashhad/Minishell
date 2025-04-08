@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:34:37 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/31 19:02:26 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/07 21:04:28 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	**ft_tokenizer(char *input)
 	t_tok	*token;
 	size_t	i;
 
+	if (!input)
+		return (NULL);
 	token = (t_tok *)malloc(sizeof(t_tok));
 	initialize(token);
 	token->input = input;
@@ -100,7 +102,6 @@ char	**ft_tokenizer(char *input)
 		ft_free_tokenizer(token, 0);
 	token->input = input;
 	fill_tokens(token);
-	free(input);
 	token->tokens[i] = NULL;
 	return (token->tokens);
 }

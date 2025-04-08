@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/31 22:46:31 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:06:42 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,13 @@ int		main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line.line = readline(line.prompt);
-		add_history(line.line);
 		line.line = ft_expander(line.line, ft_itoa(line.exit_status), argv[0]);
 		line.tokens = ft_tokenizer(line.line);
 		if (ft_exit_shell(&line))
 			break;
+		add_history(line.line);
 		terminal_shell(&line);
+		free(line.line);
 		ft_farray(line.tokens);
 	}
 	ft_exit_with_error(&line , NULL, 0);

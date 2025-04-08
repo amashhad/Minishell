@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/31 22:36:58 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:07:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ void	builtin_part1(t_read *line)
 	else if (ft_strcmp(line->tokens[0], "echo") == 0)
 		ft_handle_echo(line);
 	else
-	{
-		ft_printf("%s: command not found\n", line->tokens[0]);
-		line->exit_status = 127;
-	}
+		return ;
 }
 
