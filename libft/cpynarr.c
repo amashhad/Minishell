@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arr_srch.c                                      :+:      :+:    :+:   */
+/*   cpynarr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 20:27:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/09 08:18:24 by amashhad         ###   ########.fr       */
+/*   Created: 2025/04/11 03:13:51 by amashhad          #+#    #+#             */
+/*   Updated: 2025/04/11 03:21:19 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//searches the array, and returns the first occurance of str in it
-//returns it disregarding index (starts at 1)
-//returns (-1) on error
-//MUST SEND NULL TERMINATED ARRAY!!!!!
-int	ft_arr_srch(char *str, char **arr)
+//returns an allocated copy of the array "arr" up to 'n' size
+//returns full array if arr_size < n
+//returns NULL on malloc errors or no Arr sent
+//MUST SEND NULL TERMINATED ARR!!
+char	**ft_cpynarr(char **arr, int n)
 {
-	int	i;
-	int	size;
+	int		size;
+	int		i;
+	char	**temp;
 
 	i = 0;
-	size = 0;
-	if (!str || !arr)
-		return (-1);
 	size = ft_arrlen(arr);
-	while (i < size)
+	if (!size)
+		return (NULL);
+	if (size < n)
+		n = size;
+	temp = (char **)malloc(sizeof(char *) * (n + 1));
+	if (!temp)
+		return (NULL);
+	while (i < n)
 	{
-		if (ft_strncmp(arr[i], str, ft_strlen(str)) == 0)
-			break ;
+		temp[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	if (arr[i] == NULL)
-		return (0);
-	else
-		return (i + 1);
+	temp[n] = NULL;
+	return (temp);
 }

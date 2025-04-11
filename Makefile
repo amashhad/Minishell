@@ -3,11 +3,15 @@ CC		=	cc
 CFLAGS		=	-Wall -Wextra -Werror -g
 RM		=	rm -rf
 SRC		= 	main exit_chk ft_exit_error \
-			ft_engine_start $(BUILTIN_SRCS)\
+			ft_engine_start $(EXECUTER_SRCS) $(BUILTIN_SRCS)\
 
 SRC_DIR		= 	srcs
 SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC))) \
-				$(addprefix $(BUILTIN_DIR)/, $(addsuffix .c, $(BUILTIN_SRCS)))
+				$(addprefix $(EXECUTER_DIR)/, $(addsuffix .c, $(EXECUTER_SRCS)))\
+				$(addprefix $(BUILTIN_DIR)/, $(addsuffix .c, $(BUILTIN_SRCS)))\
+
+EXECUTER_DIR	=	executer
+EXECUTER_SRCS	=	minishell_execute
 
 BUILTIN_DIR	=	builtin
 BUILTIN_SRCS	=	builtin chdir echo env \
@@ -15,7 +19,8 @@ BUILTIN_SRCS	=	builtin chdir echo env \
 
 OBJ_DIR		=	obj
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRC:=.o)) \
-				$(addprefix $(OBJ_DIR)/, $(BUILTIN_SRCS:=.o))
+				$(addprefix $(OBJ_DIR)/, $(EXECUTER_SRCS:=.o))\
+				$(addprefix $(OBJ_DIR)/, $(BUILTIN_SRCS:=.o))\
 
 LIBFT_PATH	=	./libft
 LIBFT		=	$(LIBFT_PATH)/libft.a
@@ -38,6 +43,9 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 			$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(EXECUTER_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(BUILTIN_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@

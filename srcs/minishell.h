@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/31 22:44:55 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:04:19 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef struct s_read
 	char	**enviro;
 	char	**tokens;
 	char	**expo;
-
+	char	***piper;
+	int		piper_len;
 }				t_read;
 
 //Minishell
@@ -43,11 +44,15 @@ void	ft_exit_with_error(t_read *line, char *str, int errno);
 void	terminal_shell(t_read *line);
 
 //Builtin
-void	builtin_part1(t_read *line);
-void	ft_handle_cd(t_read *line);
-void	ft_handle_echo(t_read *line);
-void	ft_handle_export(t_read *line);
-void	ft_handle_unset(t_read *line);
-void	ft_handle_env(t_read *line);
+void	builtin_part1(t_read *line, char **cmd);
+void	ft_handle_cd(t_read *line, char **cmd);
+void	ft_handle_echo(char **cmd);
+void	ft_handle_export(t_read *line, char **cmd);
+void	ft_handle_unset(t_read *line, char **cmd);
+void	ft_handle_env(t_read *line, char **cmd);
 
+//execution
+int		prepare_piper(t_read *line);
+int		execution(t_read *line);
+void	free_piper(t_read *line);
 #endif

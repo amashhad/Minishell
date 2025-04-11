@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:14:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/31 23:02:26 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:02:07 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ static	void	ft_old_cwd(t_read *line)
 	free(old_pwd);
 	ft_get_new_cwd(line, "HOME=");
 }
-static	void	ft_path(t_read *line)
+static	void	ft_path(t_read *line, char **cmd)
 {
 	int	dir;
 	char	*old_pwd;
 
-	dir = chdir(line->tokens[1]);
+	dir = chdir(cmd[1]);
 	if (dir < 0)
 	{
-		ft_printf("Minishell: cd: %s: No such file or directory\n", line->tokens[1]);
+		ft_printf("Minishell: cd: %s: No such file or directory\n", cmd[1]);
 		return ;
 	}
 	old_pwd = ft_strjoin("OLD_PWD=", line->cwd);
@@ -90,14 +90,14 @@ static	void	ft_path(t_read *line)
 	ft_chng_pwd(line);
 }
 
-void	ft_handle_cd(t_read *line)
+void	ft_handle_cd(t_read *line, char **cmd)
 {
-	if (line->tokens[1] == NULL)
+	if (cmd[1] == NULL)
 		ft_old_cwd(line);
-	else if (ft_strcmp("~", line->tokens[1]) == 0)
+	else if (ft_strcmp("~", cmd[1]) == 0)
 		ft_old_cwd(line);
-	else if (ft_strcmp(line->tokens[1], "|") != 0)
-		ft_path(line);
+	else if (ft_strcmp(cmd[1], "|") != 0)
+		ft_path(line, cmd);
 	else
 		return ;
 }

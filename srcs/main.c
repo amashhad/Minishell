@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/07 23:06:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 03:47:49 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	initalization(t_read *line, char **envp)
 	line->prompt = NULL;
 	line->tokens = NULL;
 	line->cwd = NULL;
+	line->piper = NULL;
 	line->enviro = ft_cpyarr(envp);
 	line->exit_status = 0;
+	line->piper_len = 0;
 	if (!line->enviro)
 	{
 		ft_putendl_fd("Enviro err: no ENV variable or no memory", 2);
@@ -64,6 +66,9 @@ int		main(int argc, char **argv, char **envp)
 	(void) argv;
 	initalization(&line, envp);
 	ft_get_prompt(&line);
+	int	i;
+
+	i = 0;
 	while (1)
 	{
 		line.line = readline(line.prompt);
@@ -73,8 +78,14 @@ int		main(int argc, char **argv, char **envp)
 			break;
 		add_history(line.line);
 		terminal_shell(&line);
+		//ft_printarr(line.tokens);
 		free(line.line);
 		ft_farray(line.tokens);
+		while (line.piper != NULL && line.piper[i])
+		{
+			ft_printarr(line.piper[i]);
+			i++;
+		}
 	}
 	ft_exit_with_error(&line , NULL, 0);
 	return (line.exit_status);

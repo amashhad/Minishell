@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:57:01 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 17:08:34 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 03:21:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*ft_remove_str(char *str, char *rm);
 char	*ft_fetcharr(char **arr, char *fetch);
 char	**ft_split(char *s, char c);
 char	**ft_cpyarr(char **arr);
+char	**ft_cpynarr(char **arr, int n);
 char	*ft_joinstrjoin(char *left, char *middle, char *right);
 char	**ft_addarr(char *str, char **arr);
 char	**ft_subarr(char *str, char **old_arr);

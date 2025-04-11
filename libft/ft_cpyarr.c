@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 08:24:53 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/22 08:49:37 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:19:33 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	arr_size(char **arr)
 	return (i);
 }
 
+//returns an allocated copy of the array "arr"
+//returns NULL on malloc errors or no Arr sent
+//MUST SEND NULL TERMINATED ARR!!
 char	**ft_cpyarr(char **arr)
 {
 	int		size;

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 21:26:45 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/07 22:06:52 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/09 03:56:16 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*get_string_expander(t_expand *pand)
 	return (pand->string);
 }
 
+//remove the usage of (getenv) inside the function var_expander and replace it with ft_getenv(line.env)
 void	var_expander(t_expand *pand)
 {
     pand->j = pand->i + 1;
@@ -55,7 +56,9 @@ void	var_expander(t_expand *pand)
             pand->i++;
 		}
         pand->var_name = get_string_expander(pand);
+/////////////////////////////////////////////////////
 		pand->var_value = getenv(pand->var_name);
+////////////////////////////////////////////////////
 		free (pand->var_name);
 		pand->var_name = NULL;
 		pand->string = NULL;
@@ -86,13 +89,19 @@ void	fill_expander(t_expand *pand)
 	}
 }
 
+//reduce the size of the function (ft_expander) while keeping the protection!!
 char	*ft_expander(char *input, char *last_exit_code, char *argv)
 {
 	t_expand	*pand;
 	size_t	i;
-
+////////////////////////////////////////////////////
 	if (!input)
+	{
+		if (last_exit_code)
+			free(last_exit_code);
 		return (NULL);
+	}
+///////////////////////////////////////////////////
 	pand = (t_expand *)malloc(sizeof(t_expand));
     if (!pand)
 		ft_free_expander(pand, -1);

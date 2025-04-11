@@ -37,7 +37,7 @@ SRC	=	ft_atoi ft_bzero			\
 		ft_arrlen	ft_addarr	ft_subarr	\
 		ft_srchrarr	ft_strcmp	ft_arr_srch	\
 		ft_locate_str rhcrts	ft_arrcmp	\
-		ft_remove_str	ft_fetcharr	\
+		ft_remove_str	ft_fetcharr	cpynarr	\
 
 
 SRCS	= $(addsuffix .c, $(SRC))

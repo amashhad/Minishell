@@ -6,16 +6,16 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/07 23:10:46 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:29:36 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit_with_error(t_read *line ,char *str, int i)
+void	ft_exit_with_error(t_read *line, char *str, int i)
 {
-	if (line->line)
-		free(line->line);
+	if (line->piper != NULL)
+		free_piper(line);
 	if (line->prompt != NULL)
 		free(line->prompt);
 	if (line->cwd != NULL)

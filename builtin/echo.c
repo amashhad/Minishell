@@ -6,34 +6,34 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/31 22:37:40 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:04:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-void	ft_handle_echo(t_read *line)
+void	ft_handle_echo(char **cmd)
 {
 	int i;
 	int	endl;
 
 	i = 1;
 	endl = 0;
-	if (!line->tokens[i])
+	if (!cmd[i])
 	{
 		ft_putchar('\n');
 		return ;
 	}
-	if (ft_arr_srch("|", line->tokens) > 1)
+	if (ft_arr_srch("|", cmd) > 1)
 		return ;
-	if (line->tokens[i] && ft_strcmp(line->tokens[i], "-n") == 0)
+	if (cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
 	{
 		i++;
 		endl++;
 	}
-	while (line->tokens[i])
+	while (cmd[i])
 	{
-		ft_putstr(line->tokens[i]);
+		ft_putstr(cmd[i]);
 		i++;
 	}
 	if (endl == 0)
