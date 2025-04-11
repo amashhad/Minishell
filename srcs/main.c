@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 03:47:49 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:49:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ int		main(int argc, char **argv, char **envp)
 		//ft_printarr(line.tokens);
 		free(line.line);
 		ft_farray(line.tokens);
-		while (line.piper != NULL && line.piper[i])
-		{
-			ft_printarr(line.piper[i]);
-			i++;
-		}
+		// while (line.piper != NULL && line.piper[i])
+		// {
+		// 	ft_printarr(line.piper[i]);
+		// 	i++;
+		// }
 	}
 	ft_exit_with_error(&line , NULL, 0);
 	return (line.exit_status);

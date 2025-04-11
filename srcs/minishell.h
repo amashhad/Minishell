@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 11:04:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:52:26 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void	ft_handle_env(t_read *line, char **cmd);
 int		prepare_piper(t_read *line);
 int		execution(t_read *line);
 void	free_piper(t_read *line);
+void	pipe_execution(t_read *line, char **cmd);
 #endif
