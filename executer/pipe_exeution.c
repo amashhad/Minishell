@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/15 03:15:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:26:27 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,46 +43,91 @@ int	no_pipe(t_read *line)
 	waitpid(pid, &status, 0);
 	return (WIFEXITED(status));
 }
+//piper ops utils
+void	first_cmd(t_read *line, int read[2], int write[2], int cmd)
+{
+	(void)read;
+	dup2(write[1], STDOUT_FILENO);
+	close(write[1]);
+	close(write[0]);
+	execute(line, line->piper[cmd], line->enviro);
+}
+
+void	middle_cmd(t_read *line, int read[2], int write[2], int cmd)
+{
+	if (cmd%2)
+	{
+		(void)write;
+		dup2( read[0], STDIN_FILENO);
+		close(read[0]);
+		close(read[1]);
+		execute(line, line->piper[cmd], line->enviro);
+	}
+	else
+	{
+		(void)read;
+		dup2( write[0], STDOUT_FILENO);
+		close(write[0]);
+		close(write[1]);
+		execute(line, line->piper[cmd], line->enviro);
+	}
+}
+void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
+{
+	if (cmd%2)
+	{
+		(void)read;
+		dup2(read[0], STDIN_FILENO);
+		close(read[1]);
+		close(read[0]);
+		execute(line, line->piper[cmd], line->enviro);
+	}
+	else
+	{
+		close(read[1]);
+		close(read[0]);
+		close(write[1]);
+		close(write[0]);
+		execute(line, line->piper[cmd], line->enviro);
+	}
+}
 
 int	piper_ops(t_read *line)
 {
-	int	pipe_fd[2];
-	pid_t pid[line->piper_len - 2];
-	int	little;
-	int	status;
+	int		pingpong[2][2];
+	int		status;
+	int		track;
+	pid_t	pid;
 
-	little = 0;
-	while (little < (line->piper_len - 2))
+	track = 0;
+	if (pipe(pingpong[0]) == -1 || pipe(pingpong[1]) == -1)
+		ft_errmsg(line, "Pipe Failed\n", 1);
+	pid = fork();
+	if (pid == -1)
+		ft_errmsg(line, "Fork Failed\n", 1);
+	if (pid == 0)
+		first_cmd(line, pingpong[0], pingpong[1], 0);
+	track++;
+	while (track < (line->piper_len - 1))
 	{
-		if (pipe(pipe_fd) == -1)
-			ft_errmsg(line, "Pipe Failed\n", 32);
-		pid[little] = fork();
-		if (pid[little] == -1)
-			ft_errmsg(line, "Fork Failed\n", -1);
-		if (pid[little] == 0)
-		{
-			ft_putendl_fd("first", 1);
-			ft_cmd1_operation(line, pipe_fd);
-		}
-		little++;
-		pid[little] = fork();
-		if (pid[little] == +-1)
-			ft_errmsg(line, "Fork Failed\n", -1);
-		if (pid[little] == 0)
-		{
-			ft_putendl_fd("second", 1);
-			ft_cmd2_operation(line, pipe_fd);
-		}
-		little++;
-		close_fds(pipe_fd, 2);
+		pid = fork();
+		if (pid == -1)
+			ft_errmsg(line, "Fork Failed\n", 1);
+		if (pid == 0)
+			middle_cmd(line, pingpong[(track + 1) % 2], pingpong[track % 2], track);
+		track++;
 	}
-	while (1)
-	{
-		if (waitpid((pid[line->piper_len - 2]), &status, 0))
-			break;
-	}
+	pid = fork();
+	if (pid == -1)
+		ft_errmsg(line, "Fork Failed\n", 1);
+	if (pid == 0)
+		last_cmd(line, pingpong[(track + 1) % 2], pingpong[track % 2], track);
+	close_fds(pingpong);
+	while (wait(&status) > 0)
+		;
 	return (status);
 }
+///end of piper ops
 
 int	pipe_execution(t_read *line)
 {

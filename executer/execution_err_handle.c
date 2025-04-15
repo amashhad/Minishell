@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:06:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/14 05:22:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:46:03 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,21 @@ void	ft_errmsg(t_read *line, char *msg, int errno)
 	}
 }
 
-void	close_fds(int *fds, int fd_count)
+void	close_fds(int fds[2][2])
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (i < fd_count)
+	j = 0;
+	while (i < 2)
 	{
-		if (fds[i] != -1)
-			close(fds[i]);
+		while (j < 2)
+		{
+			if (fds[i][j] != -1)
+				close(fds[i][j]);
+			j++;
+		}
 		i++;
 	}
 }

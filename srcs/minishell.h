@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/14 05:32:35 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:46:23 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ char	**ft_get_paths(t_read *line, char **env);
 char	*ft_find_executable(t_read *line, char **env, char *cmd);
 int	execute(t_read *line, char **cmd, char **env);
 void	ft_errmsg(t_read *line, char *msg, int errno);
-void	close_fds(int *fds, int fd_count);
+void	close_fds(int fds[2][2]);
 #endif
