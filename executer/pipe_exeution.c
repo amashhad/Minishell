@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/15 12:26:27 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:18:58 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,48 +48,35 @@ void	first_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
 	(void)read;
 	dup2(write[1], STDOUT_FILENO);
-	close(write[1]);
 	close(write[0]);
+	close(write[1]);
 	execute(line, line->piper[cmd], line->enviro);
 }
 
 void	middle_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
-	if (cmd%2)
-	{
-		(void)write;
-		dup2( read[0], STDIN_FILENO);
-		close(read[0]);
-		close(read[1]);
-		execute(line, line->piper[cmd], line->enviro);
-	}
-	else
-	{
-		(void)read;
-		dup2( write[0], STDOUT_FILENO);
-		close(write[0]);
-		close(write[1]);
-		execute(line, line->piper[cmd], line->enviro);
-	}
+	dup2(read[0], STDIN_FILENO);
+	dup2(write[1], STDOUT_FILENO);
+	close(read[0]);
+	close(read[1]);
+	close(write[0]);
+	close(write[1]);
+	execute(line, line->piper[cmd], line->enviro);
 }
 void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
-	if (cmd%2)
-	{
-		(void)read;
-		dup2(read[0], STDIN_FILENO);
-		close(read[1]);
-		close(read[0]);
-		execute(line, line->piper[cmd], line->enviro);
-	}
+	int	*in_pipe;
+
+	if (cmd % 2 == 0)
+		in_pipe = write;
 	else
-	{
-		close(read[1]);
-		close(read[0]);
-		close(write[1]);
-		close(write[0]);
-		execute(line, line->piper[cmd], line->enviro);
-	}
+		in_pipe = read;
+	dup2(in_pipe[0], STDIN_FILENO);
+	close(read[0]);
+	close(read[1]);
+	close(write[0]);
+	close(write[1]);
+	execute(line, line->piper[cmd], line->enviro);
 }
 
 int	piper_ops(t_read *line)
@@ -142,7 +129,7 @@ int	pipe_execution(t_read *line)
 		no_pipe(line);
 		return (line->exit_status);
 	}
-	else if ((line->piper_len - 2) % 2)
+	else
 		piper_ops(line);
 	// if ((line->piper_len - 2) % 2)
 	// {
