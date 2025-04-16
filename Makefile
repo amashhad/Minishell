@@ -11,8 +11,7 @@ SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC))) \
 				$(addprefix $(BUILTIN_DIR)/, $(addsuffix .c, $(BUILTIN_SRCS)))\
 
 EXECUTER_DIR	=	executer
-EXECUTER_SRCS	=	minishell_execute execution_err_handle \
-					pipe_exeution	execution_utils
+EXECUTER_SRCS	=	minishell_execute
 
 BUILTIN_DIR	=	builtin
 BUILTIN_SRCS	=	builtin chdir echo env \

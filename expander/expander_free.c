@@ -12,27 +12,42 @@
 
 #include "ft_expander.h"
 
-void	ft_free_expander(t_expand *pand, int error)
+void	initialize_pand(t_expand *pand)
 {
-	if (error < 0)
-	{
-		ft_putendl_fd("Malloc Error at opening act", 2);
-		exit(1);
-	}
+	pand->i = 0;
+	pand->i_result = 0;
+	pand->i_size = 0;
+	pand->count = 0;
+	pand->j = 0;
+	pand->count = 0;
+	pand->k = 0;
+	pand->i_malloc = 0;
+	pand->last_exit_code = NULL;
+	pand->string = NULL;
+	pand->argv = NULL;
+	pand->quoted = NULL;
+	pand->input = NULL;
+	pand->var_name = NULL;
+	pand->var_value = NULL;
+	pand->result = NULL;
+}
+
+void	ft_free_expander(t_expand *pand)
+{
 	if (pand)
 	{
+		if (pand->var_value)
+			free (pand->var_value);
+		if (pand->last_exit_code)
+			free (pand->last_exit_code);
 		if (pand->var_name)
 			free (pand->var_name);
 		if (pand->string)
 			free (pand->string);
 		if (pand->quoted)
 			free (pand->quoted);
-		if (pand->result)
-			free (pand->result);
-	}
-	if (error == 0)
-	{
-		ft_putendl_fd("Malloc Error at proccess", 2);
-		exit (2);
+		free (pand);
 	}
 }
+	
+	
