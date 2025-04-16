@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:35:06 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 21:35:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 19:18:20 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 
-void	ft_free_tokenizer(t_tok *token, int error)
+void	ft_free_tokenizer(t_tok *token)
 {
 	int	i;
 
@@ -26,13 +26,8 @@ void	ft_free_tokenizer(t_tok *token, int error)
 				free(token->tokens[i]);
 				i++;
 			}
+			free(token->tokens);
 		}
-		free(token->tokens);
 		free (token);
-	}
-	if (error == 0)
-	{
-		printf("The Malloc Not Located\n");
-		exit (0);
 	}
 }

@@ -3,17 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/15 02:20:28 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/11 19:53:04 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	initalization_struct_pand(t_read *line)
+{
+	line->pand = malloc(sizeof(t_expand));
+	if (!line->pand)
+		exit (0);
+	line->pand->i = 0;
+	line->pand->i_result = 0;
+	line->pand->i_size = 0;
+	line->pand->count = 0;
+	line->pand->j = 0;
+	line->pand->count = 0;
+	line->pand->k = 0;
+	line->pand->i_malloc = 0;
+	line->pand->last_exit_code = NULL;
+	line->pand->string = NULL;
+	line->pand->argv = NULL;
+	line->pand->quoted = NULL;
+	line->pand->input = NULL;
+	line->pand->var_name = NULL;
+	line->pand->var_value = NULL;
+	line->pand->result = NULL;
+}
+
+void	initalization_struct_tok(t_read *line)
+{
+	line->token = malloc(sizeof(t_tok));
+	if (!line->token)
+		exit (0);
+	line->token->i = 0;
+	line->token->index = 0;
+	line->token->j = 0;
+	line->token->count = 0;
+	line->token->k = 0;
+	line->token->error_token = 1;
+	line->token->c = '\0';
+	line->token->input = NULL;
+	line->token->tokens = NULL;
+}
 void	initalization(t_read *line, char **envp)
 {
+	initalization_struct_pand(line);
+	initalization_struct_tok(line);
 	line->line = NULL;
 	line->prompt = NULL;
 	line->tokens = NULL;
@@ -60,28 +100,28 @@ void	ft_get_prompt(t_read *line)
 
 int		main(int argc, char **argv, char **envp)
 {
-	t_read	line;
-
+	t_read	*line = malloc(sizeof(t_read));
+	if (!line)
+		exit (0);
 	(void) argc;
 	(void) argv;
-	initalization(&line, envp);
-	ft_get_prompt(&line);
-	int	i;
+	initalization(line, envp);
+	ft_get_prompt(line);
 
-	i = 0;
 	while (1)
 	{
-		line.line = readline(line.prompt);
-		add_history(line.line);
-		line.line = ft_expander(line.line, ft_itoa(line.exit_status), argv[0]);
-		line.tokens = ft_tokenizer(line.line);
-		if (ft_exit_shell(&line))
+		line->line = readline(line->prompt);
+		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
+		line->tokens = ft_tokenizer(line);
+		if (ft_exit_shell(line))
 			break;
-		terminal_shell(&line);
+		add_history(line->line);
+		terminal_shell(line);
 		//ft_printarr(line.tokens);
-		free(line.line);
-		ft_farray(line.tokens);
+		free(line->line);
+		ft_farray(line->tokens);
+		initialize_tok(line->token);
 	}
-	ft_exit_with_error(&line , NULL, 0);
-	return (line.exit_status);
+	ft_exit_with_error(line , NULL, 0);
+	return (line->exit_status);
 }
