@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 19:53:13 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/04/17 22:46:27 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 #include <stdio.h>
+#include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -103,8 +104,9 @@ void	pipe_tokenizer(t_tok *token);
 void	dollar_tokenizer(t_tok *token);
 void	string_tokenizer(t_tok *token);
 void	initialize_tok(t_tok *token);
+
 //Builtin
-void	builtin_part1(t_read *line, char **cmd);
+int		builtin_part1(t_read *line, char **cmd);
 void	ft_handle_cd(t_read *line, char **cmd);
 void	ft_handle_echo(char **cmd);
 void	ft_handle_export(t_read *line, char **cmd);
@@ -115,5 +117,14 @@ void	ft_handle_env(t_read *line, char **cmd);
 int		prepare_piper(t_read *line);
 int		execution(t_read *line);
 void	free_piper(t_read *line);
+int	pipe_execution(t_read *line);
+
+//pipex_test
+int		ft_extra_chk(t_read *line, char *fcommand);
+char	**ft_get_paths(t_read *line, char **env);
+char	*ft_find_executable(t_read *line, char **env, char *cmd);
+int		execute(t_read *line, char **cmd, char **env);
+void	ft_errmsg(t_read *line, char *msg, int errno);
+void	close_fds(int fds[2][2]);
 
 #endif

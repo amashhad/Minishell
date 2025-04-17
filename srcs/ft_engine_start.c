@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 10:46:08 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/17 22:35:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void	terminal_shell(t_read *line)
 	if (exit_code != line->exit_status)
 		return ;
 	prepare_piper(line);
-	execution(line);
+	line->exit_status = pipe_execution(line);
 }
