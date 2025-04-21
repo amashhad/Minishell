@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 08:24:53 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/09 03:19:33 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:43:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ char	**ft_cpyarr(char **arr)
 		temp[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	temp[size] = NULL;
+	temp[i] = NULL;
 	return (temp);
 }

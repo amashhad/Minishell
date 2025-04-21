@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 23:02:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:17:50 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int		main(int argc, char **argv, char **envp)
 	setup_signals();
 	initalization(line, envp);
 	ft_get_prompt(line);
-
 	while (1)
 	{
 		line->line = readline(line->prompt);
@@ -118,7 +117,6 @@ int		main(int argc, char **argv, char **envp)
 			break;
 		add_history(line->line);
 		terminal_shell(line);
-		//ft_printarr(line.tokens);
 		free(line->line);
 		ft_farray(line->tokens);
 		initialize_tok(line->token);

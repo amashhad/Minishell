@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 23:00:53 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:30:48 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	go_to_count_malloc(t_read *line, char *last_exit_code, char *argv)
 	line->pand->last_exit_code = last_exit_code;
 	line->pand->argv = argv;
 	line->pand->input = line->line;
-	line->pand->envment = line->enviro;
+	line->pand->envment = ft_cpyarr(line->enviro);
 	line->pand->i_size = count_malloc(line->pand);
 	if (line->pand->i_malloc == 1)
 		ft_exit_with_error(line, "malloc error", 2);
