@@ -5,16 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/01 19:59:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/17 22:46:27 by amashhad         ###   ########.fr       */
+/*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
+/*   Updated: 2025/04/21 23:11:03 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <sys/wait.h>
+# include <stdio.h>
+# include <signal.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -43,6 +44,7 @@ typedef struct s_expander
 	char	*var_name;
 	char	*var_value;
 	char	*result;
+	char	**envment;
 }			t_expand;
 
 typedef struct s_token
@@ -96,6 +98,9 @@ void	single_quoted(t_expand *pand);
 void	fill_value_expander(t_expand *pand, char *value);
 void	var_expander(t_expand *pand);
 void	initialize_pand(t_expand *pand);
+void	go_to_check_arrow(t_read *line);
+void	fill_arrow(t_expand *pand);
+void	count_arrow(t_expand *pand);
 //tokenizer
 char	**ft_tokenizer(t_read *line);
 void	ft_free_tokenizer(t_tok *token);
@@ -104,27 +109,27 @@ void	pipe_tokenizer(t_tok *token);
 void	dollar_tokenizer(t_tok *token);
 void	string_tokenizer(t_tok *token);
 void	initialize_tok(t_tok *token);
-
 //Builtin
-int		builtin_part1(t_read *line, char **cmd);
+int	builtin_part1(t_read *line, char **cmd);
 void	ft_handle_cd(t_read *line, char **cmd);
 void	ft_handle_echo(char **cmd);
 void	ft_handle_export(t_read *line, char **cmd);
 void	ft_handle_unset(t_read *line, char **cmd);
 void	ft_handle_env(t_read *line, char **cmd);
+char	*ft_getenv(char **line, char *env);
 
 //execution
-int		prepare_piper(t_read *line);
-int		execution(t_read *line);
-void	free_piper(t_read *line);
-int	pipe_execution(t_read *line);
-
-//pipex_test
-int		ft_extra_chk(t_read *line, char *fcommand);
-char	**ft_get_paths(t_read *line, char **env);
-char	*ft_find_executable(t_read *line, char **env, char *cmd);
-int		execute(t_read *line, char **cmd, char **env);
 void	ft_errmsg(t_read *line, char *msg, int errno);
 void	close_fds(int fds[2][2]);
+int	execute(t_read *line, char **cmd, char **env);
+int		prepare_piper(t_read *line);
+int		pipe_execution(t_read *line);
+int		execution(t_read *line);
+void	free_piper(t_read *line);
+
+//signal
+void	handle_sigint(int sig);
+void	handle_sigquit(int sig);
+void	setup_signals(void);
 
 #endif

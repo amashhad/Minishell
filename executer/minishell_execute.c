@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 23:06:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/17 22:25:04 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/21 21:04:54 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	prepare_piper(t_read *line)
 	line->piper = (char ***)malloc(sizeof(char **) * (size + 2)); //number of (pipes + 1) (+ 1 for NULL)
 	if (!line->piper)
 		ft_exit_with_error(line, "Piper Malloc Error", 2);
-	line->piper_len = size + 2;
+	line->piper_len = size + 1;
 	fill_piper(line);
 	return (size);
 }

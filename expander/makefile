@@ -6,7 +6,7 @@ ARFLAGS	= rcs
 RM	= rm -rf
 
 SRC	=	ft_expander expander_compare expander_fill_utils \
-		expander_free ft_expander_utils \
+		expander_free ft_expander_utils arrow_expander \
 
 SRCS	= $(addsuffix .c, $(SRC))
 OBJ_DIR	= obj

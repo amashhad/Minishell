@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/17 22:32:00 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/21 21:24:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ int	no_pipe(t_read *line)
 //piper ops utils
 void	first_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
-	(void)read;
-	close(write[0]);
-	dup2(write[1], STDOUT_FILENO);
-	close(write[1]);
+	(void)write;
+	close(read[0]);
+	dup2(read[1], STDOUT_FILENO);
+	close(read[1]);
 	execute(line, line->piper[cmd], line->enviro);
 }
 
 void	middle_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
-	if (cmd%2)
+	if (!cmd%2)
 	{
 		close(read[0]);
 		close(write[1]);
@@ -73,12 +73,11 @@ void	middle_cmd(t_read *line, int read[2], int write[2], int cmd)
 		close(read[0]);
 		close(write[1]);
 	}
-
 	execute(line, line->piper[cmd], line->enviro);
 }
 void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
-	if (cmd%2)
+	if (!cmd%2)
 	{
 		close(write[1]);
 		dup2(write[0], STDIN_FILENO);
@@ -114,8 +113,11 @@ int	piper_ops(t_read *line)
 	if (pid == 0)
 		first_cmd(line, pingpong[0], pingpong[1], 0);
 	track++;
+	close(pingpong[0][1]);
+	printf("line->piper_len :%d\n", line->piper_len);
 	while (track < (line->piper_len - 1))
 	{
+		printf("track :%d\n", track);
 		pid = fork();
 		if (pid == -1)
 			ft_errmsg(line, "Fork Failed\n", 1);
@@ -127,7 +129,7 @@ int	piper_ops(t_read *line)
 	if (pid == -1)
 		ft_errmsg(line, "Fork Failed\n", 1);
 	if (pid == 0)
-		last_cmd(line, pingpong[(track + 1) % 2], pingpong[track % 2], track -1);
+		last_cmd(line, pingpong[(track + 1) % 2], pingpong[track % 2], track);
 	close_fds(pingpong);
 	while (wait(&status) > 0)
 		;
@@ -140,17 +142,17 @@ int	pipe_execution(t_read *line)
 	// int	pipe_fd[2];
 	// int	pid[line->piper_len - 2];
 	// int	status;
-	int	little;
+	// int	little;
 
-	little = 0;
-	if (little == line->piper_len - 2)
+	// little = 0;
+	if (line->piper_len == 1)
 	{
 		no_pipe(line);
 		return (line->exit_status);
 	}
 	else
 		piper_ops(line);
-	ft_exit_with_error(line, NULL, 0);
+	//ft_exit_with_error(line, NULL, 0);
 	// if ((line->piper_len - 2) % 2)
 	// {
 	// 	line->exit_status = piper_ops(line);
@@ -173,5 +175,5 @@ int	pipe_execution(t_read *line)
 	// if (WIFEXITED(status))
 	// 	return (WEXITSTATUS(status));
 	// return (128 + WTERMSIG(status));
-	return (0);
+	return (line->exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 21:09:59 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 10:52:12 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/21 22:56:53 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,12 @@ void	ft_handle_env(t_read *line, char **cmd)
 	}
 	else
 		ft_printarr(line->enviro);
+}
+
+char	*ft_getenv(char **enviro, char *env)
+{
+	char	*ret;
+
+	ret = ft_fetcharr(enviro, env);
+	return (ret);
 }

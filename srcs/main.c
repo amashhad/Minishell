@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/17 22:35:29 by amashhad         ###   ########.fr       */
+/*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
+/*   Updated: 2025/04/21 23:02:21 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	initalization_struct_pand(t_read *line)
 	line->pand->var_name = NULL;
 	line->pand->var_value = NULL;
 	line->pand->result = NULL;
+	line->pand->envment = NULL;
 }
 
 void	initalization_struct_tok(t_read *line)
@@ -97,7 +98,6 @@ void	ft_get_prompt(t_read *line)
 		ft_exit_with_error(line, "Unable to get prompt", 1);
 }
 
-
 int		main(int argc, char **argv, char **envp)
 {
 	t_read	*line = malloc(sizeof(t_read));
@@ -105,6 +105,7 @@ int		main(int argc, char **argv, char **envp)
 		exit (0);
 	(void) argc;
 	(void) argv;
+	setup_signals();
 	initalization(line, envp);
 	ft_get_prompt(line);
 

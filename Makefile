@@ -2,7 +2,7 @@ NAME		=	minishell
 CC		=	cc
 CFLAGS		=	-Wall -Wextra -Werror -g
 RM		=	rm -rf
-SRC		= 	main exit_chk ft_exit_error \
+SRC		= 	main exit_chk ft_exit_error signal \
 			ft_engine_start $(EXECUTER_SRCS) $(BUILTIN_SRCS)\
 
 SRC_DIR		= 	srcs
@@ -11,8 +11,8 @@ SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC))) \
 				$(addprefix $(BUILTIN_DIR)/, $(addsuffix .c, $(BUILTIN_SRCS)))\
 
 EXECUTER_DIR	=	executer
-EXECUTER_SRCS	=	minishell_execute execution_err_handle execution_utils\
-					pipe_exeution
+EXECUTER_SRCS	=	minishell_execute execution_err_handle execution_utils \
+					pipe_exeution \
 
 BUILTIN_DIR	=	builtin
 BUILTIN_SRCS	=	builtin chdir echo env \
