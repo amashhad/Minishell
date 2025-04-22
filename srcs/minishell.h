@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 23:11:03 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/22 22:59:14 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char	*ft_getenv(char **line, char *env);
 
 //execution
 void	ft_errmsg(t_read *line, char *msg, int errno);
-void	close_fds(int fds[2][2]);
+void	close_fds(int fds[2][2], int piper_len);
 int	execute(t_read *line, char **cmd, char **env);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);

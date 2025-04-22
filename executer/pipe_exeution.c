@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 21:24:55 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/22 23:03:12 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,40 +44,26 @@ int	no_pipe(t_read *line)
 	return (WIFEXITED(status));
 }
 //piper ops utils
-void	first_cmd(t_read *line, int read[2], int write[2], int cmd)
-{
-	(void)write;
-	close(read[0]);
-	dup2(read[1], STDOUT_FILENO);
-	close(read[1]);
-	execute(line, line->piper[cmd], line->enviro);
-}
 
-void	middle_cmd(t_read *line, int read[2], int write[2], int cmd)
+void	middle_cmd(t_read *line, int write[2], int read[2], int cmd)
 {
-	if (!cmd%2)
+	if (cmd != line->piper_len)
 	{
-		close(read[0]);
-		close(write[1]);
-		dup2(read[1], STDOUT_FILENO);
-		dup2(write[0], STDIN_FILENO);
-		close(read[1]);
 		close(write[0]);
-	}
-	else
-	{
-		close(read[1]);
-		close(write[0]);
-		dup2(read[0], STDIN_FILENO);
 		dup2(write[1], STDOUT_FILENO);
-		close(read[0]);
 		close(write[1]);
+	}
+	if (cmd != 0)
+	{
+		close(read[1]);
+		dup2(read[0], STDIN_FILENO);
+		close(read[0]);
 	}
 	execute(line, line->piper[cmd], line->enviro);
 }
 void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
-	if (!cmd%2)
+	if (!cmd%2 && line->piper_len != 1)
 	{
 		close(write[1]);
 		dup2(write[0], STDIN_FILENO);
@@ -85,7 +71,7 @@ void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 		close(read[1]);
 		close(read[0]);
 	}
-	else
+	else if (line->piper_len != 1)
 	{
 		close(read[1]);
 		dup2(read[0], STDIN_FILENO);
@@ -96,7 +82,22 @@ void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 	execute(line, line->piper[cmd], line->enviro);
 	ft_putendl_fd("Command not found", 2);
 }
+void	middle(t_read *line, int track, int pingpong[2][2])
+{
+	int	pid;
 
+	if (track >= 2)
+		{
+			close(pingpong[track % 2][0]);
+			close(pingpong[track % 2][1]);
+		}
+		pipe(pingpong[track % 2]);
+		pid = fork();
+		if (pid == -1)
+			ft_errmsg(line, "Fork Failed\n", 1);
+		if (pid == 0)
+			middle_cmd(line, pingpong[track % 2], pingpong[(track + 1) % 2], track);
+}
 int	piper_ops(t_read *line)
 {
 	int		pingpong[2][2];
@@ -105,32 +106,14 @@ int	piper_ops(t_read *line)
 	pid_t	pid;
 
 	track = 0;
-	if (pipe(pingpong[0]) == -1 || pipe(pingpong[1]) == -1)
-		ft_errmsg(line, "Pipe Failed\n", 1);
-	pid = fork();
-	if (pid == -1)
-		ft_errmsg(line, "Fork Failed\n", 1);
-	if (pid == 0)
-		first_cmd(line, pingpong[0], pingpong[1], 0);
-	track++;
-	close(pingpong[0][1]);
-	printf("line->piper_len :%d\n", line->piper_len);
 	while (track < (line->piper_len - 1))
-	{
-		printf("track :%d\n", track);
-		pid = fork();
-		if (pid == -1)
-			ft_errmsg(line, "Fork Failed\n", 1);
-		if (pid == 0)
-			middle_cmd(line, pingpong[(track + 1) % 2], pingpong[track % 2], track);
-		track++;
-	}
+		middle(line, track++, pingpong);
 	pid = fork();
 	if (pid == -1)
 		ft_errmsg(line, "Fork Failed\n", 1);
 	if (pid == 0)
-		last_cmd(line, pingpong[(track + 1) % 2], pingpong[track % 2], track);
-	close_fds(pingpong);
+		last_cmd(line, pingpong[(track + 1) % 2], pingpong[(track) % 2], track);
+	close_fds(pingpong, line->piper_len);
 	while (wait(&status) > 0)
 		;
 	return (status);
@@ -139,41 +122,6 @@ int	piper_ops(t_read *line)
 
 int	pipe_execution(t_read *line)
 {
-	// int	pipe_fd[2];
-	// int	pid[line->piper_len - 2];
-	// int	status;
-	// int	little;
-
-	// little = 0;
-	if (line->piper_len == 1)
-	{
-		no_pipe(line);
-		return (line->exit_status);
-	}
-	else
-		piper_ops(line);
-	//ft_exit_with_error(line, NULL, 0);
-	// if ((line->piper_len - 2) % 2)
-	// {
-	// 	line->exit_status = piper_ops(line);
-	// 	return (line->exit_status);
-	// }
-	// if (pipe(pipe_fd) == -1)
-	// 	ft_errmsg("Pipe Failed\n", 32);
-	// pid[0] = fork();
-	// if (pid[0] == -1)
-	// 	ft_errmsg("Fork Failed\n", -1);
-	// if (pid[0] == 0)
-	// 	ft_cmd1_operation(line, pipe_fd);
-	// pid[1] = fork();
-	// if (pid[1] == -1)
-	// 	ft_errmsg("Fork Failed\n", -1);
-	// if (pid[1] == 0)
-	// 	ft_cmd2_operation(line, pipe_fd);
-	// close_fds(pipe_fd, 2);
-	// waitpid(pid[1], &status, 0);
-	// if (WIFEXITED(status))
-	// 	return (WEXITSTATUS(status));
-	// return (128 + WTERMSIG(status));
+	piper_ops(line);
 	return (line->exit_status);
 }
