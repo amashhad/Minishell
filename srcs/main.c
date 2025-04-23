@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 23:17:50 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 01:43:03 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ int		main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line->line = readline(line->prompt);
+		add_history(line->line);
 		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
 		line->tokens = ft_tokenizer(line);
 		if (ft_exit_shell(line))
 			break;
-		add_history(line->line);
 		terminal_shell(line);
 		free(line->line);
 		ft_farray(line->tokens);
