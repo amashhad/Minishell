@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/22 22:59:14 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 02:47:26 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,13 @@ void	ft_get_prompt(t_read *line);
 void	ft_exit_with_error(t_read *line, char *str, int errno);
 void	terminal_shell(t_read *line);
 //expander
-//int & size_t
 int	comper_expander(char c);
 int string_expander(char c);
 size_t	count_malloc(t_expand *pand);
 
-//char
 char	*ft_expander(t_read *line, char *last_exit_code, char *argv);
 char	*get_string_expander(t_expand *pand);
 
-//void
 void	ft_free_expander(t_expand *pand);
 void	dollar_malloc_expander(t_expand *pand);
 void	dollar_fill_expander(t_expand *pand);
@@ -101,6 +98,7 @@ void	initialize_pand(t_expand *pand);
 void	go_to_check_arrow(t_read *line);
 void	fill_arrow(t_expand *pand);
 void	count_arrow(t_expand *pand);
+
 //tokenizer
 char	**ft_tokenizer(t_read *line);
 void	ft_free_tokenizer(t_tok *token);
@@ -109,6 +107,7 @@ void	pipe_tokenizer(t_tok *token);
 void	dollar_tokenizer(t_tok *token);
 void	string_tokenizer(t_tok *token);
 void	initialize_tok(t_tok *token);
+
 //Builtin
 int	builtin_part1(t_read *line, char **cmd);
 void	ft_handle_cd(t_read *line, char **cmd);
@@ -121,13 +120,16 @@ char	*ft_getenv(char **line, char *env);
 //execution
 void	ft_errmsg(t_read *line, char *msg, int errno);
 void	close_fds(int fds[2][2], int piper_len);
+void	free_piper(t_read *line);
+void	ft_cmd1_operation(t_read *line, int pipe_fd[]);
+void	ft_cmd2_operation(t_read *line, int pipe_fd[]);
+void	middle_cmd(t_read *line, int write[2], int read[2], int cmd);
 int	execute(t_read *line, char **cmd, char **env);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);
 int		execution(t_read *line);
-void	free_piper(t_read *line);
 
-//signal
+//signals
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	setup_signals(void);

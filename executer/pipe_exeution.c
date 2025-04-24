@@ -6,61 +6,12 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/22 23:03:12 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 02:51:16 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-void	ft_cmd1_operation(t_read *line, int pipe_fd[])
-{
-	dup2(pipe_fd[1], STDOUT_FILENO);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	execute(line, line->piper[0], line->enviro);
-}
-
-void	ft_cmd2_operation(t_read *line, int pipe_fd[])
-{
-	dup2(pipe_fd[0], STDIN_FILENO);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	execute(line, line->piper[1], line->enviro);
-}
-
-int	no_pipe(t_read *line)
-{
-	pid_t	pid;
-	int	status;
-
-	if (builtin_part1(line, line->piper[0]) != 1)
-		return (line->exit_status);
-	pid = fork();
-	if (pid == -1)
-		ft_errmsg(line, "Fork Failed\n", -1);
-	if (pid == 0)
-		execute(line, line->piper[0], line->enviro);
-	waitpid(pid, &status, 0);
-	return (WIFEXITED(status));
-}
-//piper ops utils
-
-void	middle_cmd(t_read *line, int write[2], int read[2], int cmd)
-{
-	if (cmd != line->piper_len)
-	{
-		close(write[0]);
-		dup2(write[1], STDOUT_FILENO);
-		close(write[1]);
-	}
-	if (cmd != 0)
-	{
-		close(read[1]);
-		dup2(read[0], STDIN_FILENO);
-		close(read[0]);
-	}
-	execute(line, line->piper[cmd], line->enviro);
-}
 void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
 	if (!cmd%2 && line->piper_len != 1)
@@ -82,7 +33,7 @@ void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 	execute(line, line->piper[cmd], line->enviro);
 	ft_putendl_fd("Command not found", 2);
 }
-void	middle(t_read *line, int track, int pingpong[2][2])
+void	cmd_loop(t_read *line, int track, int pingpong[2][2])
 {
 	int	pid;
 
@@ -107,7 +58,7 @@ int	piper_ops(t_read *line)
 
 	track = 0;
 	while (track < (line->piper_len - 1))
-		middle(line, track++, pingpong);
+		cmd_loop(line, track++, pingpong);
 	pid = fork();
 	if (pid == -1)
 		ft_errmsg(line, "Fork Failed\n", 1);
