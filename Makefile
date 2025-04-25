@@ -14,7 +14,7 @@ SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC))) \
 
 EXECUTER_DIR	=	executer
 EXECUTER_SRCS	=	minishell_execute execution_err_handle execution_utils \
-					pipe_exeution cmd_operations\
+					pipe_exeution cmd_operations free_execution\
 
 EXPANDER_DIR	=	expander
 EXPANDER_SRCS	=	ft_expander expander_compare expander_fill_utils \

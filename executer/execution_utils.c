@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/17 22:24:28 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 06:17:02 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,39 @@ char	*ft_find_executable(t_read *line, char **env, char *cmd)
 	free(paths);
 	return (NULL);
 }
+char **remove_redirect(char **cmd)
+{
+	char	**redirect;
+	int		srch;
+
+	srch = 0;
+	if (!ft_fetcharr(cmd, ">") || !ft_fetcharr(cmd, ">>")
+		|| !ft_fetcharr(cmd, "<") || !ft_fetcharr(cmd, "<<"))
+	{
+		redirect = ft_cpyarr(cmd);
+		return (redirect);
+	}
+	srch = ft_arr_srch(">", cmd);
+	redirect = ft_cpynarr(cmd, srch);
+	ft_printarr(redirect);
+	return (redirect);
+}
 
 int	execute(t_read *line, char **cmd, char **env)
 {
 	char	*exve;
+	char	**redirect;
 
-	if (!ft_extra_chk(line, cmd[0]))
-		exve = ft_strdup(cmd[0]);
+	redirect = remove_redirect(cmd);
+	if (!ft_extra_chk(line, redirect[0]))
+		exve = ft_strdup(redirect[0]);
 	else
-		exve = ft_find_executable(line, env, cmd[0]);
+		exve = ft_find_executable(line, env, redirect[0]);
 	if (!exve)
-	{
-		//ft_farray(cmd);
 		ft_errmsg(line, "Command not found || Invalid Command\n", 127);
-	}
-	execve(exve, cmd, env);
-	ft_errmsg(line, "Execve Failed, Unable to Execute\n", -1);
-	//ft_farray(cmd);
+	line->exit_status = execve(exve, redirect, env);
+	ft_farray(redirect);
+	free(exve);
+	execution_free(line);
 	exit(1);
 }

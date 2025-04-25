@@ -23,7 +23,6 @@ int		main(int argc, char **argv)
 		inner++;
 	}
 	arr = (char ***)malloc(sizeof(char **) * (limit + 2));
-	//ft_printf("%d\n", limit);
 	if (!arr)
 		return (ft_printf("malloc error\n"));
 	inner = 0;

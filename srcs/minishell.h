@@ -6,12 +6,17 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 02:47:26 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 07:10:28 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+//builtin enums
+# define CMD_SUCCESS 0
+# define CMD_NOTFOUND 1
+# define CMD_FAILURE 2
 
 # include <stdio.h>
 # include <signal.h>
@@ -121,10 +126,9 @@ char	*ft_getenv(char **line, char *env);
 void	ft_errmsg(t_read *line, char *msg, int errno);
 void	close_fds(int fds[2][2], int piper_len);
 void	free_piper(t_read *line);
-void	ft_cmd1_operation(t_read *line, int pipe_fd[]);
-void	ft_cmd2_operation(t_read *line, int pipe_fd[]);
-void	middle_cmd(t_read *line, int write[2], int read[2], int cmd);
-int	execute(t_read *line, char **cmd, char **env);
+void	cmd_chain(t_read *line, int write[2], int read[2], int cmd);
+void	execution_free(t_read *line);
+int		execute(t_read *line, char **cmd, char **env);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);
 int		execution(t_read *line);

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 02:51:16 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 04:52:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	cmd_loop(t_read *line, int track, int pingpong[2][2])
 		if (pid == -1)
 			ft_errmsg(line, "Fork Failed\n", 1);
 		if (pid == 0)
-			middle_cmd(line, pingpong[track % 2], pingpong[(track + 1) % 2], track);
+			cmd_chain(line, pingpong[track % 2], pingpong[(track + 1) % 2], track);
 }
 int	piper_ops(t_read *line)
 {

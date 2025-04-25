@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 10:58:11 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:50:43 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,7 @@ void	ft_handle_export(t_read *line, char **cmd)
 					|| !ft_strcmp(cmd[i], "="))
 			ft_export_err(line, cmd, i);
 		else
-			{
-				//write(1, "heress\n", 7);
 				ft_export_success(line, cmd, i);
-			}
 		i++;
 	}
 }

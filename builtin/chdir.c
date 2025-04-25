@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:14:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/17 21:34:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:44:52 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	void	ft_chng_pwd(t_read *line)
 	if (!line->enviro)
 		ft_exit_with_error(line, "Malloc Error", 1);
 	line->expo = ft_srchrarr("PWD=", line->expo, line->cwd);
-	if (!line->enviro)
+	if (!line->expo)
 		ft_exit_with_error(line, "Malloc Error", 1);
 }
 
@@ -66,6 +66,7 @@ static	void	ft_old_cwd(t_read *line)
 	free(old_pwd);
 	ft_get_new_cwd(line, "HOME=");
 }
+
 static	void	ft_path(t_read *line, char **cmd)
 {
 	int	dir;
@@ -92,12 +93,10 @@ static	void	ft_path(t_read *line, char **cmd)
 
 void	ft_handle_cd(t_read *line, char **cmd)
 {
-	if (cmd[1] == NULL)
-		ft_old_cwd(line);
-	else if (ft_strcmp("~", cmd[1]) == 0)
-		ft_old_cwd(line);
-	else if (ft_strcmp(cmd[1], "|") != 0)
-		ft_path(line, cmd);
-	else
+	if (ft_fetcharr(cmd, "|"))
 		return ;
+	if (cmd[1] == NULL || ft_strcmp("~", cmd[1]) == 0)
+		ft_old_cwd(line);
+	else
+		ft_path(line, cmd);
 }

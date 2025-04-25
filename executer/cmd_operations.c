@@ -6,29 +6,44 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:36:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 02:45:54 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 07:48:23 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-void	ft_cmd1_operation(t_read *line, int pipe_fd[])
+// void	ft_cmd1_operation(t_read *line, int pipe_fd[])
+// {
+// 	dup2(pipe_fd[1], STDOUT_FILENO);
+// 	close(pipe_fd[0]);
+// 	close(pipe_fd[1]);
+// 	execute(line, line->piper[0], line->enviro);
+// }
+
+// void	ft_cmd2_operation(t_read *line, int pipe_fd[])
+// {
+// 	dup2(pipe_fd[0], STDIN_FILENO);
+// 	close(pipe_fd[0]);
+// 	close(pipe_fd[1]);
+// 	execute(line, line->piper[1], line->enviro);
+// }
+int	redirection_chk(t_read *line, int cmd)
 {
-	dup2(pipe_fd[1], STDOUT_FILENO);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	execute(line, line->piper[0], line->enviro);
+	int	srch;
+	int fd;
+
+	fd = 0;
+	srch = 0;
+	if (ft_fetcharr(line->piper[cmd], ">"))
+	{
+		srch = ft_arr_srch(">", line->piper[cmd]);
+		fd = open(line->piper[cmd][srch + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		return (fd);
+	}
+	return (fd);
 }
 
-void	ft_cmd2_operation(t_read *line, int pipe_fd[])
-{
-	dup2(pipe_fd[0], STDIN_FILENO);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	execute(line, line->piper[1], line->enviro);
-}
-
-void	middle_cmd(t_read *line, int write[2], int read[2], int cmd)
+void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 {
 	if (cmd != line->piper_len)
 	{

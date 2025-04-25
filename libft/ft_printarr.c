@@ -6,14 +6,14 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 20:41:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 08:23:34 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/24 04:34:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//Prints array and returns the number of elements that would've been
-//written, returns 0 in case of error with an error message
+//Prints array on stdout and returns the number of elements that
+//would've been written, returns 0 in case of error with an error message
 int	ft_printarr(char **arr)
 {
 	int	i;
