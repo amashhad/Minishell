@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:44:24 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 02:29:40 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/26 07:06:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	ft_handle_unset(t_read *line, char **cmd)
 
 	i = 0;
 	if (cmd[1] == NULL)
-		return ;
-	if (ft_strcmp(cmd[1], "|") == 0)
 		return ;
 	while (cmd[i])
 	{

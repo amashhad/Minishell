@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 20:24:14 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/02 18:48:48 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/26 08:24:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,7 @@ char	**ft_split(char *s, char c)
 	int		wordcount;
 
 	if (!s)
-	{
-		string = malloc(sizeof(char *) * 1);
-		if (!string)
-			return (NULL);
-		*string = NULL;
-		return (string);
-	}
+		return (NULL);
 	wordcount = ft_wordcount0(s, c);
 	string = (char **)malloc(sizeof(*string) * (wordcount + 1));
 	if (!string)

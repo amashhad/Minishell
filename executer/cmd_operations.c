@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:36:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 03:15:48 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/26 22:07:00 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int	redirection_chk(t_read *line, int cmd)
 	return (fd);
 }
 
+	//||||||||||||||||||||||||||||||||||||||||||||||||||||||||//
+	//|||Check Redirect before going to Pipe IF there's||||||//
+	//|||redirect, don't redirect pipe, Dup2 the||||||||||||//
+	//||| Open fds, HOWEVER, close the Pipes approp||||||||//
+	////////////////////////////////////////////////////////
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 {
 	if (cmd != line->piper_len)
@@ -59,6 +64,7 @@ void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 	}
 	if (builtin_part1(line, line->piper[cmd]) == 1)
 		execute(line, line->piper[cmd], line->enviro);
-	
+	// else
+	// 	execution_free(line);
 	exit(1);
 }
