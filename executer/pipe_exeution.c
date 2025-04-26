@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 04:52:38 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/26 03:14:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 		close(write[1]);
 		dup2(write[0], STDIN_FILENO);
 		close(write[0]);
-		close(read[1]);
-		close(read[0]);
+		//close(read[1]);
+		//close(read[0]);
 	}
 	else if (line->piper_len != 1)
 	{
 		close(read[1]);
 		dup2(read[0], STDIN_FILENO);
 		close(read[0]);
-		close(write[1]);
-		close(write[0]);
+		//close(write[1]);
+		//close(write[0]);
 	}
 	execute(line, line->piper[cmd], line->enviro);
 	ft_putendl_fd("Command not found", 2);
@@ -73,6 +73,15 @@ int	piper_ops(t_read *line)
 
 int	pipe_execution(t_read *line)
 {
-	piper_ops(line);
+	//int		track;
+
+	//track = 0;
+	if (line->piper_len < 2)
+	{
+		if (builtin_part1(line, line->piper[0]) == 1)
+			piper_ops(line);
+	}
+	else
+		piper_ops(line);
 	return (line->exit_status);
 }

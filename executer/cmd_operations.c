@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:36:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 07:48:23 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/26 03:15:48 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 		dup2(read[0], STDIN_FILENO);
 		close(read[0]);
 	}
-	execute(line, line->piper[cmd], line->enviro);
+	if (builtin_part1(line, line->piper[cmd]) == 1)
+		execute(line, line->piper[cmd], line->enviro);
+	
+	exit(1);
 }

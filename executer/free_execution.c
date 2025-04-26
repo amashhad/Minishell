@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 06:13:00 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 07:11:07 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/26 03:17:28 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void	exit_message(t_read *line)
 	int		exit_status;
 	char	*str;
 
+	str = NULL;
 	exit_status = line->exit_status;
-	str = strerror(line->exit_status);
-	perror(str);
-	free(str);
+	if (line->exit_status != 0)
+	{
+		str = strerror(line->exit_status);
+		perror(str);
+		free(str);
+	}
 	free(line->line);
 	exit(exit_status);
 }
