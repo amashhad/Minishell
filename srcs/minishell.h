@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 07:10:28 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:39:58 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	execution_free(t_read *line);
 int		execute(t_read *line, char **cmd, char **env);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);
+void	free_piper(t_read *line);
 int		execution(t_read *line);
 
 //signals

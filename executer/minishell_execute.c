@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_execute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 23:06:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 06:58:00 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:58:27 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_piper(t_read *line)
 	len = 0;
 	if (line->piper == NULL)
 		return ;
-	while (len < line->piper_len)
+	while (len <= line->piper_len)
 	{
 		ft_farray(line->piper[len]);
 		len++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 06:13:00 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 06:56:06 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:31:28 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	exit_message(t_read *line)
 	{
 		str = strerror(line->exit_status);
 		perror(str);
-		//free(str);
 	}
 	exit(exit_status);
 }

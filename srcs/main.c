@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/25 17:03:20 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:40:19 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int		main(int argc, char **argv, char **envp)
 		terminal_shell(line);
 		free(line->line);
 		ft_farray(line->tokens);
+		free_piper(line);
+		
 		initialize_tok(line->token);
 	}
 	ft_exit_with_error(line , NULL, 0);

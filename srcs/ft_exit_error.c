@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 08:15:17 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 20:04:23 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	ft_exit_with_error(t_read *line, char *str, int i)
 {
 	int	j;
 
-	 if (line->pand)
-	 	ft_free_expander(line->pand);
+	//  if (line->pand)
+	//  	ft_free_expander(line->pand);
+	// if (line->enviro)
+	// 	ft_farray(line->enviro);
 	if (line->token)
 		ft_free_tokenizer(line->token);
 	if (line->piper != NULL)

@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exeution.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 06:45:46 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:23:17 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
+void	handle_sigint1(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n", 1);
+}
+
+void	setup_signals1(void)
+{
+	signal(SIGINT, handle_sigint1);
+	signal(SIGQUIT, handle_sigint1);
+}
 void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 {
 	if (!cmd%2 && line->piper_len != 1)
@@ -53,6 +64,7 @@ int	piper_ops(t_read *line)
 	pid_t	pid;
 
 	track = 0;
+	setup_signals1();
 	while (track < (line->piper_len - 1))
 		cmd_loop(line, track++, pingpong);
 	pid = fork();

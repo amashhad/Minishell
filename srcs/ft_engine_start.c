@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_engine_start.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/17 22:35:22 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:38:32 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void	terminal_shell(t_read *line)
 	if (exit_code != line->exit_status)
 		return ;
 	prepare_piper(line);
-	line->exit_status = pipe_execution(line);
+	pipe_execution(line);
 }

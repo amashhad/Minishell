@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 08:27:17 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:34:06 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	execute(t_read *line, char **cmd, char **env)
 	{
 		line->exit_status = 127;
 		execution_free(line);
+		// printf("brah\n");
+		//exit(127);
 	}
 	line->exit_status = execve(exve, redirect, env);
 	ft_farray(redirect);

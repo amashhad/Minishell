@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 11:04:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 20:20:12 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_handle_echo(char **cmd)
 		ft_putchar('\n');
 		return ;
 	}
-	if (ft_arr_srch("|", cmd) > 1)
-		return ;
 	if (cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
 	{
 		i++;

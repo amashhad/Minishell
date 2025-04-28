@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:06 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 23:38:02 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:52:39 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	ft_free_expander(t_expand *pand)
 			free (pand->string);
 		if (pand->quoted)
 			free (pand->quoted);
+		if (pand->result)
+			free (pand->result);
+		if (pand->input)
+			free (pand->input);
 		free (pand);
 	}
 }

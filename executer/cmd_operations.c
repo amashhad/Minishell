@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:36:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 22:07:00 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/04/28 13:19:38 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	redirection_chk(t_read *line, int cmd)
 	////////////////////////////////////////////////////////
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (cmd != line->piper_len)
 	{
 		close(write[0]);
