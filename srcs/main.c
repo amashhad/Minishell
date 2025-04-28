@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 19:40:19 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/04/28 22:38:08 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int		main(int argc, char **argv, char **envp)
 		if (ft_exit_shell(line))
 			break;
 		terminal_shell(line);
-		free(line->line);
+		// free(line->line);
 		ft_farray(line->tokens);
 		free_piper(line);
 		

@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 19:34:06 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/04/28 22:47:06 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,27 @@ char **remove_redirect(char **cmd)
 int	execute(t_read *line, char **cmd, char **env)
 {
 	char	*exve;
-	char	**redirect;
+	// char	**redirect;
 
-	redirect = remove_redirect(cmd);
-	if (!ft_extra_chk(line, redirect[0]))
-		exve = ft_strdup(redirect[0]);
+	// redirect = remove_redirect(cmd);
+	if (!ft_extra_chk(line, cmd[0]))
+		exve = ft_strdup(cmd[0]);
 	else
-		exve = ft_find_executable(line, env, redirect[0]);
+		exve = ft_find_executable(line, env, cmd[0]);
 	if (!exve)
 	{
 		line->exit_status = 127;
+		ft_farray(cmd);
 		execution_free(line);
+		// free(line->pand);
+		if (line->piper != NULL)
+			free_piper(line);
 		// printf("brah\n");
-		//exit(127);
+		exit(127);
 	}
-	line->exit_status = execve(exve, redirect, env);
-	ft_farray(redirect);
+	line->exit_status = execve(exve, cmd, env);
+	ft_farray(cmd);
+	free(line->pand);
 	free(exve);
 	execution_free(line);
 	exit(1);

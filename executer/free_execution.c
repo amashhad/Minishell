@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 06:13:00 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 19:31:28 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/04/28 22:50:22 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	exit_message(t_read *line)
 }
 void	execution_free(t_read *line)
 {
-	//if (line->pand)
-	//	ft_free_expander(line->pand);
+	// if (line->pand)
+		// ft_free_expander(line->pand);
 	if (line->token)
 		ft_free_tokenizer(line->token);
-	if (line->piper != NULL)
-		free_piper(line);
+	// if (line->piper != NULL)
+	// 	free_piper(line);
 	if (line->prompt != NULL)
 		free(line->prompt);
 	if (line->cwd != NULL)

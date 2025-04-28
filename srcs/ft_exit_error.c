@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 20:04:23 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/04/28 21:34:37 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	ft_exit_with_error(t_read *line, char *str, int i)
 {
 	int	j;
 
-	//  if (line->pand)
-	//  	ft_free_expander(line->pand);
-	// if (line->enviro)
-	// 	ft_farray(line->enviro);
+	if (line->pand)
+	 	ft_free_expander(line->pand);
+	if (line->enviro)
+		ft_farray(line->enviro);
 	if (line->token)
 		ft_free_tokenizer(line->token);
 	if (line->piper != NULL)
