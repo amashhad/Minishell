@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 19:39:58 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/02 19:25:03 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	string_tokenizer(t_tok *token);
 void	initialize_tok(t_tok *token);
 
 //Builtin
-int	builtin_part1(t_read *line, char **cmd);
+int		builtin_part1(t_read *line, char **cmd);
 void	ft_handle_cd(t_read *line, char **cmd);
 void	ft_handle_echo(char **cmd);
 void	ft_handle_export(t_read *line, char **cmd);

@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fetcharr.c                                      :+:      :+:    :+:   */
+/*   get_value_of_export.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/22 06:53:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/02 18:49:45 by alhamdan         ###   ########.fr       */
+/*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
+/*   Updated: 2025/05/02 20:00:20 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//fetches the string from the array and returns a pointer to it
-//if no such string exists within array returns null
-//no array or fetch exist returns null
-//MUST SEND NULL TERMINATED ARRAY
-//no need to free memory
-char	*ft_fetcharr(char **arr, char *fetch)
-{
-	int	i;
 
-	i = 0;
-	if (!fetch)
-		return (NULL);
-	if (!arr)
-		return (NULL);
-	while (arr[i])
+
+	
+}
+
+char	*get_value_of_export(const char *big, const char *little, size_t len)
+{
+	size_t	c;
+
+	c = 0;
+	if (!big)
 	{
-		if (get_value_of_export(arr[i], fetch, ft_strlen(fetch)))
-			return (get_value_of_export(arr[i], fetch, ft_strlen(fetch)));
-		i++;
+		ft_putendl_fd("(Strnstr error, no 'big')", 2);
+		exit(1);
 	}
+	if (!*little)
+		return (NULL);
+	if (len == 0)
+		return (NULL);
+	while (little[c] != '\0')
+	{
+		if (big[c] == little[c])
+			c++;
+		else if (big[c] != little[c] && big[c] != '=')
+			return (NULL);
+	}
+	if (big[c] == '=')
+		return ((char *)(big + (c + 1)));
 	return (NULL);
 }

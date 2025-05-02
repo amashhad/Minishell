@@ -38,7 +38,7 @@ SRC	=	ft_atoi ft_bzero			\
 		ft_srchrarr	ft_strcmp	ft_arr_srch	\
 		ft_locate_str rhcrts	ft_arrcmp	\
 		ft_remove_str	ft_fetcharr	cpynarr	\
-
+		get_value_of_export \
 
 SRCS	= $(addsuffix .c, $(SRC))
 OBJ_DIR	= obj
