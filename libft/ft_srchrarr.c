@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_srchrarr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:03:03 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/27 22:21:41 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:49:37 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../srcs/minishell.h"
 
 //searchs the array for the string with fnd, if found, and if
 //rplc is not null, replaces fnd with rplc in the array
@@ -36,7 +37,7 @@ char	**ft_srchrarr(char *fnd, char **old_arr, char *rplc)
 	if (old_arr[i] == NULL)
 		return (old_arr);
 	free(old_arr[i]);
-	old_arr[i] = ft_strdup(rplc);
+	copy_without_quoted(rplc, i, old_arr);
 	new_arr = ft_cpyarr(old_arr);
 	if (!new_arr)
 		return (NULL);

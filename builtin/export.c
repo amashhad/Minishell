@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/24 09:50:43 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/03 22:57:51 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void add_export(t_read *line, char *srch, char *rplc)
 {
 	if (ft_fetcharr(line->expo, srch))
-		line->expo = ft_srchrarr(srch, line->expo, rplc);
+		line->expo = ft_srchrarr(srch, line->expo, rplc); // change name ft_srchrarr
 	else
 		line->expo = ft_addarr(rplc, line->expo);
 	if (!line->expo)
@@ -54,7 +54,7 @@ static void	ft_export_success(t_read *line, char **cmd, int i)
 			add_rplc(line, srch, cmd[i]);
 		else
 		{
-			line->enviro = ft_addarr(cmd[i], line->enviro);
+			line->enviro = fill_env(cmd[i], line->enviro);
 			line->expo = ft_addarr(cmd[i], line->expo);
 			if (!line->expo || !line->enviro)
 			{
@@ -64,7 +64,7 @@ static void	ft_export_success(t_read *line, char **cmd, int i)
 		}
 		free(srch);
 	}
-	else
+	else 
 		add_export(line, srch, cmd[i]);
 }
 

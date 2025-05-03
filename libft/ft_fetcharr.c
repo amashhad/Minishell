@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:53:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/02 18:49:45 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:17:11 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*ft_fetcharr(char **arr, char *fetch)
 		return (NULL);
 	while (arr[i])
 	{
-		if (get_value_of_export(arr[i], fetch, ft_strlen(fetch)))
-			return (get_value_of_export(arr[i], fetch, ft_strlen(fetch)));
+		if (ft_strnstr(arr[i], fetch, ft_strlen(fetch)))
+			return (ft_strnstr(arr[i], fetch, ft_strlen(fetch)));
 		i++;
 	}
 	return (NULL);

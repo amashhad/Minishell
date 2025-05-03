@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:37:16 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/30 22:21:00 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:49:07 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	comper(char c)
 		return (1);
 	if (c == '<')
 		return (1);
-	if (c == ' ')
+	if (ft_isspace(c))
 		return (1);
 	if (c == '\0')
 		return (1);

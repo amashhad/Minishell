@@ -6,15 +6,11 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/02 20:00:20 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:31:12 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-
-	
-}
 
 char	*get_value_of_export(const char *big, const char *little, size_t len)
 {
@@ -23,7 +19,7 @@ char	*get_value_of_export(const char *big, const char *little, size_t len)
 	c = 0;
 	if (!big)
 	{
-		ft_putendl_fd("(Strnstr error, no 'big')", 2);
+		ft_putendl_fd("(get_value_of_export error)", 2);
 		exit(1);
 	}
 	if (!*little)

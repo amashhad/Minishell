@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/02 19:25:03 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:45:51 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	pipe_tokenizer(t_tok *token);
 void	dollar_tokenizer(t_tok *token);
 void	string_tokenizer(t_tok *token);
 void	initialize_tok(t_tok *token);
+int		comper(char c);
 
 //Builtin
 int		builtin_part1(t_read *line, char **cmd);
@@ -120,7 +121,9 @@ void	ft_handle_echo(char **cmd);
 void	ft_handle_export(t_read *line, char **cmd);
 void	ft_handle_unset(t_read *line, char **cmd);
 void	ft_handle_env(t_read *line, char **cmd);
-char	*ft_getenv(char **line, char *env);
+char	*ft_getenv(char **enviro, char *env);
+char	**fill_env(char *str, char **old_arr);
+void	*copy_without_quoted(char *str, int size, char **arr);
 
 //execution
 void	ft_errmsg(t_read *line, char *msg, int errno);

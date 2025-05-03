@@ -25,7 +25,7 @@ TOKENIZER_SRCS	=	ft_tokenizer tokenizer_utils free_tokens \
 
 BUILTIN_DIR		=	builtin
 BUILTIN_SRCS	=	builtin chdir echo env \
-					export unset\
+					export unset env_and_export\
 
 OBJ_DIR		=	obj
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRC:=.o)) \

@@ -6,35 +6,33 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/02 20:03:51 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:05:55 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-char	*check_quoted(char *str)
+int	check_quoted(char *str)
 {
-	char	*s;
 	int	i;
 	int	j;
 	int	len;
 
 	if (!str)
-		return (NULL);
+		return (0);
 	j = 0;
 	i = 0;
 	len = ft_strlen(str);
 	if (str[i] == '"' && str[len - 1] == '"')
 	{
-		s = malloc((len - 1) *sizeof(char));
 		i++;
-		while (j < (len - 1))
+		while (i < (len - 1))
 		{
-			s[j] = str[i];
+			ft_putchar(str[i]);
 			i++;
-			j++;
 		}
-		return (s);
+		return (0);
 	}
+	return (1);
 }
 void	ft_handle_echo(char **cmd)
 {
@@ -53,11 +51,13 @@ void	ft_handle_echo(char **cmd)
 		i++;
 		endl++;
 	}
-	
 	while (cmd[i])
 	{
-		ft_putstr(cmd[i]);
+		if (check_quoted(cmd[i]))
+			ft_putstr(cmd[i]);
 		i++;
+		if (cmd[i])
+			ft_putchar(' ');
 	}
 	if (endl == 0)
 		ft_putchar('\n');

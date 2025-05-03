@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 21:09:59 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 22:56:53 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/03 18:58:26 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
+
+char	*go_to_get(char **arr, char *fetch)
+{
+	int	i;
+
+	i = 0;
+	if (!fetch)
+		return (NULL);
+	if (!arr)
+		return (NULL);
+	while (arr[i])
+	{
+		if (get_value_of_export(arr[i], fetch, ft_strlen(fetch)))
+			return (get_value_of_export(arr[i], fetch, ft_strlen(fetch)));
+		i++;
+	}
+	return (NULL);
+}
 
 void	ft_handle_env(t_read *line, char **cmd)
 {
@@ -29,6 +47,6 @@ char	*ft_getenv(char **enviro, char *env)
 {
 	char	*ret;
 
-	ret = ft_fetcharr(enviro, env);
+	ret = go_to_get(enviro, env);
 	return (ret);
 }
