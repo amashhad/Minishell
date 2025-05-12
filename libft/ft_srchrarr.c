@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../srcs/minishell.h"
 
 //searchs the array for the string with fnd, if found, and if
 //rplc is not null, replaces fnd with rplc in the array
@@ -37,7 +36,7 @@ char	**ft_srchrarr(char *fnd, char **old_arr, char *rplc)
 	if (old_arr[i] == NULL)
 		return (old_arr);
 	free(old_arr[i]);
-	copy_without_quoted(rplc, i, old_arr);
+	old_arr[i] = ft_strdup(fnd);
 	new_arr = ft_cpyarr(old_arr);
 	if (!new_arr)
 		return (NULL);

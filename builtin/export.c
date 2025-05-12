@@ -12,26 +12,26 @@
 
 #include "../srcs/minishell.h"
 
-static void add_export(t_read *line, char *srch, char *rplc)
-{
-	if (ft_fetcharr(line->expo, srch))
-		line->expo = ft_srchrarr(srch, line->expo, rplc); // change name ft_srchrarr
-	else
-		line->expo = ft_addarr(rplc, line->expo);
-	if (!line->expo)
-	{
-		free(srch);
-		line->exit_status = 1;
-		ft_exit_with_error(line, "Malloc Error", 1);
-	}
-	free(srch);
-}
+// static void add_export(t_read *line, char *srch, char *rplc)
+// {
+// 	if (ft_fetcharr(line->expo, srch))
+// 		line->expo = ft_srchrarr(srch, line->expo, rplc); // change name ft_srchrarr
+// 	else
+// 		line->expo = ft_addarr(rplc, line->expo);
+// 	if (!line->expo)
+// 	{
+// 		free(srch);
+// 		line->exit_status = 1;
+// 		ft_exit_with_error(line, "Malloc Error", 1);
+// 	}
+// 	free(srch);
+// }
 
 static void	add_rplc(t_read *line, char *srch, char *rplc)
 {
-	line->expo = ft_srchrarr(srch, line->expo, rplc);
+	line->expo = rplc_export(srch, line->expo, rplc);
 	if (ft_fetcharr(line->enviro, srch))
-		line->enviro = ft_srchrarr(srch, line->enviro, rplc);
+		line->enviro = rplc_env(srch, line->enviro, rplc);
 	else
 		line->enviro = ft_addarr(rplc, line->enviro);
 	if (!line->expo || !line->enviro)
@@ -42,20 +42,20 @@ static void	add_rplc(t_read *line, char *srch, char *rplc)
 	}
 }
 
-static void	ft_export_success(t_read *line, char **cmd, int i)
+static	int	fill_or_rplc(t_read *line, char **cmd, int i, char *srch)
 {
-	char	*srch;
-
-	srch = NULL;
-	if (ft_strchr(cmd[i], '='))
-	{
-		srch = rev_strchr(cmd[i], '=');
-		if (ft_fetcharr(line->expo, srch))
+	if (!srch || !(ft_strcmp(srch, "Malloc Error\n")))
+		{
+			printf("The Key Not Valid\n");
+			return (1);
+		}
+			//ft_exit_with_error(line, "the key not valid", 1);
+		if (check_name_of_key(line->expo, srch))
 			add_rplc(line, srch, cmd[i]);
 		else
 		{
 			line->enviro = fill_env(cmd[i], line->enviro);
-			line->expo = ft_addarr(cmd[i], line->expo);
+			line->expo = fill_export(cmd[i], line->expo);
 			if (!line->expo || !line->enviro)
 			{
 				free(srch);
@@ -63,9 +63,31 @@ static void	ft_export_success(t_read *line, char **cmd, int i)
 			}
 		}
 		free(srch);
+		return (0);
+}
+
+static void	ft_export_success(t_read *line, char **cmd, int i)
+{
+	char	*srch;
+
+	srch = NULL;
+	if (ft_strchr(cmd[i], '='))
+	{
+		srch = get_key(cmd[i], '=');
+		if (fill_or_rplc(line, cmd, i, srch))
+			return ;
 	}
-	else 
-		add_export(line, srch, cmd[i]);
+	else
+	{
+		srch = get_key(cmd[i], 0);
+		if (!srch || !(ft_strcmp(srch, "Malloc Error\n")))
+		{
+			printf("The Key Not Valid\n");
+			return ;
+		}
+		if (!(check_name_of_key(line->expo, srch)))
+			line->expo= ft_addarr(srch, line->expo);
+	}
 }
 
 static void	ft_export_err(t_read *line, char **cmd,  int i)

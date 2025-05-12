@@ -33,7 +33,7 @@ void	ft_exit_with_error(t_read *line, char *str, int i)
 	rl_clear_history();
 	if (str)
 	{
-		ft_farray(line->tokens);
+		//ft_farray(line->tokens);
 		free(line->line);
 		ft_putendl_fd(str, 2);
 	}

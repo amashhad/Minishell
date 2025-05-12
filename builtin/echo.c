@@ -11,15 +11,13 @@
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-int	check_quoted(char *str)
+static	int	check_quoted(char *str)
 {
 	int	i;
-	int	j;
 	int	len;
 
 	if (!str)
 		return (0);
-	j = 0;
 	i = 0;
 	len = ft_strlen(str);
 	if (str[i] == '"' && str[len - 1] == '"')
@@ -34,6 +32,29 @@ int	check_quoted(char *str)
 	}
 	return (1);
 }
+
+static int	is_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	if (str[i] == '-')
+	{
+		i++;
+		while (str[i] != '\0')
+		{
+			while (str[i] == 'n')
+				i++;
+			if (str[i] == '\0')
+				return (1);
+			return (0);
+		}
+	}
+	return (0);
+}
+
 void	ft_handle_echo(char **cmd)
 {
 	int i;
@@ -46,7 +67,7 @@ void	ft_handle_echo(char **cmd)
 		ft_putchar('\n');
 		return ;
 	}
-	if (cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
+	while (cmd[i] && is_n(cmd[i]) == 1)
 	{
 		i++;
 		endl++;

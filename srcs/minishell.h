@@ -124,6 +124,12 @@ void	ft_handle_env(t_read *line, char **cmd);
 char	*ft_getenv(char **enviro, char *env);
 char	**fill_env(char *str, char **old_arr);
 void	*copy_without_quoted(char *str, int size, char **arr);
+void    *add_quoted_for_value(char **arr, int size);
+char	**fill_export(char *str, char **old_arr);
+char	**rplc_env(char *fnd, char **old_arr, char *rplc);
+char	**rplc_export(char *fnd, char **old_arr, char *rplc);
+char	*get_key(char *str, int c);
+char	*check_name_of_key(char **arr, char *fetch);
 
 //execution
 void	ft_errmsg(t_read *line, char *msg, int errno);
