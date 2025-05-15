@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/03 22:55:25 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:12:52 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,12 @@ int		main(int argc, char **argv, char **envp)
 		line->tokens = ft_tokenizer(line);
 		if (ft_exit_shell(line))
 			break;
+		write(1,"in\n",3);
 		terminal_shell(line);
-		// free(line->line);
+		setup_signals();
 		ft_farray(line->tokens);
-		free_piper(line);
-		
 		initialize_tok(line->token);
+		free(line->line);
 	}
 	ft_exit_with_error(line , NULL, 0);
 	return (line->exit_status);
