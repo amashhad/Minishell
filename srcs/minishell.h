@@ -147,5 +147,6 @@ int		execution(t_read *line);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	setup_signals(void);
+void	setup_signals1(void);
 
 #endif

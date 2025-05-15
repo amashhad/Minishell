@@ -16,8 +16,8 @@ void	ft_exit_with_error(t_read *line, char *str, int i)
 {
 	int	j;
 
-	if (line->pand)
-	 	ft_free_expander(line->pand);
+	// if (line->pand)
+	//  	ft_free_expander(line->pand);
 	if (line->enviro)
 		ft_farray(line->enviro);
 	if (line->token)

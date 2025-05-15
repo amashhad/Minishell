@@ -22,7 +22,7 @@ int	ft_extra_chk(t_read *line, char *fcommand)
 	}
 	else
 		return (1);
-}
+}// if there is no any path for command or you delete path which check using it
 
 char	**ft_get_paths(t_read *line, char **env)
 {

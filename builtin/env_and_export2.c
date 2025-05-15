@@ -83,10 +83,10 @@ static	char	*check_name(const char *big, const char *little, size_t len)
 	{
 		if (big[c] == little[c])
 			c++;
-		else if (big[c] != little[c] && big[c] != '=')
+		else if (big[c] != little[c])
 			return (NULL);
 	}
-	if (big[c] == '=' || big[c] == '\0')
+	if ((big[c] == '=' || big[c] == '\0') && little[c] == '\0')
 		return ((char *)(big));
 	return (NULL);
 }
