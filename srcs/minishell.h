@@ -152,7 +152,7 @@ void	close_heredocs(int *heredocs, t_read *line);
 
 //signals
 void	handle_sigint(int sig);
-void	setup_signals(void);
+void	setup_signals(int mode);
 void	ft_signal(int mod);
 void	ft_signal2(int mod);
 void	ft_signal3(int mod);

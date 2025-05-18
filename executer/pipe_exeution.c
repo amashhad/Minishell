@@ -57,8 +57,6 @@ void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 }
 void	cmd_loop(t_read *line, int track, int pingpong[2][2])
 {
-	// signal(SIGINT, handle_sigint1);
-	// signal(SIGQUIT, handle_sigquit1);
 	int	pid;
 
 	if (track >= 2)
@@ -78,6 +76,7 @@ void	cmd_loop(t_read *line, int track, int pingpong[2][2])
 			last_cmd(line, pingpong[(track + 1) % 2], pingpong[(track) % 2], track);
 			cmd_chain(line, pingpong[track % 2], pingpong[(track + 1) % 2], track);
 		}
+		ft_signal3(3);
 }
 int	piper_ops(t_read *line)
 {
@@ -86,7 +85,6 @@ int	piper_ops(t_read *line)
 	int		track;
 	pid_t	pid; 
 	pid_t	wpid;
-	//int		last_status = 0;
 
 	track = 0;
 	while (track < (line->piper_len - 1))
@@ -96,14 +94,13 @@ int	piper_ops(t_read *line)
 		ft_errmsg(line, "Fork Failed\n", 1);
 	if (pid == 0)
 	{
-		// signal(SIGINT, SIG_DFL);
-		// signal(SIGQUIT, SIG_DFL);
-		ft_signal2(2);
+		setup_signals(2);
 		last_cmd(line, pingpong[(track + 1) % 2], pingpong[(track) % 2], track);
 	}
+	ft_signal3(3);
 	close_fds(pingpong, line->piper_len);
 	close_heredocs(line->heredocs, line);
-	g_sig = 0;
+	
 	while ((wpid = wait(&status)) > 0)
 	{
 		if (wpid == pid)
@@ -119,7 +116,6 @@ int	piper_ops(t_read *line)
 				line->exit_status = WEXITSTATUS(status);
 		}
 	}
-	// ft_signal3(3);
 	return (line->exit_status);
 }
 
@@ -160,6 +156,8 @@ int	pipe_execution(t_read *line)
 	{
 		if (builtin_part1(line, line->piper[0]) == 1)
 			piper_ops(line);
+		else
+			line->exit_status = 0;
 	}
 	else
 		piper_ops(line);

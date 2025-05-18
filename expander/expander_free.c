@@ -50,8 +50,8 @@ void	ft_free_expander(t_expand *pand)
 			free (pand->string);
 		if (pand->quoted)
 			free (pand->quoted);
-		if (pand->result)
-			free (pand->result);
+		// if (pand->result)
+		// 	free (pand->result);
 		if (pand->input)
 			free (pand->input);
 		free (pand);

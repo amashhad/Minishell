@@ -81,14 +81,10 @@ void	*copy_without_quoted(char *str, int size, char **arr)
 {
 	char	*s;
 	int i;
-	int len;
-	int j;
 
 	if (!str)
 		return (NULL);
 	i = 0;
-	j = 0;
-	len = ft_strlen(str);
 	i = get_length(str);
 	s = malloc((i + 1) * sizeof(char));
 	if (!s)

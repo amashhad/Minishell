@@ -102,29 +102,14 @@ void	ft_get_prompt(t_read *line)
 		ft_exit_with_error(line, "Unable to get prompt", 1);
 }
 
-int		main(int argc, char **argv, char **envp)
+void	go_to_work(t_read *line, char **argv)
 {
-	t_read	*line = malloc(sizeof(t_read));
-	if (!line)
-		exit (0);
-	(void) argc;
-	(void) argv;
-	initalization(line, envp);
-	ft_get_prompt(line);
-	//if (g_sig == 0)
-	//setup_signals();
 	while (1)
 	{
-		ft_signal(1);
-		if (g_sig == 0)
-			line->line = readline(line->prompt);
-		else
-			line->line = readline(NULL);
+		setup_signals(1);
+		line->line = readline(line->prompt);
 		if (g_sig == 1)
-		{
-			//g_sig = 0;
-			line->exit_status = 130;	
-		}
+			line->exit_status = 130;
 		add_history(line->line);
 		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
 		line->tokens = ft_tokenizer(line);
@@ -134,8 +119,23 @@ int		main(int argc, char **argv, char **envp)
 		ft_farray(line->tokens);
 		free_piper(line);
 		initialize_tok(line->token);
-		//line->exit_status = 0;
+		free (line->line);
+		if (g_sig == 1)
+			line->exit_status = 0;
+		g_sig = 0;
 	}
+}
+
+int		main(int argc, char **argv, char **envp)
+{
+	t_read	*line = malloc(sizeof(t_read));
+	if (!line)
+		exit (0);
+	(void) argc;
+	(void) argv;
+	initalization(line, envp);
+	ft_get_prompt(line);
+	go_to_work(line, argv);
 	ft_exit_with_error(line , NULL, 0);
 	return (line->exit_status);
 }

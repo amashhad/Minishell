@@ -15,18 +15,16 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	// if (g_sig != 0)
-	// {
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	// }
 	g_sig = 1;
 }
 void	handle_sigint3(int sig)
 {
 	(void)sig;
+	signal(SIGINT, SIG_DFL);
 	write(1, "\n", 1);
 }
 void	ft_signal(int mod)
@@ -38,22 +36,22 @@ void	ft_signal(int mod)
 
 void	ft_signal2(int mod)
 {
-	g_sig = mod;
-	//signal(SIGINT, SIG_DFL);
-	// signal(SIGQUIT, SIG_IGN);
+	(void)mod;
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }
 void	ft_signal3(int mod)
 {
-	// g_sig = mod;
 	(void)mod;
 	signal(SIGINT, handle_sigint3);
 	signal(SIGQUIT, handle_sigint3);
 }
-void	setup_signals(void)
+void	setup_signals(int mode)
 {
-	ft_signal(1);
-	ft_signal2(2);
-	ft_signal3(3);
+	if (mode == 1)
+		ft_signal(1);
+	if (mode == 2)
+		ft_signal2(2);
+	if (mode == 3)
+		ft_signal3(3);
 }
