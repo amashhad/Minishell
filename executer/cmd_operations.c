@@ -6,52 +6,14 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:36:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 13:19:38 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/16 03:45:46 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-// void	ft_cmd1_operation(t_read *line, int pipe_fd[])
-// {
-// 	dup2(pipe_fd[1], STDOUT_FILENO);
-// 	close(pipe_fd[0]);
-// 	close(pipe_fd[1]);
-// 	execute(line, line->piper[0], line->enviro);
-// }
-
-// void	ft_cmd2_operation(t_read *line, int pipe_fd[])
-// {
-// 	dup2(pipe_fd[0], STDIN_FILENO);
-// 	close(pipe_fd[0]);
-// 	close(pipe_fd[1]);
-// 	execute(line, line->piper[1], line->enviro);
-// }
-int	redirection_chk(t_read *line, int cmd)
-{
-	int	srch;
-	int fd;
-
-	fd = 0;
-	srch = 0;
-	if (ft_fetcharr(line->piper[cmd], ">"))
-	{
-		srch = ft_arr_srch(">", line->piper[cmd]);
-		fd = open(line->piper[cmd][srch + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		return (fd);
-	}
-	return (fd);
-}
-
-	//||||||||||||||||||||||||||||||||||||||||||||||||||||||||//
-	//|||Check Redirect before going to Pipe IF there's||||||//
-	//|||redirect, don't redirect pipe, Dup2 the||||||||||||//
-	//||| Open fds, HOWEVER, close the Pipes approp||||||||//
-	////////////////////////////////////////////////////////
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	if (cmd != line->piper_len)
 	{
 		close(write[0]);
@@ -66,7 +28,5 @@ void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 	}
 	if (builtin_part1(line, line->piper[cmd]) == 1)
 		execute(line, line->piper[cmd], line->enviro);
-	// else
-	// 	execution_free(line);
 	exit(1);
 }

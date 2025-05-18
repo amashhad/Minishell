@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_addarr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 21:27:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/03 18:57:47 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/03 07:02:21 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**ft_addarr(char *str, char **old_arr)
 		ft_putendl_fd("addarr error, no str present, nothing to add", 2);
 		return (NULL);
 	}
-	if (!old_arr || *old_arr == NULL)
+	if (!old_arr)
 	{
 		ft_putendl_fd("addarr error, no arr present, nothing to edit", 2);
 		return (NULL);

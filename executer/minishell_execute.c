@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_execute.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 23:06:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 18:58:27 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/09 06:03:13 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-#include "sys/wait.h"
 
 void	free_piper(t_read *line)
 {

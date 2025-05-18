@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:57:01 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/02 19:24:03 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:30:15 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
 
@@ -53,10 +54,12 @@ int		ft_printarr(char **arr);
 int		ft_addprintarr(char *print, char **arr);
 int		ft_arr_srch(char *str, char **arr);
 int		ft_arrcmp(char **arr1, char **arr2, int mode);
+
 //chars
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
+char	*ft_strstr(char *big, char *little);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -74,6 +77,7 @@ char	*ft_joinstrjoin(char *left, char *middle, char *right);
 char	**ft_addarr(char *str, char **arr);
 char	**ft_subarr(char *str, char **old_arr);
 char	**ft_srchrarr(char *fnd, char **old_arr, char *rplc);
+char	**del_arr(char **arr, char *str);
 char	*get_value_of_export(const char *big, const char *little, size_t len);
 //voids
 void	*ft_memchr(const void *s, int c, size_t n);

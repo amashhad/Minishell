@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 00:33:39 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 20:24:33 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/11 16:56:00 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	i = 0;
 	if (!s2 || !s2)
 	{
-		ft_putendl_fd("strncmp err, no s1 or no s2", 2);
-		exit(1);
+		perror("strncmp err, no s1 or no s2");
+		return (-1);
 	}
 	if (n == 0)
 		return (0);

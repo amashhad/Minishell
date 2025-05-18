@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_srchrarr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:03:03 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/03 21:49:37 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:21:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**ft_srchrarr(char *fnd, char **old_arr, char *rplc)
 	if (old_arr[i] == NULL)
 		return (old_arr);
 	free(old_arr[i]);
-	old_arr[i] = ft_strdup(fnd);
+	old_arr[i] = ft_strdup(rplc);
 	new_arr = ft_cpyarr(old_arr);
 	if (!new_arr)
 		return (NULL);

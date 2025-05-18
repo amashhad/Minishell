@@ -6,19 +6,20 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/15 23:01:50 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:24:12 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-//builtin enums
-# define CMD_SUCCESS 0
-# define CMD_NOTFOUND 1
-# define CMD_FAILURE 2
+//heredoc identifiers enums
+# define HEREDOC_FINISH -255
+# define HEREDOC_FAIL -1
+# define HEREDOC_SUCCESS -100
 
 # include <stdio.h>
+# include <errno.h>
 # include <signal.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
@@ -32,6 +33,7 @@
 # define PATH_MAX 4096
 # endif
 
+extern volatile sig_atomic_t    g_sig;
 typedef struct s_expander
 {
 	size_t	j;
@@ -68,6 +70,7 @@ typedef struct s_token
 typedef struct s_read
 {
 	int		exit_status;
+	int		heredocs[256];
 	char	*prompt;
 	char	*line;
 	char	*cwd;
@@ -83,7 +86,7 @@ typedef struct s_read
 //Minishell
 int		ft_exit_shell(t_read *line);
 void	ft_get_prompt(t_read *line);
-void	ft_exit_with_error(t_read *line, char *str, int errno);
+void	ft_exit_with_error(t_read *line, char *str, int err);
 void	terminal_shell(t_read *line);
 //expander
 int	comper_expander(char c);
@@ -124,7 +127,7 @@ void	ft_handle_env(t_read *line, char **cmd);
 char	*ft_getenv(char **enviro, char *env);
 char	**fill_env(char *str, char **old_arr);
 void	*copy_without_quoted(char *str, int size, char **arr);
-void    *add_quoted_for_value(char **arr, int size);
+void	*add_quoted_for_value(char **arr, int size);
 char	**fill_export(char *str, char **old_arr);
 char	**rplc_env(char *fnd, char **old_arr, char *rplc);
 char	**rplc_export(char *fnd, char **old_arr, char *rplc);
@@ -132,21 +135,25 @@ char	*get_key(char *str, int c);
 char	*check_name_of_key(char **arr, char *fetch);
 
 //execution
-void	ft_errmsg(t_read *line, char *msg, int errno);
+char	**redirect_stdout(char **cmd);
+char	**redirect_stdin(t_read *line, char **cmd);
+void	ft_errmsg(t_read *line, char *msg, int err);
 void	close_fds(int fds[2][2], int piper_len);
 void	free_piper(t_read *line);
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd);
-void	execution_free(t_read *line);
+void	execution_free(t_read *line, int exit_stat);
+void	free_piper(t_read *line);
 int		execute(t_read *line, char **cmd, char **env);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);
-void	free_piper(t_read *line);
 int		execution(t_read *line);
+void	heredoc_handler(t_read *line);
+void	close_heredocs(int *heredocs, t_read *line);
 
 //signals
 void	handle_sigint(int sig);
-void	handle_sigquit(int sig);
 void	setup_signals(void);
-void	setup_signals1(void);
-
+void	ft_signal(int mod);
+void	ft_signal2(int mod);
+void	ft_signal3(int mod);
 #endif

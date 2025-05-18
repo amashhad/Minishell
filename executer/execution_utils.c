@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/15 22:22:40 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:07:20 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 int	ft_extra_chk(t_read *line, char *fcommand)
 {
 	if (!fcommand)
-		ft_errmsg(line, "MT", 2);
+		ft_errmsg(line, "Empty Command", 2);
 	if (access(fcommand, F_OK) == 0)
 	{
 		return (access(fcommand, X_OK | R_OK));
 	}
 	else
 		return (1);
-}// if there is no any path for command or you delete path which check using it
+}
 
 char	**ft_get_paths(t_read *line, char **env)
 {
 	int		i;
+	int		exit_stat;
 	char	*path;
 	char	**paths;
 
@@ -48,8 +49,8 @@ char	**ft_get_paths(t_read *line, char **env)
 	{
 		if (paths != NULL)
 			ft_farray(paths);
-		line->exit_status = -1;
-		execution_free(line);
+		exit_stat = -1;
+		execution_free(line, exit_stat);
 	}
 	return (paths);
 }
@@ -63,6 +64,8 @@ char	*ft_find_executable(t_read *line, char **env, char *cmd)
 
 	i = 0;
 	paths = ft_get_paths(line, env);
+	if (!paths)
+		return (NULL);
 	while (paths[i])
 	{
 		temp = ft_strjoin_gnl(paths[i], "/");
@@ -75,49 +78,29 @@ char	*ft_find_executable(t_read *line, char **env, char *cmd)
 	free(paths);
 	return (NULL);
 }
-char **remove_redirect(char **cmd)
-{
-	char	**redirect;
-	int		srch;
-
-	srch = 0;
-	if (!ft_fetcharr(cmd, ">") || !ft_fetcharr(cmd, ">>")
-		|| !ft_fetcharr(cmd, "<") || !ft_fetcharr(cmd, "<<"))
-	{
-		redirect = ft_cpyarr(cmd);
-		return (redirect);
-	}
-	srch = ft_arr_srch(">", cmd);
-	redirect = ft_cpynarr(cmd, srch);
-	ft_printarr(redirect);
-	return (redirect);
-}
 
 int	execute(t_read *line, char **cmd, char **env)
 {
 	char	*exve;
-	// char	**redirect;
+	char	**redirect;
+	int		exit_stat;
 
-	// redirect = remove_redirect(cmd);
-	if (!ft_extra_chk(line, cmd[0]))
-		exve = ft_strdup(cmd[0]);
+	exit_stat = 0;
+	redirect = redirect_stdout(cmd);
+	redirect = redirect_stdin(line, redirect);
+	close_heredocs(line->heredocs, line);
+	if (!redirect)
+		exit(1);
+	if (!ft_extra_chk(line, redirect[0]))
+		exve = ft_strdup(redirect[0]);
 	else
-		exve = ft_find_executable(line, env, cmd[0]);
+		exve = ft_find_executable(line, env, redirect[0]);
 	if (!exve)
-	{
-		line->exit_status = 127;
-		ft_farray(cmd);
-		execution_free(line);
-		// free(line->pand);
-		if (line->piper != NULL)
-			free_piper(line);
-		// printf("brah\n");
-		exit(127);
-	}
-	line->exit_status = execve(exve, cmd, env);
-	ft_farray(cmd);
-	free(line->pand);
+		execution_free(line, exit_stat);
+	exit_stat = execve(exve, redirect, env);
+	ft_farray(redirect);
 	free(exve);
-	execution_free(line);
+	execution_free(line, exit_stat);
 	exit(1);
 }
+//	export x1="abc"

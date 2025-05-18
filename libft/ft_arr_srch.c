@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:27:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/09 08:18:24 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/01 23:44:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@
 int	ft_arr_srch(char *str, char **arr)
 {
 	int	i;
-	int	size;
 
 	i = 0;
-	size = 0;
 	if (!str || !arr)
 		return (-1);
-	size = ft_arrlen(arr);
-	while (i < size)
+	while (arr[i])
 	{
-		if (ft_strncmp(arr[i], str, ft_strlen(str)) == 0)
+		if (ft_strcmp(arr[i], str) == 0)
 			break ;
 		i++;
 	}

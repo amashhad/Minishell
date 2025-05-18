@@ -3,37 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   free_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 06:13:00 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 22:50:22 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/04/30 23:52:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-void	exit_message(t_read *line)
+void	exit_message(int exit_stat)
 {
-	int		exit_status;
 	char	*str;
 
 	str = NULL;
-	exit_status = line->exit_status;
-	if (line->exit_status != 0)
+	if (exit_stat != 0)
 	{
-		str = strerror(line->exit_status);
+		str = strerror(exit_stat);
 		perror(str);
 	}
-	exit(exit_status);
+	exit(exit_stat);
 }
-void	execution_free(t_read *line)
+void	execution_free(t_read *line, int exit_stat)
 {
-	// if (line->pand)
-		// ft_free_expander(line->pand);
 	if (line->token)
 		ft_free_tokenizer(line->token);
-	// if (line->piper != NULL)
-	// 	free_piper(line);
+	if (line->piper != NULL)
+		free_piper(line);
 	if (line->prompt != NULL)
 		free(line->prompt);
 	if (line->cwd != NULL)
@@ -44,5 +40,5 @@ void	execution_free(t_read *line)
 		ft_farray(line->expo);
 	free(line->line);
 	rl_clear_history();
-	exit_message(line);
+	exit_message(exit_stat);
 }

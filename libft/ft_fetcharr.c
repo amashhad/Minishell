@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fetcharr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:53:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/03 14:17:11 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:30:52 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,21 @@
 char	*ft_fetcharr(char **arr, char *fetch)
 {
 	int	i;
+	char	*fnd;
 
 	i = 0;
+	fnd = NULL;
 	if (!fetch)
 		return (NULL);
 	if (!arr)
 		return (NULL);
 	while (arr[i])
 	{
-		if (ft_strnstr(arr[i], fetch, ft_strlen(fetch)))
-			return (ft_strnstr(arr[i], fetch, ft_strlen(fetch)));
+		if (ft_strstr(arr[i], fetch))
+		{
+			fnd = ft_strstr(arr[i], fetch);
+			return (fnd);
+		}
 		i++;
 	}
 	return (NULL);
