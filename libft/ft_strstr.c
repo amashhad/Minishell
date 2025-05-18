@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_err_handle.c                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 00:06:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/09 06:06:53 by amashhad         ###   ########.fr       */
+/*   Created: 2025/04/28 22:44:58 by amashhad          #+#    #+#             */
+/*   Updated: 2025/05/02 20:29:31 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../srcs/minishell.h"
+#include "libft.h"
 
-void	ft_errmsg(t_read *line, char *msg, int err)
+char	*ft_strstr(char *big, char *little)
 {
+	size_t	c;
+	size_t	size;
 
-	if ((err == 42) | (err == 127))
-		ft_exit_with_error(line, msg, err);
-	else
+	c = 0;
+	size = ft_strlen(little);
+	if (!big)
 	{
-		perror(msg);
-		ft_exit_with_error(line, NULL, err);
+		ft_putendl_fd("strstr error: Big doesn't exist", 2);
+		return (NULL);
 	}
-}
-
-void	close_fds(int fds[2][2], int piper_len)
-{
-	if (piper_len > 1)
+	if (!little)
+		return (NULL);
+	while (big[c])
 	{
-		close(fds[0][0]);
-		close(fds[0][1]);
-		if (piper_len > 2)
-		{
-			close(fds[1][0]);
-			close(fds[1][1]);
-		}
+		if (ft_strncmp(big + c, little, size) == 0)
+			return (big + c);
+		c++;
 	}
+	return (NULL);
 }

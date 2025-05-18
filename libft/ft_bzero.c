@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 03:01:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/03/01 20:09:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/11 18:29:03 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_bzero(void *s, size_t n)
 
 	if (!s)
 	{
-		ft_putstr_fd("Bzero Error, no String found\n", 2);
-		exit (2);
+		perror("Bzero Error, no String found\n");
+		return ;
 	}
 	ptr = s;
 	i = 0;

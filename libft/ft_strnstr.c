@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 06:08:46 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/02 18:19:53 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/01 21:02:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	c;
-
 	i = 0;
+
 	if (!big)
-	{
-		ft_putendl_fd("(Strnstr error, no 'big')", 2);
-		exit(1);
-	}
-	if (!*little)
 		return (NULL);
+	if (!*little)
+		return ((char *)big);
 	if (len == 0)
 		return (NULL);
 	while (i < len && big[i])

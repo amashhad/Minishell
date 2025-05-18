@@ -14,7 +14,8 @@ SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC))) \
 
 EXECUTER_DIR	=	executer
 EXECUTER_SRCS	=	minishell_execute execution_err_handle execution_utils \
-					pipe_exeution cmd_operations free_execution\
+					pipe_exeution cmd_operations free_execution redirect_executables \
+					heredoc_utils \
 
 EXPANDER_DIR	=	expander
 EXPANDER_SRCS	=	ft_expander expander_compare expander_fill_utils \
@@ -24,8 +25,9 @@ TOKENIZER_DIR	=	tokenizer
 TOKENIZER_SRCS	=	ft_tokenizer tokenizer_utils free_tokens \
 
 BUILTIN_DIR		=	builtin
-BUILTIN_SRCS	=	builtin chdir echo env \
-					export unset env_and_export env_and_export2 fill_export\
+BUILTIN_SRCS	=	builtin chdir echo env		\
+					export unset env_and_export	\
+					env_and_export2 fill_export	\
 
 OBJ_DIR		=	obj
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRC:=.o)) \

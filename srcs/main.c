@@ -6,11 +6,14 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/15 23:12:52 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:52:07 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile sig_atomic_t   g_sig;
+
 
 void	initalization_struct_pand(t_read *line)
 {
@@ -55,6 +58,7 @@ void	initalization(t_read *line, char **envp)
 {
 	initalization_struct_pand(line);
 	initalization_struct_tok(line);
+	ft_bzero(line->heredocs, sizeof(line->heredocs));
 	line->line = NULL;
 	line->prompt = NULL;
 	line->tokens = NULL;
@@ -105,23 +109,32 @@ int		main(int argc, char **argv, char **envp)
 		exit (0);
 	(void) argc;
 	(void) argv;
-	setup_signals();
 	initalization(line, envp);
 	ft_get_prompt(line);
+	//if (g_sig == 0)
+	//setup_signals();
 	while (1)
 	{
-		line->line = readline(line->prompt);
+		ft_signal(1);
+		if (g_sig == 0)
+			line->line = readline(line->prompt);
+		else
+			line->line = readline(NULL);
+		if (g_sig == 1)
+		{
+			//g_sig = 0;
+			line->exit_status = 130;	
+		}
 		add_history(line->line);
 		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
 		line->tokens = ft_tokenizer(line);
 		if (ft_exit_shell(line))
 			break;
-		write(1,"in\n",3);
 		terminal_shell(line);
-		setup_signals();
 		ft_farray(line->tokens);
+		free_piper(line);
 		initialize_tok(line->token);
-		free(line->line);
+		//line->exit_status = 0;
 	}
 	ft_exit_with_error(line , NULL, 0);
 	return (line->exit_status);

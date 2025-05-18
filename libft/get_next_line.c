@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:11:46 by amashhad          #+#    #+#             */
-/*   Updated: 2025/01/24 00:10:57 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/03 04:00:02 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ char	*clean_storage(char *line)
 	if (!ptr)
 	{
 		new_line = NULL;
-		return (ft_free_gnl(&line));
+		ft_free_gnl(&line);
+		return (NULL);
 	}
 	else
 		len = (ptr - line) + 1;
 	if (!line[len])
-		return (ft_free_gnl(&line));
+	{
+		ft_free_gnl(&line);
+		return (NULL);
+	}
 	new_line = ft_substr_gnl(line, len, ft_strlen(line) - len);
 	ft_free_gnl(&line);
 	if (!new_line)
@@ -77,7 +81,10 @@ char	*readbuf(int fd, char *line)
 	}
 	free(buffer);
 	if (byte == -1)
-		return (ft_free_gnl(&line));
+	{
+		ft_free_gnl(&line);
+		return (NULL);
+	}
 	return (line);
 }
 
@@ -94,7 +101,10 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buf = new_buf(line[fd]);
 	if (!buf)
-		return (ft_free_gnl(&line[fd]));
+	{
+		ft_free_gnl(&line[fd]);
+		return (NULL);
+	}
 	line[fd] = clean_storage(line[fd]);
 	return (buf);
 }

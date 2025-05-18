@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 08:24:53 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/21 23:43:55 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/03 01:42:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ char	**ft_cpyarr(char **arr)
 		return (NULL);
 	temp = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!temp)
+	{
+		perror("malloc");
 		return (NULL);
+	}
 	while (arr[i] != NULL)
 	{
 		temp[i] = ft_strdup(arr[i]);

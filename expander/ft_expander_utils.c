@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expander_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:31:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/28 16:24:40 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:22:32 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

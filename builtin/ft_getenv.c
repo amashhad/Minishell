@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 20:15:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/03 14:33:28 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:31:37 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
+char	*ft_getenv(t_read *line, char *env)
+{
+	char	*ret;
 
-
-// char	*ft_getenv(char **enviro, char *env)
-// {
-// 	char	*ret;
-
-// 	ret = go_to_get(enviro, env);
-// 	return (ret);
-// }
+	ret = ft_fetcharr(line->enviro, env);
+	return (ret);
+}
