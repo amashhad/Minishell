@@ -14,22 +14,25 @@
 
 static	int	check_quoted(char *str)
 {
-	int	i;
-	int	len;
+	size_t	i;
+	char	c;
 
-	if (!str)
-		return (0);
 	i = 0;
-	len = ft_strlen(str);
-	if (str[i] == '"' && str[len - 1] == '"')
+	while (str[i] != '\0')
 	{
-		i++;
-		while (i < (len - 1))
+		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
 		{
-			ft_putchar(str[i]);
-			i++;
+			c = str[i];
+			while (str[i] != '\0')
+			{
+				i++;
+				if (str[i] == c)
+					break;
+				if (str[i] == '\0')
+					return (0);
+			}
 		}
-		return (0);
+		i++;
 	}
 	return (1);
 }
@@ -56,6 +59,30 @@ static int	is_n(char *str)
 	return (0);
 }
 
+static	void	print_arg(char *str)
+{
+	char	c;
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
+		{
+			c = str[i];
+			i++;
+			while (str[i] != c)
+			{
+				write(1, &str[i], 1);
+				i++;
+			}
+		}
+		else
+			write(1, &str[i], 1);
+		i++;
+	}
+}
+
 void	ft_handle_echo(char **cmd)
 {
 	int i;
@@ -76,7 +103,9 @@ void	ft_handle_echo(char **cmd)
 	while (cmd[i])
 	{
 		if (check_quoted(cmd[i]))
-			ft_putstr(cmd[i]);
+			print_arg(cmd[i]);
+		else
+			ft_putstr_fd("syntax error", 2);
 		i++;
 		if (cmd[i])
 			ft_putchar(' ');

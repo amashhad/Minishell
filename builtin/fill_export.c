@@ -71,7 +71,7 @@ char	**fill_export(char *str, char **old_arr)
 	arr[size + 1] = NULL;
 	return (arr);
 }
-static  int is_odd(char *str)
+int is_odd(char *str)
 {
     int i;
     int j;

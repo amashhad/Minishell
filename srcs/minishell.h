@@ -133,7 +133,7 @@ char	**rplc_env(char *fnd, char **old_arr, char *rplc);
 char	**rplc_export(char *fnd, char **old_arr, char *rplc);
 char	*get_key(char *str, int c);
 char	*check_name_of_key(char **arr, char *fetch);
-
+int 	is_odd(char *str);
 //execution
 char	**redirect_stdout(char **cmd);
 char	**redirect_stdin(t_read *line, char **cmd);
