@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 03:26:33 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/20 22:37:02 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:00:29 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	close_heredocs(int *heredocs, int len)
 		i++;
 	}
 }
-
 
 void	fill_heredoc(int fd, char *fnd, char **line)
 {

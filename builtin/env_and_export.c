@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_and_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/03 21:47:36 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:08:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	get_length(char *str)
 			if (str[i] != '\0')
 				i++;
 		}
-		else 
+		else
 		{
 			i++;
 			j++;
@@ -43,6 +43,7 @@ static int	get_length(char *str)
 	}
 	return (j);
 }
+
 static char	*fill_string(char *str, char *s)
 {
 	char	c;
@@ -72,7 +73,7 @@ static char	*fill_string(char *str, char *s)
 			s[j] = str[i];
 			j++;
 			i++;
-		}	
+		}
 	}
 	return (s);
 }
@@ -81,14 +82,10 @@ void	*copy_without_quoted(char *str, int size, char **arr)
 {
 	char	*s;
 	int i;
-	int len;
-	int j;
 
 	if (!str)
 		return (NULL);
 	i = 0;
-	j = 0;
-	len = ft_strlen(str);
 	i = get_length(str);
 	s = malloc((i + 1) * sizeof(char));
 	if (!s)
@@ -99,6 +96,7 @@ void	*copy_without_quoted(char *str, int size, char **arr)
 	free (s);
 	return (NULL);
 }
+
 char	**fill_env(char *str, char **old_arr)
 {
 	int		i;
