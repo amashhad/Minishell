@@ -14,50 +14,69 @@
 
 int	builtin_part2(t_read *line, char **cmd)
 {
-	if (ft_strcmp(cmd[0], "export") == 0)
+	char	*str;
+
+	str = get_key(cmd[0], 0);
+	if (ft_strcmp(str, "export") == 0)
 	{
 		ft_handle_export(line, cmd);
+		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(cmd[0], "unset") == 0)
+	else if (ft_strcmp(str, "unset") == 0)
 	{
 		ft_handle_unset(line, cmd);
+		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(cmd[0], "cd") == 0)
+	else if (ft_strcmp(str, "cd") == 0)
 	{
 		ft_handle_cd(line, cmd);
+		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(cmd[0], "echo") == 0)
+	else if (ft_strcmp(str, "echo") == 0)
 	{
 		ft_handle_echo(cmd);
+		free (str);
 		return (line->exit_status);
 	}
 	else
+	{
+		free (str);
 		return (1);
+	}
 }
 
 int	builtin_part1(t_read *line, char **cmd)
 {
+	char	*str;
 	int	executed;
 
 	executed = 0;
+	str = NULL;
+	if (cmd[0])
+		str = get_key(cmd[0], 0);
 	if (cmd == NULL)
 		return (1);
-	else if (ft_strcmp(cmd[0], "env") == 0)
+	else if (ft_strcmp(str, "env") == 0)
 	{
 		ft_handle_env(line, cmd);
+		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(cmd[0], "pwd") == 0)
+	else if (ft_strcmp(str, "pwd") == 0)
 	{
 		ft_get_prompt(line);
 		ft_putendl_fd(line->cwd, 1);
+		free (str);
 		return (line->exit_status);
 	}
 	else
+	{
+		free (str);
 		executed = builtin_part2(line, cmd);
+	}
 	return (executed);
 }
 

@@ -97,6 +97,10 @@ int	execute(t_read *line, char **cmd, char **env, int track)
 		exit(1);
 	// if (!ft_fetcharr(env, "PATH=/home/"))
 	// 	exit(127);
+	if (builtin_part1(line, redirect) != 1)
+	{
+		exit(line->exit_status);
+	}
 	if (!ft_extra_chk(line, redirect[0]))
 		exve = ft_strdup(redirect[0]);
 	else

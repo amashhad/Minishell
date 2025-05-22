@@ -18,8 +18,6 @@
 //counts from CMD{0}, as it is indexed
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 {
-	// signal(SIGINT, SIG_DFL);
-	// signal(SIGQUIT, SIG_DFL);
 	if (cmd != line->piper_len)
 	{
 		close(write[0]);
@@ -32,7 +30,6 @@ void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
 		dup2(read[0], STDIN_FILENO);
 		close(read[0]);
 	}
-	if (builtin_part1(line, line->piper[cmd]) == 1)
-		execute(line, line->piper[cmd], line->enviro, cmd);
+	execute(line, line->piper[cmd], line->enviro, cmd);
 	exit(1);
 }

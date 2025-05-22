@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 03:26:33 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/20 22:37:02 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:22:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,24 @@ void	close_heredocs(int *heredocs, int len)
 }
 
 
-void	fill_heredoc(int fd, char *fnd, char **line)
+void	fill_heredoc(int fd, int fd2, char *fnd, char **line)
 {
-	ft_putstr_fd("Delimiter is: ", 1);
-	ft_putendl_fd(fnd, 1);
-	while ((*line = readline(">")))
+	int dup_fd;
+
+	dup_fd = dup(STDIN_FILENO);
+	setup_signals(4);
+	ft_putstr_fd("Delimiter is: ", dup_fd);
+	ft_putendl_fd(fnd, dup_fd);
+	while (1)
 	{
+		*line = readline(">");
+		if (g_sig == 2)
+		{
+			dup2(dup_fd, STDIN_FILENO);
+			close(dup_fd);
+			close(fd2);
+			return	;
+		}
 		if (ft_strcmp(*line, fnd) == 0 || !*line)
 		{
 			free(*line);
@@ -46,7 +58,9 @@ void	fill_heredoc(int fd, char *fnd, char **line)
 		*line = NULL;
 	}
 	if (!*line)
-		printf("minishell: warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", fnd);
+		printf("minishell: warning: here-document at\
+			line 1 delimited by end-of-file (wanted `%s')\n", fnd);
+	close(dup_fd);
 }
 
 //prints the delimiter and reads heredoc w/readline function
@@ -63,7 +77,7 @@ int	readheredoc(int fd[2], char *fnd, int count)
 		close(prev_fd);
 		prev_fd = 0;
 	}
-	fill_heredoc(fd[1], fnd, &line);
+	fill_heredoc(fd[1], fd[0], fnd, &line);
 	close(fd[1]);
 	prev_fd = fd[0];
 	return (0);
@@ -90,6 +104,8 @@ int	search_heredoc(t_read *line, char **heredoc, int fill)
 				return (-1);
 			}
 			readheredoc(fd, heredoc[i + 1], count++);
+			if (g_sig == 2)
+				break;
 			line->heredocs[fill] = fd[0];
 		}
 		i++;
@@ -110,6 +126,8 @@ void	heredoc_handler(t_read *line)
 	while (line->piper[i])
 	{
 		chk = search_heredoc(line, line->piper[i], i);
+		if (g_sig == 2)
+			break;
 		if (chk < 0)
 		{
 			line->heredocs[255] = HEREDOC_FAIL;

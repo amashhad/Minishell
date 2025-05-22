@@ -33,6 +33,8 @@
 # define PATH_MAX 4096
 # endif
 
+extern volatile sig_atomic_t    g_sig;
+
 typedef struct s_expander
 {
 	size_t	j;
@@ -175,8 +177,10 @@ void	*add_quoted_for_value(char **arr, int size);
 
 //signals(void)
 void	handle_sigint(int sig);
-void	handle_sigquit(int sig);
-void	setup_signals(void);
-void	setup_signals1(void);
+void	setup_signals(int mode);
+void	ft_signal(int mod);
+void	ft_signal2(int mod);
+void	ft_signal3(int mod);
+void	ft_signal4(int mod);
 
 #endif

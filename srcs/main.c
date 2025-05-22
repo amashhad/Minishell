@@ -6,11 +6,13 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/16 09:22:35 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:42:14 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile sig_atomic_t   g_sig;
 
 void	initalization_struct_pand(t_read *line)
 {
@@ -99,6 +101,30 @@ void	ft_get_prompt(t_read *line)
 		ft_exit_with_error(line, "Unable to get prompt", 1);
 }
 
+void	go_to_work(t_read *line, char **argv)
+{
+	while (1)
+	{
+		setup_signals(1);
+		line->line = readline(line->prompt);
+		if (g_sig == 1)
+			line->exit_status = 130;
+		add_history(line->line);
+		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
+		line->tokens = ft_tokenizer(line);
+		if (ft_exit_shell(line))
+			break;
+		terminal_shell(line);
+		ft_farray(line->tokens);
+		free_piper(line);
+		initialize_tok(line->token);
+		free (line->line);
+		if (g_sig == 1)
+			line->exit_status = 0;
+		g_sig = 0;
+	}
+}
+
 int		main(int argc, char **argv, char **envp)
 {
 	t_read	*line = malloc(sizeof(t_read));
@@ -106,24 +132,9 @@ int		main(int argc, char **argv, char **envp)
 		exit (0);
 	(void) argc;
 	(void) argv;
-	setup_signals();
 	initalization(line, envp);
 	ft_get_prompt(line);
-	while (1)
-	{
-		line->line = readline(line->prompt);
-		add_history(line->line);
-		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
-		line->tokens = ft_tokenizer(line);
-		if (ft_exit_shell(line))
-			break;
-		terminal_shell(line);
-		//setup_signals();
-		ft_farray(line->tokens);
-		free_piper(line);
-		initialize_tok(line->token);
-		free(line->line);
-	}
+	go_to_work(line, argv);
 	ft_exit_with_error(line , NULL, 0);
 	return (line->exit_status);
 }

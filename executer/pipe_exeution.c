@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/19 15:21:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/21 22:53:37 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ void	cmd_loop(t_read *line, int track, int pingpong[2][2])
 	if (pid == -1)
 		ft_errmsg(line, "Fork Failed\n", 1);
 	if (pid == 0)
+	{
+		ft_signal2(2);
 		cmd_chain(line, pingpong[track % 2], pingpong[(track + 1) % 2], track);
+	}
+	ft_signal3(3);
 }
 int	piper_ops(t_read *line)
 {
@@ -71,9 +75,9 @@ int	piper_ops(t_read *line)
 	int		status;
 	int		track;
 	pid_t	pid;
+	pid_t	wpid;
 
 	track = 0;
-	//setup_signals1();
 	while (track < (line->piper_len - 1))
 		cmd_loop(line, track++, pingpong);
 	if (track > 1)
@@ -83,14 +87,29 @@ int	piper_ops(t_read *line)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_errmsg(line, "Fork Failed\n", 1);
+	ft_errmsg(line, "Fork Failed\n", 1);
 	if (pid == 0)
+	{
+		setup_signals(2);
 		last_cmd(line, pingpong[(track + 1) % 2], pingpong[(track) % 2], track);
-	close_fds(pingpong, line->piper_len);
-	close_heredocs(line->heredocs, line->piper_len);
-	while (wait(&status) > 0)
-		;
-	return (WEXITSTATUS(status));
+	}
+	ft_signal3(3);
+	while ((wpid = wait(&status)) > 0)
+	{
+		if (wpid == pid)
+		{
+			if (WIFSIGNALED(status))
+			{
+				int sig = WTERMSIG(status);
+				if (sig == SIGQUIT)
+					write(1, "Quit (core dumped)\n", 20);
+				line->exit_status = 128 + sig;
+			}
+			else if (WIFEXITED(status))
+				line->exit_status = WEXITSTATUS(status);
+		}
+	}
+	return (line->exit_status);
 }
 ///end of piper ops
 
@@ -115,6 +134,8 @@ int	pipe_execution(t_read *line)
 	{
 		if (builtin_part1(line, line->piper[0]) == 1)
 			line->exit_status = piper_ops(line);
+		else
+			line->exit_status = 0;
 	}
 	else
 		line->exit_status = piper_ops(line);

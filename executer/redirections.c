@@ -137,12 +137,10 @@ char **redirect_stdin(t_read *line, char **cmd, int track)
 {
 	int	fd;
 	int	counter;
-	int	i;
 	char	**fetch;
 
 	counter = 0;
 	fd = 0;
-	i = 0;
 	fetch = NULL;
 	if (!ft_fetcharr(cmd, "<"))
 		return (cmd);
