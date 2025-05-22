@@ -6,26 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/13 21:35:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:09:26 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-
-// static void add_export(t_read *line, char *srch, char *rplc)
-// {
-// 	if (ft_fetcharr(line->expo, srch))
-// 		line->expo = ft_srchrarr(srch, line->expo, rplc); // change name ft_srchrarr
-// 	else
-// 		line->expo = ft_addarr(rplc, line->expo);
-// 	if (!line->expo)
-// 	{
-// 		free(srch);
-// 		line->exit_status = 1;
-// 		ft_exit_with_error(line, "Malloc Error", 1);
-// 	}
-// 	free(srch);
-// }
 
 static void	add_rplc(t_read *line, char *srch, char *rplc)
 {
