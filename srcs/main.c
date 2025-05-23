@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:58:49 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:42:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ void	go_to_work(t_read *line, char **argv)
 		ft_farray(line->tokens);
 		free_piper(line);
 		initialize_tok(line->token);
-		free (line->line);
+		if (line->line && *line->line)
+		{
+			free (line->line);
+			line->pand->result = NULL;
+		}
 		g_sig = 0;
 	}
 }

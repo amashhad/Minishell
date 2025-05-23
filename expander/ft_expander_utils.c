@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:31:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:17:58 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:01:09 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	var_expander(t_expand *pand)
 		pand->var_value = ft_getenv(pand->envment, pand->var_name);
 		free (pand->var_name);
 	}
+	if (pand->var_value == NULL)
+		pand->pand_error = 1;
 	pand->var_name = NULL;
 	pand->string = NULL;
 	pand->count += ft_strlen(pand->var_value);

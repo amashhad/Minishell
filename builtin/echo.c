@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 07:07:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:58:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_redirections(char *str)
 		return (1);
 	if (!ft_strcmp(str, "<"))
 		return (1);
-	if (!ft_strcmp(str, ">>"))
+	if (!ft_strcmp(str, "<<"))
 		return (1);
 	if (!ft_strcmp(str, ">>"))
 		return (1);

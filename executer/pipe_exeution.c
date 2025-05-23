@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 05:55:05 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:49:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,64 +39,60 @@ int	piper_ops(t_read *line)
 	wait_children(line, &status, pingpong, pid);
 	return (line->exit_status);
 }
-
-int	is_there_redirection(t_read *line)
+int	key_loop(t_read *line)
 {
+	char *srch;
 	int		i;
 
-	i = -1;
-	while (line->piper[0][++i] != NULL)
-	{
-		if (check_redirections(line->piper[0][i]))
-			break ;
-	}
-	if (line->piper[0][i] == NULL)
-		return (0);
+	srch = NULL;
 	i = 0;
 	while (line->piper[0][i] != NULL)
 	{
-		if (!ft_strcmp(get_key(line->piper[0][i], 0), "echo")
-			|| !ft_strcmp(get_key(line->piper[0][i], 0), "env")
-			|| !ft_strcmp(get_key(line->piper[0][i], 0), "pwd"))
+		srch = get_key(line->piper[0][i], 0);
+		if (!srch)
+			return (1);
+		if (!ft_strcmp(srch, "echo") || !ft_strcmp(srch, "env")
+			|| !ft_strcmp(srch, "pwd") || !ft_strcmp(srch, "export"))
 		{
+			free(srch);
 			piper_ops(line);
 			line->exit_status = 0;
 			return (1);
 		}
+		free(srch);
 		i++;
 	}
 	return (0);
+}
+
+int	is_there_redirection(t_read *line)
+{
+	int		i;
+	char	*srch;
+
+	i = 0;
+	srch = NULL;
+	while (line->piper[0][i] != NULL)
+	{
+		if (check_redirections(line->piper[0][i]))
+			break ;
+		i++;
+	}
+	if (line->piper[0][i] == NULL)
+		return (0);
+	return (key_loop(line));
 }
 
 void	child_chk(t_read *line)
 {
 	if (is_there_redirection(line))
 		return ;
-	if (builtin_part1(line, line->piper[0]) == 1)
+	if (builtin_part1(line, line->piper[0]) == 10)
 		line->exit_status = piper_ops(line);
-	else
-	{
-		line->exit_status = 0;
-	}
 }
 
 int	pipe_execution(t_read *line)
 {
-	if (line->heredocs[255] < 0)
-	{
-		if (line->heredocs[255] == HEREDOC_FAIL)
-		{
-			line->exit_status = EXIT_FAILURE;
-			errno = 0;
-			close_heredocs(line->heredocs, line->piper_len + 1);
-			return (line->exit_status);
-		}
-		else
-		{
-			line->exit_status = -2;
-			return (line->exit_status);
-		}
-	}
 	if (line->piper_len < 2)
 		child_chk(line);
 	else

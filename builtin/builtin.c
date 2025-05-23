@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 02:25:34 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:48:59 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	builtin_part2(t_read *line, char **cmd)
 	else
 	{
 		free (str);
-		return (1);
+		return (10);
 	}
 }
 

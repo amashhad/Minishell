@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:40:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 09:06:30 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:54:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,13 @@ char	**redirect_stdin(t_read *line, char **cmd, int track)
 		return (NULL);
 	counter = chk_stdin(fetch);
 	line->old_fd = stdin_arrow(counter, &fetch);
+	ft_putendl_fd("world222", 2);
 	fd = check_heredocs(line, counter, &fetch, track);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	fd = -1;
+	line->old_fd = -1;
 	close_heredocs(line->heredocs, line->piper_len);
+	ft_farray (cmd);
 	return (fetch);
 }

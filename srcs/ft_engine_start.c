@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:47:56 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:16:19 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,6 @@ void	terminal_shell(t_read *line)
 			return ;
 		pipe_execution(line);
 	}
+	else
+		line->exit_status = 2;
 }

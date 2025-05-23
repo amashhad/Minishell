@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_and_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 18:22:21 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 13:36:16 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	**fill_env(char *str, char **old_arr)
 		arr[i] = ft_strdup(old_arr[i]);
 		i++;
 	}
+	ft_farray(old_arr);
 	copy_without_quoted(str, size, arr);
 	arr[size + 1] = NULL;
 	return (arr);

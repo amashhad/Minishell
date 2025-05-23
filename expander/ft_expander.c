@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:40:29 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:24:37 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	go_to_count_malloc(t_read *line, char *last_exit_code, char *argv)
 	line->pand->envment = NULL;
 	if (line->pand->i_malloc == 1)
 		ft_exit_with_error(line, "malloc error", "pand", 2);
+	if (line->pand->pand_error == 1)
+		line->i_error = 1;
 }
 
 static void	go_to_fill_expander(t_read *line, char *last_exit_code, char *argv)
@@ -75,10 +77,13 @@ static void	go_to_fill_expander(t_read *line, char *last_exit_code, char *argv)
 	line->pand->result[i] = '\0';
 	ft_farray(line->pand->envment);
 	line->pand->envment = NULL;
+	if (line->pand->pand_error == 1)
+		line->i_error = 1;
 }
 
 char	*ft_expander(t_read *line, char *last_exit_code, char *argv)
 {
+	line->exit_status = 0;
 	if (!line->line)
 	{
 		if (last_exit_code)
@@ -95,6 +100,6 @@ char	*ft_expander(t_read *line, char *last_exit_code, char *argv)
 	go_to_fill_expander(line, last_exit_code, argv);
 	free(line->pand->last_exit_code);
 	line->pand->last_exit_code = NULL;
-	line->exit_status = 0;
+	//line->exit_status = 0;
 	return (line->pand->result);
 }

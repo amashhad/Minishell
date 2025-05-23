@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 04:22:47 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:52:58 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //checks if the command exists in relative path
 int	ft_extra_chk(t_read *line, char *fcommand)
 {
+	ft_putendl_fd("hello5", 2);
 	if (!fcommand)
 		execution_free(line, 0, NULL);
 	if (access(fcommand, F_OK) == 0)
@@ -94,23 +95,31 @@ int	execute(t_read *line, char **cmd, char **env, int track)
 	int		exit_stat;
 
 	exit_stat = 0;
+	ft_putendl_fd("world", 2);
 	redirect = redirect_stdout(cmd);
+	ft_putendl_fd("world111", 2);
 	redirect = redirect_stdin(line, redirect, track);
 	if (!redirect)
+	{
 		exit(1);
-	if (builtin_part1(line, redirect) != 1)
-		exit(line->exit_status);
+	}
+	if (builtin_part1(line, redirect) != 10)
+	{
+		ft_farray(redirect);
+		ft_exit_with_error(line, NULL, "NULL", line->exit_status);
+	}
 	if (!ft_extra_chk(line, redirect[0]))
 		exve = ft_strdup(redirect[0]);
 	else
 		exve = ft_find_executable(line, env, redirect[0]);
 	if (!exve)
-		execution_free(line, 127, ft_joinstrjoin("Minisehll: command ",
-				redirect[0], " doesn't exist"));
+		ft_exit_with_error(line, ft_joinstrjoin("Minisehll: command ",
+				redirect[0], " doesn't exist"),"NULL", 127);
 	exit_stat = execve(exve, redirect, env);
 	free_piper(line);
-	ft_free_expander(line->pand);
+	//ft_free_expander(line->pand);
 	free(exve);
-	execution_free(line, exit_stat, NULL);
+	//execution_free(line, exit_stat, NULL);
+	ft_exit_with_error(line, "NULL", "NULL", exit_stat);
 	exit(exit_stat);
 }

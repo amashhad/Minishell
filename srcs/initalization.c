@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 08:51:48 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 09:05:23 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:35:31 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	initalization_struct_pand(t_read *line)
 	line->pand->count = 0;
 	line->pand->k = 0;
 	line->pand->i_malloc = 0;
+	line->pand->pand_error = 0;
 	line->pand->last_exit_code = NULL;
 	line->pand->string = NULL;
 	line->pand->argv = NULL;
@@ -66,6 +67,7 @@ void	initalization(t_read *line, char **envp)
 	line->enviro = ft_cpyarr(envp);
 	line->exit_status = 0;
 	line->piper_len = 0;
+	line->i_error = 0;
 	if (!line->enviro)
 	{
 		ft_putendl_fd("Enviro err: no ENV variable or no memory", 2);

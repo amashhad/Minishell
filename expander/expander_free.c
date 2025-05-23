@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:06 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 04:43:09 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:46:07 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ void	ft_free_expander(t_expand *pand)
 {
 	if (pand)
 	{
+		if (pand->result)
+		{
+			free(pand->result);
+			pand->result = NULL;
+		}
 		if (pand->envment)
 			ft_farray(pand->envment);
-		if (pand->var_value)
-			free (pand->var_value);
 		if (pand->last_exit_code)
 			free (pand->last_exit_code);
 		if (pand->var_name)

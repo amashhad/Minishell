@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:37:16 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/13 19:23:58 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:20:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ void	string_tokenizer(t_tok *token)
 	while (!(comper(token->input[token->i])))
 	{
 		if ((token->input[token->i] == '"'
-				|| token->input[token->i] == '\'')
-			&& token->input[token->i - 1] != '\\')
+				|| token->input[token->i] == '\''))
 		{
 			token->c = token->input[token->i];
 			token->i++;
 			while ((token->input[token->i] != token->c
-					|| (token->input[token->i] == token->c
-						&& token->input[token->i - 1] == '\\'))
+					|| (token->input[token->i] == token->c))
 				&& token->input[token->i] != '\0')
 				token->i++;
 		}

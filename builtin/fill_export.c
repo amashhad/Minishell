@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 23:04:48 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 13:34:25 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	*add_quoted_for_value(char **arr, int size)
 	if (!str)
 		return (NULL);
 	str = fill_str(str, arr[size], i, j);
+	free(arr[size]);
 	arr[size] = ft_strdup(str);
 	free (str);
 	return (NULL);
@@ -92,6 +93,7 @@ char	**fill_export(char *str, char **old_arr)
 		arr[i] = ft_strdup(old_arr[i]);
 		i++;
 	}
+	ft_farray(old_arr);
 	copy_without_quoted(str, size, arr);
 	add_quoted_for_value(arr, size);
 	arr[size + 1] = NULL;

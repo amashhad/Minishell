@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:34:37 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:43:31 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:13:59 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,10 @@ char	**ft_tokenizer(t_read *line)
 	line->token->input = line->line;
 	fill_tokens(line);
 	line->token->tokens[i] = NULL;
+	if (line->token->error_token == 2)
+	{
+		ft_putendl_fd("syntax error", 2);
+		line->exit_status = 2;
+	}
 	return (line->token->tokens);
 }

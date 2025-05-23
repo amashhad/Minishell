@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:51:05 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:41:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ void	ft_msg(t_read *line, char *str, int i)
 {
 	int	j;
 
+	(void)str;
 	j = 0;
 	if (str)
 	{
-		free(line->line);
 		ft_putendl_fd(str, 2);
+		free(str);
 	}
 	if (line->exit_status == 0)
 		line->exit_status = i;
@@ -31,8 +32,12 @@ void	ft_msg(t_read *line, char *str, int i)
 
 void	ft_exit_with_error(t_read *line, char *str, char *exception, int i)
 {
+	(void)str;
 	if (line->pand && ft_strcmp(exception, "pand"))
+	{
 		ft_free_expander(line->pand);
+		line->line = NULL;
+	}
 	if (line->enviro && ft_strcmp(exception, "enviro"))
 		ft_farray(line->enviro);
 	if (line->token && ft_strcmp(exception, "token"))

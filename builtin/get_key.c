@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 23:02:06 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:34:09 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_quoted_1(char *serch, int i)
 	i = 0;
 	while (serch[i] != '\0')
 	{
-		if (comper(serch[i]) && serch[i] != '\0')
+		if (chk_compare(serch[i]) && serch[i] != '\0')
 			return (1);
 		i++;
 	}

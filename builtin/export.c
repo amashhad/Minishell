@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:32:41 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:38:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	ft_export_success(t_read *line, char **cmd, int i)
 		}
 		if (!(check_name_of_key(line->expo, srch)))
 			line->expo = ft_addarr(srch, line->expo);
+		free (srch);
 	}
 }
 
@@ -87,12 +88,18 @@ void	ft_handle_export(t_read *line, char **cmd)
 	int	i;
 
 	i = 1;
+	if (line->i_error == 1)
+	{
+		ft_putendl_fd("minishell: export: _err_ not a valid identifier", 2);
+		line->exit_status = 1;
+		return ;
+	}
 	if (!cmd[1])
 		ft_addprintarr("export ", line->expo);
-	if (ft_fetcharr(cmd, "|"))
-		return ;
 	while (cmd[i])
 	{
+		if (check_redirections(cmd[i]))
+			break ;
 		if (!ft_strncmp(cmd[i], "=", 1)
 			|| ft_isdigit(cmd[i][0])
 					|| !ft_strcmp(cmd[i], "="))

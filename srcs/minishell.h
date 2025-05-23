@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 09:05:36 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:55:24 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_expander
 	size_t	count;
 	size_t	k;
 	size_t	i_malloc;
+	int			pand_error;
 	char	*last_exit_code;
 	char	*string;
 	char	*argv;
@@ -81,6 +82,7 @@ typedef struct s_read
 	char		**expo;
 	char		***piper;
 	int			piper_len;
+	int			i_error;
 	t_tok		*token;
 	t_expand	*pand;
 }				t_read;
@@ -170,6 +172,7 @@ int		is_odd(char *str);
 int		check_quoted_1(char *serch, int i);
 int		check_quoted_2(char *serch, int i);
 int		check_redirections(char *str);
+int		chk_compare(char c);
 //builtin->char
 char	*ft_getenv(char **enviro, char *env);
 char	**fill_env(char *str, char **old_arr);

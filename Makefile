@@ -31,7 +31,7 @@ HEREDOC_SRCS	=	heredoc_utils heredoc \
 BUILTIN_DIR		=	builtin
 BUILTIN_SRCS	=	builtin chdir echo env	echo_2\
 					in_side_quoted export unset \
-					env_and_export	get_key \
+					env_and_export	get_key chk_compare\
 					env_and_export2 fill_export	\
 
 OBJ_DIR		=	obj
