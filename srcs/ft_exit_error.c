@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/16 09:23:07 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 04:15:36 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_exit_with_error(t_read *line, char *str, int i)
 	rl_clear_history();
 	if (str)
 	{
-		//ft_farray(line->tokens);
 		free(line->line);
 		ft_putendl_fd(str, 2);
 	}

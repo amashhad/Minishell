@@ -6,21 +6,18 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:06:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/19 15:13:41 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 04:24:12 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-void	ft_errmsg(t_read *line, char *msg, int err)
+void	ft_errmsg(t_read *line, int pingpong[2][2], char *msg, int err)
 {
-	if ((err == 42) | (err == 127))
-		ft_exit_with_error(line, msg, err);
-	else
-	{
-		perror(msg);
-		ft_exit_with_error(line, NULL, errno);
-	}
+		ft_putstr_fd(msg, 2);
+		close_heredocs(line->heredocs, line->piper_len);
+		close_fds(pingpong, line->piper_len);
+		ft_exit_with_error(line, NULL, err);
 }
 
 void	close_fds(int fds[2][2], int piper_len)

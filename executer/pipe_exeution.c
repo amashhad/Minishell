@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 03:27:55 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 05:55:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	piper_ops(t_read *line)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_errmsg(line, "Fork Failed\n", 1);
+		ft_errmsg(line, pingpong, "Fork Failed\n", 1);
 	if (pid == 0)
 	{
 		setup_signals(2);

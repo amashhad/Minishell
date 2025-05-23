@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 03:54:05 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 04:22:47 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	ft_extra_chk(t_read *line, char *fcommand)
 {
 	if (!fcommand)
-		ft_errmsg(line, "Empty Command", 2);
+		execution_free(line, 0, NULL);
 	if (access(fcommand, F_OK) == 0)
 	{
 		if (access(fcommand, X_OK) == -1)

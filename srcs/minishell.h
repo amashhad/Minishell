@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 02:53:36 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 04:21:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int		open_stdout(char **cmd, int close_flag);
 char	**redirect_stdout(char **cmd);
 char	**redirect_stdin(t_read *line, char **cmd, int track);
 //execution->void
-void	ft_errmsg(t_read *line, char *msg, int err);
+void	ft_errmsg(t_read *line, int pingpong[2][2], char *msg, int err);
 void	close_fds(int fds[2][2], int piper_len);
 void	free_piper(t_read *line);
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd);
