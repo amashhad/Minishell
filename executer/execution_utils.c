@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 03:27:26 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 03:54:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ int	ft_extra_chk(t_read *line, char *fcommand)
 	if (!fcommand)
 		ft_errmsg(line, "Empty Command", 2);
 	if (access(fcommand, F_OK) == 0)
+	{
+		if (access(fcommand, X_OK) == -1)
+			execution_free(line, 126,
+				ft_joinstrjoin("minishell: ",
+					fcommand, " : Permission denied"));
 		return (access(fcommand, X_OK | R_OK));
+	}
 	else
 		return (1);
 }
@@ -99,7 +105,7 @@ int	execute(t_read *line, char **cmd, char **env, int track)
 	else
 		exve = ft_find_executable(line, env, redirect[0]);
 	if (!exve)
-		execution_free(line, exit_stat, ft_joinstrjoin("Minisehll: command ",
+		execution_free(line, 127, ft_joinstrjoin("Minisehll: command ",
 				redirect[0], " doesn't exist"));
 	exit_stat = execve(exve, redirect, env);
 	free_piper(line);
