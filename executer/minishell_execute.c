@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 23:06:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/09 06:03:13 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:17:09 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	fill_piper(t_read *line)
 	{
 		if (!ft_strcmp(line->tokens[inner], "|"))
 		{
-			line->piper[outer] = ft_cpynarr(line->tokens + flag, (inner - flag));
+			line->piper[outer] = ft_cpynarr(line->tokens
+					+ flag, (inner - flag));
 			if (!line->piper[outer])
 				ft_exit_with_error(line, "Malloc error", 2);
 			flag = inner + 1;
@@ -69,7 +70,7 @@ int	prepare_piper(t_read *line)
 			size++;
 		i++;
 	}
-	line->piper = (char ***)malloc(sizeof(char **) * (size + 2)); //number of (pipes + 1) (+ 1 for NULL)
+	line->piper = (char ***)malloc(sizeof(char **) * (size + 2));
 	if (!line->piper)
 		ft_exit_with_error(line, "Piper Malloc Error", 2);
 	line->piper_len = size + 1;

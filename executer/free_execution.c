@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 06:13:00 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/19 16:17:34 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:15:57 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ void	exit_message(int exit_stat, char *msg)
 	ft_putendl_fd(msg, 2);
 	exit(exit_stat);
 }
+
 void	execution_free(t_read *line, int exit_stat, char *msg)
 {
 	if (line->token)
 		ft_free_tokenizer(line->token);
-	// if (line->piper != NULL)
-	// 	free_piper(line);
 	if (line->prompt != NULL)
 		free(line->prompt);
 	if (line->cwd != NULL)

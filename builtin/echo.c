@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/13 20:10:14 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:09:29 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static	void	print_arg(char *str)
 	}
 }
 
-static	int	check_redirections(char *str)
+int	check_redirections(char *str)
 {
 	if (!ft_strcmp(str, ">"))
 		return (1);
@@ -123,7 +123,7 @@ static	void	go_to_print(char **cmd, int j)
 			ft_putchar(' ');
 	}
 }
-		
+
 void	ft_handle_echo(char **cmd)
 {
 	int i;

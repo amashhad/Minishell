@@ -6,46 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:40:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/18 19:06:31 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:24:28 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-
-//opens and closes fds, only dups when flag is != 0
-int	open_stdin(char *cmd)
-{
-	int fd;
-
-	fd = open(cmd, O_RDONLY);
-	if (fd < 0)
-	{
-		perror(cmd);
-		exit(1);
-	}
-	return (fd);
-}
-
-//opens and closes fds, only dups when flag is != 0
-int	open_stdout(char **cmd, int close_flag)
-{
-	int fd;
-
-	fd = 0;
-	if (ft_strcmp(">", cmd[0]) == 0)
-		fd = open(cmd[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	else
-		fd = open(cmd[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-	{
-		perror(cmd[1]);
-		exit(1);
-	}
-	if (close_flag != 0)
-		dup2(fd, STDOUT_FILENO);
-	close(fd);
-	return (0);
-}
 
 //searches for ">" && ">>" in the array (cmd)
 //opens fds and dups the last one to STDOUT
@@ -70,9 +35,9 @@ char	**redirect_stdout(char **cmd)
 			open_stdout(fetch + i, close_flag);
 			fetch = del_arr(fetch, fetch[i]);
 			fetch = del_arr(fetch, fetch[i]);
-			continue;
+			continue ;
 		}
-	i++;
+		i++;
 	}
 	return (fetch);
 }
@@ -97,7 +62,7 @@ int	stdin_arrow(int counter, char ***fetch)
 				fd = open_stdin((*fetch)[i + 1]);
 				*fetch = del_arr(*fetch, (*fetch)[i + 1]);
 				*fetch = del_arr(*fetch, "<");
-				continue;
+				continue ;
 			}
 		}
 		i++;
@@ -108,7 +73,7 @@ int	stdin_arrow(int counter, char ***fetch)
 int	chk_stdin(char **cmd)
 {
 	int	i;
-	int heredoc;
+	int	heredoc;
 	int	redirect;
 
 	heredoc = 0;
@@ -133,10 +98,10 @@ int	chk_stdin(char **cmd)
 
 //searches for "<" in the array (cmd)
 //opens fds and dups the last one to STDIN
-char **redirect_stdin(t_read *line, char **cmd, int track)
+char	**redirect_stdin(t_read *line, char **cmd, int track)
 {
-	int	fd;
-	int	counter;
+	int		fd;
+	int		counter;
 	char	**fetch;
 
 	counter = 0;

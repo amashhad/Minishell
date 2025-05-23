@@ -6,76 +6,18 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/21 22:53:37 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 03:27:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-void	handle_sigint1(int sig)
-{
-	(void)sig;
-	write(STDOUT_FILENO, "\n", 1);
-}
-void	handle_sigquit1(int sig)
-{
-	(void)sig;
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	ft_putendl_fd("\nQuit (core dumped)", 1);
-	rl_redisplay();
-}
-
-void	setup_signals1(void)
-{
-	signal(SIGINT, handle_sigint1);
-	signal(SIGQUIT, handle_sigquit1);
-	//signal(SIGQUIT, handle_sigint1);
-}
-void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
-{
-	setup_signals1();
-	if (!cmd%2 && line->piper_len != 1)
-	{
-		close(write[1]);
-		dup2(write[0], STDIN_FILENO);
-		close(write[0]);
-	}
-	else if (line->piper_len != 1)
-	{
-		close(read[1]);
-		dup2(read[0], STDIN_FILENO);
-		close(read[0]);
-	}
-	execute(line, line->piper[cmd], line->enviro, cmd);
-}
-void	cmd_loop(t_read *line, int track, int pingpong[2][2])
-{
-	int	pid;
-
-	if (track >= 2)
-		{
-			close(pingpong[track % 2][0]);
-			close(pingpong[track % 2][1]);
-		}
-	pipe(pingpong[track % 2]);
-	pid = fork();
-	if (pid == -1)
-		ft_errmsg(line, "Fork Failed\n", 1);
-	if (pid == 0)
-	{
-		ft_signal2(2);
-		cmd_chain(line, pingpong[track % 2], pingpong[(track + 1) % 2], track);
-	}
-	ft_signal3(3);
-}
 int	piper_ops(t_read *line)
 {
 	int		pingpong[2][2];
 	int		status;
 	int		track;
 	pid_t	pid;
-	pid_t	wpid;
 
 	track = 0;
 	while (track < (line->piper_len - 1))
@@ -87,31 +29,56 @@ int	piper_ops(t_read *line)
 	}
 	pid = fork();
 	if (pid == -1)
-	ft_errmsg(line, "Fork Failed\n", 1);
+		ft_errmsg(line, "Fork Failed\n", 1);
 	if (pid == 0)
 	{
 		setup_signals(2);
 		last_cmd(line, pingpong[(track + 1) % 2], pingpong[(track) % 2], track);
 	}
 	ft_signal3(3);
-	while ((wpid = wait(&status)) > 0)
-	{
-		if (wpid == pid)
-		{
-			if (WIFSIGNALED(status))
-			{
-				int sig = WTERMSIG(status);
-				if (sig == SIGQUIT)
-					write(1, "Quit (core dumped)\n", 20);
-				line->exit_status = 128 + sig;
-			}
-			else if (WIFEXITED(status))
-				line->exit_status = WEXITSTATUS(status);
-		}
-	}
+	wait_children(line, &status, pingpong, pid);
 	return (line->exit_status);
 }
-///end of piper ops
+
+int	is_there_redirection(t_read *line)
+{
+	int		i;
+
+	i = -1;
+	while (line->piper[0][++i] != NULL)
+	{
+		if (check_redirections(line->piper[0][i]))
+			break ;
+	}
+	if (line->piper[0][i] == NULL)
+		return (0);
+	i = 0;
+	while (line->piper[0][i] != NULL)
+	{
+		if (!ft_strcmp(get_key(line->piper[0][i], 0), "echo")
+			|| !ft_strcmp(get_key(line->piper[0][i], 0), "env")
+			|| !ft_strcmp(get_key(line->piper[0][i], 0), "pwd"))
+		{
+			piper_ops(line);
+			line->exit_status = 0;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	child_chk(t_read *line)
+{
+	if (is_there_redirection(line))
+		return ;
+	if (builtin_part1(line, line->piper[0]) == 1)
+		line->exit_status = piper_ops(line);
+	else
+	{
+		line->exit_status = 0;
+	}
+}
 
 int	pipe_execution(t_read *line)
 {
@@ -131,12 +98,7 @@ int	pipe_execution(t_read *line)
 		}
 	}
 	if (line->piper_len < 2)
-	{
-		if (builtin_part1(line, line->piper[0]) == 1)
-			line->exit_status = piper_ops(line);
-		else
-			line->exit_status = 0;
-	}
+		child_chk(line);
 	else
 		line->exit_status = piper_ops(line);
 	close_heredocs(line->heredocs, line->piper_len);

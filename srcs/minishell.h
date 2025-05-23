@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/19 15:54:38 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 02:53:36 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	terminal_shell(t_read *line);
 int		execute(t_read *line, char **cmd, char **env, int track);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);
+int		open_stdin(char *cmd);
+int		open_stdout(char **cmd, int close_flag);
 //int		execution(t_read *line);
 //execution->char
 char	**redirect_stdout(char **cmd);
@@ -106,6 +108,9 @@ void	free_piper(t_read *line);
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd);
 void	execution_free(t_read *line, int exit_stat, char *msg);
 void	free_piper(t_read *line);
+void	wait_children(t_read *line, int *status, int pingpong[2][2], pid_t pid);
+void	cmd_loop(t_read *line, int track, int pingpong[2][2]);
+void	last_cmd(t_read *line, int read[2], int write[2], int cmd);
 
 
 //expander
@@ -148,13 +153,14 @@ int	search_heredoc(t_read *line, char **heredoc, int fill);
 char	**remove_heredoc(char **fetch);
 void	heredoc_handler(t_read *line);
 void	close_heredocs(int *heredocs, int len);
-void	heredoc_handler(t_read *line);
+int		readheredoc(int fd[2], char *fnd, int count);
+void	fill_heredoc(int fd, int fd2, char *fnd, char **line);
 
 //builtin
 
 //builtin->int
 int		builtin_part1(t_read *line, char **cmd);
-
+int		check_redirections(char *str);
 //builtin->char
 char	*ft_getenv(char **enviro, char *env);
 char	**fill_env(char *str, char **old_arr);
