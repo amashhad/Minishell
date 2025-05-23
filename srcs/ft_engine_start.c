@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/11 17:42:31 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:47:56 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	syntax_exit_status(t_read *line, char *token, int exit_status, int std)
 	{
 		if (ft_strcmp(token, ">>") || ft_strcmp(token, "<<"))
 		{
-			ft_putendl_fd("bash: syntax error near unexpected token `newline'", std);
+			ft_putendl_fd("bash: syntax error"
+				"near unexpected token `newline'", std);
 			return (line->exit_status);
 		}
 		ft_putstr_fd("bash: syntax error near unexpected token `", std);
@@ -69,9 +70,11 @@ void	ft_checkredirect(t_read *line)
 		return ;
 	}
 	if (ft_arr_srch(line->tokens[ft_arrlen(line->tokens) - 1], redirections)
-		|| (ft_arr_srch(line->tokens[ft_arrlen(line->tokens) - 1], redirections)))
+		|| (ft_arr_srch(line->tokens[ft_arrlen(line->tokens)
+					- 1], redirections)))
 	{
-		syntax_exit_status(line, line->tokens[ft_arrlen(line->tokens) - 1], 2, 2);
+		syntax_exit_status(line, line->tokens[ft_arrlen(line->tokens)
+			- 1], 2, 2);
 		return ;
 	}
 }
@@ -81,19 +84,22 @@ void	terminal_shell(t_read *line)
 	int	exit_code;
 
 	exit_code = line->exit_status;
-	if (!line->tokens || *line->tokens == NULL)
-		return ;
-	ft_checktokens(line);
-	if (exit_code != line->exit_status)
-		return ;
-	ft_checkredirect(line);
-	if (exit_code != line->exit_status)
-		return ;
-	prepare_piper(line);
-	if (exit_code != line->exit_status)
-		return ;
-	heredoc_handler(line);
-	if (exit_code != line->exit_status)
-		return ;
-	pipe_execution(line);
+	if (line->exit_status != 2)
+	{
+		if (!line->tokens || *line->tokens == NULL)
+			return ;
+		ft_checktokens(line);
+		if (exit_code != line->exit_status)
+			return ;
+		ft_checkredirect(line);
+		if (exit_code != line->exit_status)
+			return ;
+		prepare_piper(line);
+		if (exit_code != line->exit_status)
+			return ;
+		heredoc_handler(line);
+		if (exit_code != line->exit_status)
+			return ;
+		pipe_execution(line);
+	}
 }

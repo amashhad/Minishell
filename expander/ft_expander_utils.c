@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:31:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/13 19:22:32 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:17:58 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	single_quoted(t_expand *pand)
 		pand->j = pand->i;
 		pand->i++;
 		pand->count++;
-		while (pand->input[pand->i] != '\'' && pand->input[pand->i] != '\0')
+		while (pand->input[pand->i] != '\''
+			&& pand->input[pand->i] != '\0')
 		{
 			pand->count++;
 			pand->i++;
@@ -70,24 +71,24 @@ char	*get_string_expander(t_expand *pand)
 	return (pand->string);
 }
 
-//remove the usage of (getenv) inside the function var_expander and replace it with ft_getenv(line.env)
+//remove the usage of (getenv) inside the function
+//var_expander and replace it with ft_getenv(line.env)
 void	var_expander(t_expand *pand)
 {
-    pand->j = pand->i + 1;
+	pand->j = pand->i + 1;
 	while (string_expander(pand->input[pand->i + 1]))
 	{
 		pand->k++;
-    	pand->i++;
+		pand->i++;
 	}
-    pand->var_name = get_string_expander(pand);
+	pand->var_name = get_string_expander(pand);
 	if (pand->var_name != NULL)
 	{
 		pand->var_value = ft_getenv(pand->envment, pand->var_name);
 		free (pand->var_name);
-		// ft_farray (pand->envment);
 	}
 	pand->var_name = NULL;
 	pand->string = NULL;
-    pand->count += ft_strlen(pand->var_value);
-    pand->count--;
+	pand->count += ft_strlen(pand->var_value);
+	pand->count--;
 }

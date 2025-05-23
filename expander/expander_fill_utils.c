@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:33:23 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/13 19:21:59 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:14:37 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,15 @@ size_t	count_malloc(t_expand *pand)
 		if (pand->input[pand->i] == '>' || pand->input[pand->i] == '<')
 			count_arrow(pand);
 		if (pand->input[pand->i] == '$')
-            dollar_malloc_expander(pand);
+			dollar_malloc_expander(pand);
 		single_quoted(pand);
 		if (pand->quoted)
 		{
 			free (pand->quoted);
 			pand->quoted = NULL;
 		}
-        pand->count++;
-        pand->i++;
+		pand->count++;
+		pand->i++;
 	}
 	return (pand->count);
 }

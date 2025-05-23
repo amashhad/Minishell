@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:56:16 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/18 19:09:30 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:04:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ char	**remove_heredoc(char **fetch)
 
 //checks for heredocs, dup2s the ones that are ok
 //pipes stop it, aka turn based pipes
-int	check_heredocs(t_read *line, int old_fd, int heredoc, char ***fetch, int track)
+int	check_heredocs(t_read *line, int heredoc, char ***fetch, int track)
 {
 	if (heredoc != 1)
 	{
 		(*fetch) = remove_heredoc(*fetch);
-		return (old_fd);
+		return (line->old_fd);
 	}
-	close(old_fd);
+	close(line->old_fd);
 	(*fetch) = remove_heredoc(*fetch);
 	return (line->heredocs[track]);
 }

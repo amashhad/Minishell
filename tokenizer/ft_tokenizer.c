@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:34:37 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/11 19:53:49 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:43:31 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,16 @@ void	fill_token(t_read *line)
 {
 	if (line->token->index > line->token->k)
 	{
-		line->token->tokens[line->token->k] = ft_calloc((line->token->i - line->token->count + 1),
+		line->token->tokens[line->token->k]
+			= ft_calloc((line->token->i - line->token->count + 1),
 				sizeof(char));
 		if (!line->token->tokens[line->token->k])
-			ft_exit_with_error(line, "malloc error", 2);
+			ft_exit_with_error(line, "malloc error", "token", 2);
 		line->token->j = 0;
 		while (line->token->count < line->token->i)
 		{
-			line->token->tokens[line->token->k][line->token->j] = line->token->input[line->token->count];
+			line->token->tokens[line->token->k][line->token->j]
+				= line->token->input[line->token->count];
 			line->token->count++;
 			line->token->j++;
 		}
@@ -64,7 +66,8 @@ void	fill_tokens(t_read *line)
 {
 	while (line->token->input[line->token->i] != '\0')
 	{
-		while (line->token->input[line->token->i] == ' ' || line->token->input[line->token->i] == '\t')
+		while (line->token->input[line->token->i] == ' '
+			|| line->token->input[line->token->i] == '\t')
 			line->token->i++;
 		line->token->k = line->token->index;
 		line->token->count = line->token->i;
@@ -97,7 +100,7 @@ char	**ft_tokenizer(t_read *line)
 	initialize_tok(line->token);
 	line->token->tokens = ft_calloc(i + 1, sizeof(char *));
 	if (!(line->token->tokens))
-		ft_exit_with_error(line, "malloc error", 2);
+		ft_exit_with_error(line, "malloc error", "NULL", 2);
 	line->token->input = line->line;
 	fill_tokens(line);
 	line->token->tokens[i] = NULL;

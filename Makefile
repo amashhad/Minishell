@@ -2,7 +2,7 @@ NAME		=	minishell
 CC		=	cc
 CFLAGS		=	-Wall -Wextra -Werror -g
 RM		=	rm -rf
-SRC		= 	main exit_chk ft_exit_error signal \
+SRC		= 	main exit_chk ft_exit_error signal signal_2 initalization\
 			ft_engine_start $(EXECUTER_SRCS) $(EXPANDER_SRCS) $(TOKENIZER_SRCS) $(HEREDOC_SRCS) $(BUILTIN_SRCS)\
 
 SRC_DIR		= 	srcs
@@ -29,8 +29,9 @@ HEREDOC_DIR		=	heredoc
 HEREDOC_SRCS	=	heredoc_utils heredoc \
 
 BUILTIN_DIR		=	builtin
-BUILTIN_SRCS	=	builtin chdir echo env		\
-					export unset env_and_export	\
+BUILTIN_SRCS	=	builtin chdir echo env	echo_2\
+					in_side_quoted export unset \
+					env_and_export	get_key \
 					env_and_export2 fill_export	\
 
 OBJ_DIR		=	obj

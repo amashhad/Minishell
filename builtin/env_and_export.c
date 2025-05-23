@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/03 21:47:36 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:22:21 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,9 @@ static int	get_length(char *str)
 		{
 			c = str[i];
 			i++;
-			while ((str[i] != c || (str[i] == c && str[i - 1] == '\\'))
-				&& str[i] != '\0')
-				{
-					i++;
-					j++;
-				}
-			if (str[i] != '\0')
-				i++;
+			count_in_side_quoted(str, c, &i, &j);
 		}
-		else 
+		else
 		{
 			i++;
 			j++;
@@ -43,9 +36,9 @@ static int	get_length(char *str)
 	}
 	return (j);
 }
+
 static char	*fill_string(char *str, char *s)
 {
-	char	c;
 	int		i;
 	int		j;
 
@@ -55,24 +48,14 @@ static char	*fill_string(char *str, char *s)
 	{
 		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
 		{
-			c = str[i];
-			i++;
-			while ((str[i] != c || (str[i] == c && str[i - 1] == '\\'))
-				&& str[i] != '\0')
-				{
-					s[j] = str[i];
-					i++;
-					j++;
-				}
-			if (str[i] != '\0')
-				i++;
+			fill_in_side_quoted(str, s, &i, &j);
 		}
 		else
 		{
 			s[j] = str[i];
 			j++;
 			i++;
-		}	
+		}
 	}
 	return (s);
 }
@@ -80,7 +63,7 @@ static char	*fill_string(char *str, char *s)
 void	*copy_without_quoted(char *str, int size, char **arr)
 {
 	char	*s;
-	int i;
+	int		i;
 
 	if (!str)
 		return (NULL);
@@ -95,6 +78,7 @@ void	*copy_without_quoted(char *str, int size, char **arr)
 	free (s);
 	return (NULL);
 }
+
 char	**fill_env(char *str, char **old_arr)
 {
 	int		i;
@@ -112,7 +96,6 @@ char	**fill_env(char *str, char **old_arr)
 		i++;
 	}
 	copy_without_quoted(str, size, arr);
-	//arr[size] = ft_strdup(str);
 	arr[size + 1] = NULL;
 	return (arr);
 }

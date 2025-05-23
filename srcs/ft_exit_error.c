@@ -6,31 +6,17 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 04:15:36 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:51:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit_with_error(t_read *line, char *str, int i)
+void	ft_msg(t_read *line, char *str, int i)
 {
 	int	j;
 
-	if (line->pand)
-	 	ft_free_expander(line->pand);
-	if (line->enviro)
-		ft_farray(line->enviro);
-	if (line->token)
-		ft_free_tokenizer(line->token);
-	if (line->piper != NULL)
-		free_piper(line);
-	if (line->prompt != NULL)
-		free(line->prompt);
-	if (line->cwd != NULL)
-		free(line->cwd);
-	if (line->expo != NULL)
-		ft_farray(line->expo);
-	rl_clear_history();
+	j = 0;
 	if (str)
 	{
 		free(line->line);
@@ -41,4 +27,24 @@ void	ft_exit_with_error(t_read *line, char *str, int i)
 	j = i;
 	free (line);
 	exit(j);
+}
+
+void	ft_exit_with_error(t_read *line, char *str, char *exception, int i)
+{
+	if (line->pand && ft_strcmp(exception, "pand"))
+		ft_free_expander(line->pand);
+	if (line->enviro && ft_strcmp(exception, "enviro"))
+		ft_farray(line->enviro);
+	if (line->token && ft_strcmp(exception, "token"))
+		ft_free_tokenizer(line->token);
+	if (line->piper != NULL && ft_strcmp(exception, "piper"))
+		free_piper(line);
+	if (line->prompt != NULL && ft_strcmp(exception, "prompt"))
+		free(line->prompt);
+	if (line->cwd != NULL && ft_strcmp(exception, "cwd"))
+		free(line->cwd);
+	if (line->expo != NULL && ft_strcmp(exception, "expo"))
+		ft_farray(line->expo);
+	rl_clear_history();
+	ft_msg(line, str, i);
 }

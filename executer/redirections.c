@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:40:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 23:24:28 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:06:30 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ char	**redirect_stdin(t_read *line, char **cmd, int track)
 	if (!fetch)
 		return (NULL);
 	counter = chk_stdin(fetch);
-	fd = stdin_arrow(counter, &fetch);
-	fd = check_heredocs(line, fd, counter, &fetch, track);
+	line->old_fd = stdin_arrow(counter, &fetch);
+	fd = check_heredocs(line, counter, &fetch, track);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	fd = -1;

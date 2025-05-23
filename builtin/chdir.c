@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:14:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/06 21:16:02 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:32:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static	void	ft_chng_pwd(t_read *line)
 	ft_get_prompt(line);
 	line->enviro = ft_srchrarr("PWD=", line->enviro, line->cwd);
 	if (!line->enviro)
-		ft_exit_with_error(line, "Malloc Error", 1);
+		ft_exit_with_error(line, "Malloc Error", "enviro", 1);
 	line->expo = ft_srchrarr("PWD=", line->expo, line->cwd);
 	if (!line->expo)
-		ft_exit_with_error(line, "Malloc Error", 1);
+		ft_exit_with_error(line, "Malloc Error", "expo", 1);
 }
 
 static	void	ft_get_new_cwd(t_read *line, char *srch)
@@ -33,7 +33,7 @@ static	void	ft_get_new_cwd(t_read *line, char *srch)
 	while (line->enviro[i] != NULL)
 	{
 		if (ft_strnstr(line->enviro[i], srch, ft_strlen(srch)))
-			break;
+			break ;
 		i++;
 	}
 	if (line->enviro[i] == NULL)
@@ -56,20 +56,20 @@ static	void	ft_old_cwd(t_read *line)
 
 	old_pwd = ft_strjoin("OLD_PWD=", line->cwd);
 	if (!old_pwd)
-		ft_exit_with_error(line, "Strjoin Error w/PWD", 1);
+		ft_exit_with_error(line, "Strjoin Error w/PWD", "NULL", 1);
 	line->enviro = ft_srchrarr("OLD_PWD", line->enviro, old_pwd);
 	if (!line->enviro || *line->expo == NULL)
-		ft_exit_with_error(line, "old CWD err", 1);
+		ft_exit_with_error(line, "old CWD err", "NULL", 1);
 	line->expo = ft_srchrarr("OLD_PWD", line->expo, old_pwd);
 	if (!line->expo || *line->expo == NULL)
-		ft_exit_with_error(line, "old CWD err", 1);
+		ft_exit_with_error(line, "old CWD err", "NULL", 1);
 	free(old_pwd);
 	ft_get_new_cwd(line, "HOME=");
 }
 
 static	void	ft_path(t_read *line, char **cmd)
 {
-	int	dir;
+	int		dir;
 	char	*old_pwd;
 
 	dir = chdir(cmd[1]);
@@ -80,13 +80,13 @@ static	void	ft_path(t_read *line, char **cmd)
 	}
 	old_pwd = ft_strjoin("OLD_PWD=", line->cwd);
 	if (!old_pwd)
-		ft_exit_with_error(line, "strjoin Error w/PWD", 1);
+		ft_exit_with_error(line, "strjoin Error w/PWD", "NULL", 1);
 	line->enviro = ft_srchrarr("OLD_PWD=", line->enviro, old_pwd);
 	if (!line->enviro || *line->enviro == NULL)
-		ft_exit_with_error(line ,"srchrarr error", 1);
+		ft_exit_with_error(line, "srchrarr error", "NULL", 1);
 	line->expo = ft_srchrarr("OLD_PWD=", line->expo, old_pwd);
 	if (!line->expo || *line->expo == NULL)
-		ft_exit_with_error(line, "srchrarr error", 1);
+		ft_exit_with_error(line, "srchrarr error", "NULL", 1);
 	free(old_pwd);
 	ft_chng_pwd(line);
 }

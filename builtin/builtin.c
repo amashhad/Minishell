@@ -29,7 +29,38 @@ int	builtin_part2(t_read *line, char **cmd)
 		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(str, "cd") == 0)
+	else
+	{
+		free (str);
+		return (1);
+	}
+}
+
+int	builtin_part4(t_read *line, char **cmd)
+{
+	char	*str;
+
+	str = get_key(cmd[0], 0);
+	if (ft_strcmp(str, "pwd") == 0)
+	{
+		ft_get_prompt(line);
+		ft_putendl_fd(line->cwd, 1);
+		free (str);
+		return (line->exit_status);
+	}
+	else
+	{
+		free (str);
+		return (builtin_part2(line, cmd));
+	}
+}
+
+int	builtin_part3(t_read *line, char **cmd)
+{
+	char	*str;
+
+	str = get_key(cmd[0], 0);
+	if (ft_strcmp(str, "cd") == 0)
 	{
 		ft_handle_cd(line, cmd);
 		free (str);
@@ -44,14 +75,14 @@ int	builtin_part2(t_read *line, char **cmd)
 	else
 	{
 		free (str);
-		return (1);
+		return (builtin_part4(line, cmd));
 	}
 }
 
 int	builtin_part1(t_read *line, char **cmd)
 {
 	char	*str;
-	int	executed;
+	int		executed;
 
 	executed = 0;
 	str = NULL;
@@ -65,18 +96,10 @@ int	builtin_part1(t_read *line, char **cmd)
 		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(str, "pwd") == 0)
-	{
-		ft_get_prompt(line);
-		ft_putendl_fd(line->cwd, 1);
-		free (str);
-		return (line->exit_status);
-	}
 	else
 	{
 		free (str);
-		executed = builtin_part2(line, cmd);
+		executed = builtin_part3(line, cmd);
 	}
 	return (executed);
 }
-

@@ -6,17 +6,17 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 23:44:12 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/11 21:03:25 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:12:43 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char **edit_arr(char **arr, char **new_arr, char *str)
+char	**edit_arr(char **arr, char **new_arr, char *str)
 {
 	int	i;
-	int j;
-	int limit;
+	int	j;
+	int	limit;
 
 	i = 0;
 	j = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:06 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/16 09:28:08 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 04:43:09 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ void	go_to_check_error_arrow(t_read *line)
 		if (line->line[i] == '>')
 		{
 			if (line->line[i + 1] == '<')
-				ft_exit_with_error(line, "the arrow is not correct", 2);
+			{
+				ft_putendl_fd("Syntax Error near token", 2);
+				line->exit_status = 2;
+				return ;
+			}
 		}
 		i++;
 	}
@@ -76,7 +80,11 @@ void	go_to_check_error_arrow(t_read *line)
 		if (line->line[i] == '<')
 		{
 			if (line->line[i + 1] == '>')
-				ft_exit_with_error(line, "the arrow is not correct", 2);
+			{
+				ft_putendl_fd("Syntax Error near token", 2);
+				line->exit_status = 2;
+				return ;
+			}
 		}
 		i++;
 	}
@@ -96,7 +104,11 @@ void	go_to_check_arrow_two(t_read *line)
 		if (line->line[i] == ' ')
 			j = 0;
 		if (j > 2)
-			ft_exit_with_error(line, "the arrow is not correct", 2);
+		{
+			ft_putendl_fd("Syntax Error near token", 2);
+			line->exit_status = 2;
+			return ;
+		}
 		i++;
 	}
 }
@@ -115,7 +127,11 @@ void	go_to_check_arrow(t_read *line)
 		if (line->line[i] == ' ')
 			j = 0;
 		if (j > 2)
-			ft_exit_with_error(line, "the arrow is not correct", 2);
+		{
+			ft_putendl_fd("Syntax Error near token", 2);
+			line->exit_status = 2;
+			return ;
+		}
 		i++;
 	}
 	go_to_check_arrow_two(line);

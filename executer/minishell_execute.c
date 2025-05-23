@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 23:06:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 23:17:09 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:34:17 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	fill_piper(t_read *line)
 			line->piper[outer] = ft_cpynarr(line->tokens
 					+ flag, (inner - flag));
 			if (!line->piper[outer])
-				ft_exit_with_error(line, "Malloc error", 2);
+				ft_exit_with_error(line, "Malloc error", "NULL", 2);
 			flag = inner + 1;
 			outer++;
 		}
@@ -53,7 +53,7 @@ void	fill_piper(t_read *line)
 	}
 	line->piper[outer] = ft_cpyarr(line->tokens + flag);
 	if (!line->piper[outer])
-		ft_exit_with_error(line, "Malloc error", 2);
+		ft_exit_with_error(line, "Malloc error", "piper", 2);
 	line->piper[outer + 1] = NULL;
 }
 
@@ -72,7 +72,7 @@ int	prepare_piper(t_read *line)
 	}
 	line->piper = (char ***)malloc(sizeof(char **) * (size + 2));
 	if (!line->piper)
-		ft_exit_with_error(line, "Piper Malloc Error", 2);
+		ft_exit_with_error(line, "Piper Malloc Error", "piper", 2);
 	line->piper_len = size + 1;
 	fill_piper(line);
 	return (size);

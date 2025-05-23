@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:44:24 by amashhad          #+#    #+#             */
-/*   Updated: 2025/04/26 07:06:22 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:33:13 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	ft_handle_unset(t_read *line, char **cmd)
 	{
 		line->expo = ft_subarr(cmd[i], line->expo);
 		if (!line->expo)
-			ft_exit_with_error(line, "Error in export command", 1);
+			ft_exit_with_error(line, "Error in export command", "expo", 1);
 		line->enviro = ft_subarr(cmd[i], line->enviro);
 		if (!line->enviro)
-			ft_exit_with_error(line, "Error in export command", 1);
+			ft_exit_with_error(line, "Error in export command", "enviro", 1);
 		i++;
 	}
 }

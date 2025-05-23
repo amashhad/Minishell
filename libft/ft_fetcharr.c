@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:53:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/16 07:49:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:13:00 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //no need to free memory
 char	*ft_fetcharr(char **arr, char *fetch)
 {
-	int	i;
+	int		i;
 	char	*fnd;
 
 	i = 0;

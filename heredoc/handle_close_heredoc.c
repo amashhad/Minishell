@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 02:37:10 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 02:38:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:17:29 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	close_heredocs(int *heredocs, int len)
 //inside the command line
 int	readheredoc(int fd[2], char *fnd, int count)
 {
-	char *line;
-	static	int	prev_fd;
+	char		*line;
+	static int	prev_fd;
 
 	line = NULL;
 	if (prev_fd > 0 && count > 0)
@@ -55,7 +55,7 @@ int	readheredoc(int fd[2], char *fnd, int count)
 void	heredoc_handler(t_read *line)
 {
 	int	i;
-	int chk;
+	int	chk;
 
 	i = 0;
 	chk = 0;
@@ -65,7 +65,7 @@ void	heredoc_handler(t_read *line)
 		if (g_sig == 2)
 		{
 			line->exit_status = 130;
-			break;
+			break ;
 		}
 		if (chk < 0)
 		{

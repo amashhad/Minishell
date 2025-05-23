@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 04:21:38 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:05:36 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # include "../tokenizer/tokenizer.h"
 
 # ifndef PATH_MAX
-# define PATH_MAX 4096
+#  define PATH_MAX 4096
 # endif
 
-extern volatile sig_atomic_t    g_sig;
+extern volatile sig_atomic_t	g_sig;
 
 typedef struct s_expander
 {
@@ -70,25 +70,31 @@ typedef struct s_token
 
 typedef struct s_read
 {
-	int		exit_status;
-	int		heredocs[256];
-	char	*prompt;
-	char	*line;
-	char	*cwd;
-	char	**enviro;
-	char	**tokens;
-	char	**expo;
-	char	***piper;
-	int		piper_len;
-	t_tok	*token;
+	int			exit_status;
+	int			heredocs[256];
+	int			old_fd;
+	char		*prompt;
+	char		*line;
+	char		*cwd;
+	char		**enviro;
+	char		**tokens;
+	char		**expo;
+	char		***piper;
+	int			piper_len;
+	t_tok		*token;
 	t_expand	*pand;
 }				t_read;
 
 //Minishell
 int		ft_exit_shell(t_read *line);
 void	ft_get_prompt(t_read *line);
-void	ft_exit_with_error(t_read *line, char *str, int err);
+void	ft_exit_with_error(t_read *line, char *str, char *exception, int err);
 void	terminal_shell(t_read *line);
+
+//Initialization
+void	initalization_struct_pand(t_read *line);
+void	initalization_struct_tok(t_read *line);
+void	initalization(t_read *line, char **envp);
 
 //execution
 //execution->int
@@ -111,7 +117,6 @@ void	free_piper(t_read *line);
 void	wait_children(t_read *line, int *status, int pingpong[2][2], pid_t pid);
 void	cmd_loop(t_read *line, int track, int pingpong[2][2]);
 void	last_cmd(t_read *line, int read[2], int write[2], int cmd);
-
 
 //expander
 //expander->int
@@ -147,9 +152,9 @@ void	dollar_tokenizer(t_tok *token);
 void	string_tokenizer(t_tok *token);
 
 //heredoc
-int	check_heredocs(t_read *line, int old_fd, int heredoc, char ***fetch, int track);
-int	readheredoc(int fd[2], char *fnd, int count);
-int	search_heredoc(t_read *line, char **heredoc, int fill);
+int		check_heredocs(t_read *line, int heredoc, char ***fetch, int track);
+int		readheredoc(int fd[2], char *fnd, int count);
+int		search_heredoc(t_read *line, char **heredoc, int fill);
 char	**remove_heredoc(char **fetch);
 void	heredoc_handler(t_read *line);
 void	close_heredocs(int *heredocs, int len);
@@ -157,9 +162,13 @@ int		readheredoc(int fd[2], char *fnd, int count);
 void	fill_heredoc(int fd, int fd2, char *fnd, char **line);
 
 //builtin
-
 //builtin->int
 int		builtin_part1(t_read *line, char **cmd);
+int		check_quoted(char *str);
+int		is_n(char *str);
+int		is_odd(char *str);
+int		check_quoted_1(char *serch, int i);
+int		check_quoted_2(char *serch, int i);
 int		check_redirections(char *str);
 //builtin->char
 char	*ft_getenv(char **enviro, char *env);
@@ -169,6 +178,7 @@ char	**rplc_env(char *fnd, char **old_arr, char *rplc);
 char	**rplc_export(char *fnd, char **old_arr, char *rplc);
 char	*get_key(char *str, int c);
 char	*check_name_of_key(char **arr, char *fetch);
+char	*get_serch(char *str, int i, int c);
 
 //builtin->void
 void	ft_handle_cd(t_read *line, char **cmd);
@@ -178,8 +188,8 @@ void	ft_handle_unset(t_read *line, char **cmd);
 void	ft_handle_env(t_read *line, char **cmd);
 void	*copy_without_quoted(char *str, int size, char **arr);
 void	*add_quoted_for_value(char **arr, int size);
-
-
+void	count_in_side_quoted(char *str, char c, int *i, int *j);
+void	fill_in_side_quoted(char *str, char *s, int *i, int *j);
 
 //signals(void)
 void	handle_sigint(int sig);

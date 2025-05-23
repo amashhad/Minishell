@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:27:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/13 19:21:22 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:12:43 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ void	count_arrow(t_expand *pand)
 
 void	fill_arrow_var_name(t_expand *pand)
 {
-    pand->i++;
+	pand->i++;
 	pand->i_result++;
-    pand->result[pand->i_result] = pand->input[pand->i];
+	pand->result[pand->i_result] = pand->input[pand->i];
 	if (ft_isdigit(pand->input[pand->i + 1]))
 		pand->i_malloc = 1;
 	while (string_expander(pand->input[pand->i + 1]))
 	{
 		pand->i++;
 		pand->i_result++;
-        pand->result[pand->i_result] = pand->input[pand->i];
+		pand->result[pand->i_result] = pand->input[pand->i];
 	}
 }
 
@@ -73,7 +73,7 @@ void	fill_arrow(t_expand *pand)
 		{
 			pand->i++;
 			pand->i_result++;
-            pand->result[pand->i_result] = pand->input[pand->i];
+			pand->result[pand->i_result] = pand->input[pand->i];
 		}
 		if (pand->input[pand->i + 1] == '$')
 			fill_arrow_var_name(pand);
@@ -85,7 +85,7 @@ void	fill_arrow(t_expand *pand)
 		{
 			pand->i++;
 			pand->i_result++;
-            pand->result[pand->i_result] = pand->input[pand->i];
+			pand->result[pand->i_result] = pand->input[pand->i];
 		}
 		if (pand->input[pand->i + 1] == '$')
 			fill_arrow_var_name(pand);

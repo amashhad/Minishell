@@ -6,58 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 00:09:29 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/23 07:07:42 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-
-static	int	check_quoted(char *str)
-{
-	size_t	i;
-	char	c;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
-		{
-			c = str[i];
-			while (str[i] != '\0')
-			{
-				i++;
-				if (str[i] == c)
-					break;
-				if (str[i] == '\0')
-					return (0);
-			}
-		}
-		i++;
-	}
-	return (1);
-}
-
-static int	is_n(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	if (str[i] == '-')
-	{
-		i++;
-		while (str[i] != '\0')
-		{
-			while (str[i] == 'n')
-				i++;
-			if (str[i] == '\0')
-				return (1);
-			return (0);
-		}
-	}
-	return (0);
-}
 
 static	void	print_arg(char *str)
 {
@@ -108,7 +61,7 @@ static	void	go_to_print(char **cmd, int j)
 		else
 		{
 			ft_putstr_fd("syntax error", 2);
-			return;
+			return ;
 		}
 	}
 	i = j;
@@ -117,7 +70,7 @@ static	void	go_to_print(char **cmd, int j)
 		if (!check_redirections(cmd[i]))
 			print_arg(cmd[i]);
 		else
-			break;
+			break ;
 		i++;
 		if (cmd[i] && !check_redirections(cmd[i]))
 			ft_putchar(' ');
@@ -126,7 +79,7 @@ static	void	go_to_print(char **cmd, int j)
 
 void	ft_handle_echo(char **cmd)
 {
-	int i;
+	int	i;
 	int	endl;
 
 	i = 1;
