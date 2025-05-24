@@ -6,11 +6,19 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:40:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 19:54:41 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:21:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
+
+//safetly disposes of the redirected cmd
+char	**redirect_clear(char **func)
+{
+	ft_farray(func);
+	func = NULL;
+	return (NULL);
+}
 
 //searches for ">" && ">>" in the array (cmd)
 //opens fds and dups the last one to STDOUT
@@ -32,7 +40,8 @@ char	**redirect_stdout(char **cmd)
 		{
 			if (!ft_arr_srch(">", fetch + i) || !ft_arr_srch(">>", fetch + i))
 				close_flag = 1;
-			open_stdout(fetch + i, close_flag);
+			if (open_stdout(fetch + i, close_flag) == -1)
+				return (redirect_clear(fetch));
 			fetch = del_arr(fetch, fetch[i]);
 			fetch = del_arr(fetch, fetch[i]);
 			continue ;
@@ -42,12 +51,10 @@ char	**redirect_stdout(char **cmd)
 	return (fetch);
 }
 
-int	stdin_arrow(int counter, char ***fetch)
+void	stdin_arrow(t_read *line, int counter, char ***fetch)
 {
-	int	fd;
 	int	i;
 
-	fd = 0;
 	i = 0;
 	while ((*fetch)[(i)])
 	{
@@ -55,11 +62,14 @@ int	stdin_arrow(int counter, char ***fetch)
 		{
 			if ((*fetch)[(i) + 1])
 			{
-				if (counter != 2 && fd > 0)
-					close(fd);
-				if (fd < 0)
-					return (-1);
-				fd = open_stdin((*fetch)[i + 1]);
+				if (counter != 2 && line->old_fd > 0)
+					close(line->old_fd);
+				line->old_fd = open_stdin((*fetch)[i + 1]);
+				if (line->old_fd < 0)
+				{
+					redirect_clear(*(fetch));
+					return ;
+				}
 				*fetch = del_arr(*fetch, (*fetch)[i + 1]);
 				*fetch = del_arr(*fetch, "<");
 				continue ;
@@ -67,10 +77,10 @@ int	stdin_arrow(int counter, char ***fetch)
 		}
 		i++;
 	}
-	return (fd);
+	return ;
 }
 
-int	chk_stdin(char **cmd)
+int	chk_stdin(char **cmd, t_read *line)
 {
 	int	i;
 	int	heredoc;
@@ -79,6 +89,7 @@ int	chk_stdin(char **cmd)
 	heredoc = 0;
 	redirect = 0;
 	i = 0;
+	line->old_fd = 0;
 	while (cmd[i])
 	{
 		if (ft_strcmp(cmd[i], "<") == 0)
@@ -112,14 +123,16 @@ char	**redirect_stdin(t_read *line, char **cmd, int track)
 	fetch = ft_cpyarr(cmd);
 	if (!fetch)
 		return (NULL);
-	counter = chk_stdin(fetch);
-	line->old_fd = stdin_arrow(counter, &fetch);
-	ft_putendl_fd("world222", 2);
+	counter = chk_stdin(fetch, line);
+	stdin_arrow(line, counter, &fetch);
+	if (line->old_fd == -1)
+		return (NULL);
 	fd = check_heredocs(line, counter, &fetch, track);
+	if (fd == -1)
+		return (redirect_clear(fetch));
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	fd = -1;
-	line->old_fd = -1;
 	close_heredocs(line->heredocs, line->piper_len);
 	ft_farray (cmd);
 	return (fetch);

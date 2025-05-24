@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 18:49:56 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:20:23 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ int	piper_ops(t_read *line)
 	wait_children(line, &status, pingpong, pid);
 	return (line->exit_status);
 }
+
 int	key_loop(t_read *line)
 {
-	char *srch;
+	char	*srch;
 	int		i;
 
 	srch = NULL;

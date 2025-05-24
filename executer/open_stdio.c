@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:03:29 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 03:28:51 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/24 20:10:46 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	open_stdin(char *cmd)
 	if (fd < 0)
 	{
 		perror(cmd);
-		exit(1);
+		return (-1);
 	}
 	return (fd);
 }
@@ -39,7 +39,7 @@ int	open_stdout(char **cmd, int close_flag)
 	if (fd < 0)
 	{
 		perror(cmd[1]);
-		exit(1);
+		return (-1);
 	}
 	if (close_flag != 0)
 		dup2(fd, STDOUT_FILENO);

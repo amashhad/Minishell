@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 19:24:37 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:22:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ char	*ft_expander(t_read *line, char *last_exit_code, char *argv)
 	go_to_fill_expander(line, last_exit_code, argv);
 	free(line->pand->last_exit_code);
 	line->pand->last_exit_code = NULL;
-	//line->exit_status = 0;
 	return (line->pand->result);
 }

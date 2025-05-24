@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:06 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 17:46:07 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:24:19 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,84 +59,84 @@ void	ft_free_expander(t_expand *pand)
 	}
 }
 
-void	go_to_check_error_arrow(t_read *line)
-{
-	size_t	i;
+// void	go_to_check_error_arrow(t_read *line)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (line->line[i] != '\0')
-	{
-		if (line->line[i] == '>')
-		{
-			if (line->line[i + 1] == '<')
-			{
-				ft_putendl_fd("Syntax Error near token", 2);
-				line->exit_status = 2;
-				return ;
-			}
-		}
-		i++;
-	}
-	i = 0;
-	while (line->line[i] != '\0')
-	{
-		if (line->line[i] == '<')
-		{
-			if (line->line[i + 1] == '>')
-			{
-				ft_putendl_fd("Syntax Error near token", 2);
-				line->exit_status = 2;
-				return ;
-			}
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (line->line[i] != '\0')
+// 	{
+// 		if (line->line[i] == '>')
+// 		{
+// 			if (line->line[i + 1] == '<')
+// 			{
+// 				ft_putendl_fd("Syntax Error near token", 2);
+// 				line->exit_status = 2;
+// 				return ;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (line->line[i] != '\0')
+// 	{
+// 		if (line->line[i] == '<')
+// 		{
+// 			if (line->line[i + 1] == '>')
+// 			{
+// 				ft_putendl_fd("Syntax Error near token", 2);
+// 				line->exit_status = 2;
+// 				return ;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }
 
-void	go_to_check_arrow_two(t_read *line)
-{
-	size_t	i;
-	size_t	j;
+// void	go_to_check_arrow_two(t_read *line)
+// {
+// 	size_t	i;
+// 	size_t	j;
 
-	i = 0;
-	j = 0;
-	while (line->line[i] != '\0')
-	{
-		if (line->line[i] == '<')
-			j++;
-		if (line->line[i] == ' ')
-			j = 0;
-		if (j > 2)
-		{
-			ft_putendl_fd("Syntax Error near token", 2);
-			line->exit_status = 2;
-			return ;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (line->line[i] != '\0')
+// 	{
+// 		if (line->line[i] == '<')
+// 			j++;
+// 		if (line->line[i] == ' ')
+// 			j = 0;
+// 		if (j > 2)
+// 		{
+// 			ft_putendl_fd("Syntax Error near token", 2);
+// 			line->exit_status = 2;
+// 			return ;
+// 		}
+// 		i++;
+// 	}
+// }
 
-void	go_to_check_arrow(t_read *line)
-{
-	size_t	i;
-	size_t	j;
+// void	go_to_check_arrow(t_read *line)
+// {
+// 	size_t	i;
+// 	size_t	j;
 
-	i = 0;
-	j = 0;
-	while (line->line[i] != '\0')
-	{
-		if (line->line[i] == '>')
-			j++;
-		if (line->line[i] == ' ')
-			j = 0;
-		if (j > 2)
-		{
-			ft_putendl_fd("Syntax Error near token", 2);
-			line->exit_status = 2;
-			return ;
-		}
-		i++;
-	}
-	go_to_check_arrow_two(line);
-	go_to_check_error_arrow(line);
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (line->line[i] != '\0')
+// 	{
+// 		if (line->line[i] == '>')
+// 			j++;
+// 		if (line->line[i] == ' ')
+// 			j = 0;
+// 		if (j > 2)
+// 		{
+// 			ft_putendl_fd("Syntax Error near token", 2);
+// 			line->exit_status = 2;
+// 			return ;
+// 		}
+// 		i++;
+// 	}
+// 	go_to_check_arrow_two(line);
+// 	go_to_check_error_arrow(line);
+// }

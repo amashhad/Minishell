@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 15:55:24 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:26:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_expander
 	size_t	count;
 	size_t	k;
 	size_t	i_malloc;
-	int			pand_error;
+	int		pand_error;
 	char	*last_exit_code;
 	char	*string;
 	char	*argv;
@@ -100,7 +100,6 @@ void	initalization(t_read *line, char **envp);
 
 //execution
 //execution->int
-int		execute(t_read *line, char **cmd, char **env, int track);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);
 int		open_stdin(char *cmd);
@@ -119,6 +118,7 @@ void	free_piper(t_read *line);
 void	wait_children(t_read *line, int *status, int pingpong[2][2], pid_t pid);
 void	cmd_loop(t_read *line, int track, int pingpong[2][2]);
 void	last_cmd(t_read *line, int read[2], int write[2], int cmd);
+void	execute(t_read *line, char **cmd, char **env, int track);
 
 //expander
 //expander->int
@@ -139,6 +139,9 @@ void	initialize_pand(t_expand *pand);
 void	go_to_check_arrow(t_read *line);
 void	fill_arrow(t_expand *pand);
 void	count_arrow(t_expand *pand);
+void	go_to_check_error_arrow(t_read *line);
+void	go_to_check_arrow_two(t_read *line);
+void	go_to_check_arrow(t_read *line);
 
 //tokenizer
 //tokenizer->int

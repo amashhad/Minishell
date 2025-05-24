@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 19:48:59 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/24 20:19:18 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	builtin_part1(t_read *line, char **cmd)
 
 	executed = 0;
 	str = NULL;
+	if (!cmd[0])
+		return (0);
 	if (cmd[0])
 		str = get_key(cmd[0], 0);
 	if (cmd == NULL)
