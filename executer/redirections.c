@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:40:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 22:21:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/25 23:03:25 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ char	**redirect_stdout(char **cmd)
 
 	i = 0;
 	close_flag = 0;
-	fetch = NULL;
-	if (!ft_fetcharr(cmd, ">") && !ft_fetcharr(cmd, ">>"))
-		return (cmd);
 	fetch = ft_cpyarr(cmd);
+	if (!fetch)
+		return (NULL);
 	while (ft_fetcharr(fetch, ">") || ft_fetcharr(fetch, ">>"))
 	{
 		if ((ft_strcmp(">", fetch[i]) == 0) || (ft_strcmp(">>", fetch[i]) == 0))
@@ -44,6 +43,8 @@ char	**redirect_stdout(char **cmd)
 				return (redirect_clear(fetch));
 			fetch = del_arr(fetch, fetch[i]);
 			fetch = del_arr(fetch, fetch[i]);
+			if (!fetch)
+				return (NULL);
 			continue ;
 		}
 		i++;
@@ -119,8 +120,9 @@ char	**redirect_stdin(t_read *line, char **cmd, int track)
 	fd = 0;
 	fetch = NULL;
 	if (!ft_fetcharr(cmd, "<"))
-		return (cmd);
+	return (cmd);
 	fetch = ft_cpyarr(cmd);
+	ft_farray (cmd);
 	if (!fetch)
 		return (NULL);
 	counter = chk_stdin(fetch, line);
@@ -134,6 +136,5 @@ char	**redirect_stdin(t_read *line, char **cmd, int track)
 	close(fd);
 	fd = -1;
 	close_heredocs(line->heredocs, line->piper_len);
-	ft_farray (cmd);
 	return (fetch);
 }

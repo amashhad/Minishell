@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 23:06:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:34:17 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/25 21:11:57 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_piper(t_read *line)
 	len = 0;
 	if (line->piper == NULL)
 		return ;
-	while (len <= line->piper_len)
+	while (len < line->piper_len)
 	{
 		ft_farray(line->piper[len]);
 		len++;

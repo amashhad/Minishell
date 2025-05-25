@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 22:19:59 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/25 22:49:54 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ void	execute(t_read *line, char **cmd, char **env, int track)
 
 	redirect = redirect_stdout(cmd);
 	if (!redirect)
-		ft_exit_with_error(line, 0, 0, 1);
+		ft_exit_with_error(line, NULL, NULL, 1);
 	redirect = redirect_stdin(line, redirect, track);
 	if (!redirect)
-		ft_exit_with_error(line, 0, "piper", 1);
+		ft_exit_with_error(line, NULL, NULL, 1);
 	if (builtin_part1(line, redirect) != 10)
 		ft_exit_with_error(line, NULL, 0, 2);
 	if (!ft_extra_chk(line, redirect[0]))

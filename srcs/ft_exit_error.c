@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:56:15 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 21:38:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/25 22:58:50 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_msg(t_read *line, char *str, int i)
 	if (line->exit_status == 0)
 		line->exit_status = i;
 	j = i;
+	close_heredocs(line->heredocs, line->piper_len);
 	free (line);
 	exit(j);
 }
