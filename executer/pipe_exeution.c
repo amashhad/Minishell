@@ -69,10 +69,10 @@ int	key_loop(t_read *line)
 int	is_there_redirection(t_read *line)
 {
 	int		i;
-	char	*srch;
+	//char	*srch;
 
 	i = 0;
-	srch = NULL;
+	//srch = NULL;
 	while (line->piper[0][i] != NULL)
 	{
 		if (check_redirections(line->piper[0][i]))

@@ -106,9 +106,13 @@ void	execute(t_read *line, char **cmd, char **env, int track)
 	else
 		exve = ft_find_executable(line, env, redirect[0]);
 	if (!exve)
+	{
+		ft_farray(redirect);
 		ft_exit_with_error(line, ft_joinstrjoin("Minisehll: command ",
-				redirect[0], " doesn't exist"), "NULL", 127);
+				"is", " doesn't exist"), "NULL", 127);
+	}
 	exit_stat = execve(exve, redirect, env);
 	free(exve);
+	ft_farray(redirect);
 	ft_exit_with_error(line, "NULL", "NULL", exit_stat);
 }

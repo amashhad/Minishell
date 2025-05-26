@@ -119,10 +119,10 @@ char	**redirect_stdin(t_read *line, char **cmd, int track)
 	counter = 0;
 	fd = 0;
 	fetch = NULL;
-	if (!ft_fetcharr(cmd, "<"))
-	return (cmd);
 	fetch = ft_cpyarr(cmd);
 	ft_farray (cmd);
+	if (!ft_fetcharr(fetch, "<"))
+	return (fetch);
 	if (!fetch)
 		return (NULL);
 	counter = chk_stdin(fetch, line);
