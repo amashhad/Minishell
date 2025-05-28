@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_side_quoted.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 18:25:29 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:04:25 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	count_in_side_quoted(char *str, char c, int *i, int *j)
 {
-	while ((str[*i] != c || (str[*i] == c && str[*i - 1] == '\\'))
-		&& str[*i] != '\0')
+	while (str[*i] != c && str[*i] != '\0')
 	{
 		(*i)++;
 		(*j)++;
@@ -30,8 +29,7 @@ void	fill_in_side_quoted(char *str, char *s, int *i, int *j)
 
 	c = str[(*i)];
 	(*i)++;
-	while ((str[(*i)] != c || (str[(*i)] == c && str[(*i) - 1] == '\\'))
-		&& str[(*i)] != '\0')
+	while (str[(*i)] != c && str[(*i)] != '\0')
 	{
 		s[(*j)] = str[(*i)];
 		(*i)++;

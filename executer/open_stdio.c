@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:03:29 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 20:10:46 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:23:59 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	open_stdin(char *cmd)
 }
 
 //opens and closes fds, only dups when flag is != 0
-int	open_stdout(char **cmd, int close_flag)
+int	open_stdout(char **cmd, int *close_flag)
 {
 	int	fd;
 
@@ -41,8 +41,11 @@ int	open_stdout(char **cmd, int close_flag)
 		perror(cmd[1]);
 		return (-1);
 	}
-	if (close_flag != 0)
+	if (*(close_flag) != 0)
+	{
 		dup2(fd, STDOUT_FILENO);
+		*(close_flag) = 0;
+	}
 	close(fd);
 	return (0);
 }

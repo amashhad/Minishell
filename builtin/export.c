@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 15:23:14 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:45:25 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-static void	add_rplc(t_read *line, char *srch, char *rplc)
+void	add_rplc(t_read *line, char *srch, char *rplc)
 {
 	line->expo = rplc_export(srch, line->expo, rplc);
 	if (ft_fetcharr(line->enviro, srch))
@@ -88,12 +88,6 @@ void	ft_handle_export(t_read *line, char **cmd)
 	int	i;
 
 	i = 1;
-	if (line->i_error == 1)
-	{
-		ft_putendl_fd("minishell: export: _err_ not a valid identifier", 2);
-		line->exit_status = 1;
-		return ;
-	}
 	if (!cmd[1])
 		ft_addprintarr("export ", line->expo);
 	while (cmd[i])

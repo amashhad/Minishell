@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_engine_start.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 14:41:44 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:42:53 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,29 @@ void	ft_checkredirect(t_read *line)
 	}
 }
 
+static int	terminal_helper(t_read *line)
+{
+	if (line->exit_status != 0)
+		return (1);
+	if (!line->tokens || *line->tokens == NULL)
+	{
+		free (line->line);
+		line->pand->result = NULL;
+		line->line = NULL;
+		return (1);
+	}
+	return (0);
+}
+
 void	terminal_shell(t_read *line)
 {
 	int	exit_code;
 
 	exit_code = line->exit_status;
-	if (line->exit_status != 2)
+	if (line->exit_status != 2 || line->line[0] == '\0')
 	{
-		if (!line->tokens || *line->tokens == NULL)
-		{
-			free (line->line);
-			line->pand->result = NULL;
-			line->line = NULL;
+		if (terminal_helper(line))
 			return ;
-		}
 		ft_checktokens(line);
 		if (exit_code != line->exit_status)
 			return ;

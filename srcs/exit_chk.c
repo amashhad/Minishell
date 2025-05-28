@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:59:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 15:04:33 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:59:16 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_numeric(int i, t_read *line)
 		ft_putendl_fd(" : numeric argument required", 2);
 		return (1);
 	}
-	line->exit_status = ft_atol(line->tokens[i]);
+	line->exit_status = (ft_atol(line->tokens[i]) % 256);
 	i++;
 	if (line->tokens[i])
 	{
@@ -47,7 +47,6 @@ int	ft_exit_shell(t_read *line)
 	i = 0;
 	if (!line->line)
 	{
-		line->exit_status = 0;
 		ft_putendl_fd("exit", 1);
 		free(line->line);
 		return (1);
@@ -63,7 +62,6 @@ int	ft_exit_shell(t_read *line)
 		if (i < 1)
 			return (0);
 		ft_putendl_fd("exit", 1);
-		free(line->line);
 		return (i);
 	}
 	return (0);

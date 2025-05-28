@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 22:22:20 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:25:27 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	go_to_count_malloc(t_read *line, char *last_exit_code, char *argv)
 	line->pand->argv = argv;
 	line->pand->input = line->line;
 	line->pand->envment = ft_cpyarr(line->enviro);
+	line->pand->pand_error = 0;
 	if (!line->pand->envment)
 	{
 		free(last_exit_code);

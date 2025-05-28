@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expander_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:31:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 16:21:30 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:52:18 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	single_quoted(t_expand *pand)
 {
 	if (pand->input[pand->i] == '\'')
 	{
-		
+		pand->j = pand->i;
 		pand->i++;
 		pand->count++;
-		pand->j = pand->i;
+		pand->k++;
 		while (pand->input[pand->i] != '\''
 			&& pand->input[pand->i] != '\0')
 		{
@@ -48,6 +48,7 @@ void	single_quoted(t_expand *pand)
 			pand->count--;
 			pand->i--;
 		}
+		pand->k++;
 		pand->quoted = get_string_expander(pand);
 		pand->string = NULL;
 	}
@@ -62,7 +63,7 @@ char	*get_string_expander(t_expand *pand)
 		return (NULL);
 	}
 	pand->k = 0;
-	while (pand->j < pand->i)
+	while (pand->j <= pand->i)
 	{
 		pand->string[pand->k] = pand->input[pand->j];
 		pand->k++;

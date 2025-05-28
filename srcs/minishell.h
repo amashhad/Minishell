@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/25 22:51:49 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:23:27 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,13 @@ void	initalization(t_read *line, char **envp);
 int		prepare_piper(t_read *line);
 int		pipe_execution(t_read *line);
 int		open_stdin(char *cmd);
-int		open_stdout(char **cmd, int close_flag);
+int		open_stdout(char **cmd, int *close_flag);
 //int		execution(t_read *line);
 //execution->char
 char	**redirect_stdout(char **cmd);
 char	**redirect_stdin(t_read *line, char **cmd, int track);
+char	**ft_get_paths(t_read *line, char **env);
+char	*ft_find_executable(t_read *line, char **env, char *cmd);
 //execution->void
 void	ft_errmsg(t_read *line, int pingpong[2][2], char *msg, int err);
 void	close_fds(int fds[2][2], int piper_len);
@@ -184,7 +186,8 @@ char	**rplc_env(char *fnd, char **old_arr, char *rplc);
 char	**rplc_export(char *fnd, char **old_arr, char *rplc);
 char	*get_key(char *str, int c);
 char	*check_name_of_key(char **arr, char *fetch);
-char	*get_serch(char *str, int i, int c);
+char	*get_serch(char *str, int c);
+char	*check_name(const char *big, const char *little, size_t len);
 
 //builtin->void
 void	ft_handle_cd(t_read *line, char **cmd);
@@ -196,6 +199,7 @@ void	*copy_without_quoted(char *str, int size, char **arr);
 void	*add_quoted_for_value(char **arr, int size);
 void	count_in_side_quoted(char *str, char c, int *i, int *j);
 void	fill_in_side_quoted(char *str, char *s, int *i, int *j);
+void	add_rplc(t_read *line, char *srch, char *rplc);
 
 //signals(void)
 void	handle_sigint(int sig);

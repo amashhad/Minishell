@@ -6,16 +6,18 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 20:17:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:46:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
 
-char	*get_serch(char *str, int i, int c)
+char	*get_serch(char *str, int c)
 {
 	char	*serch;
+	int		i;
 
+	i = 0;
 	if (c == 0)
 	{
 		serch = ft_strdup(str);

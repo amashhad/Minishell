@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 18:42:56 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:42:28 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int	main(int argc, char **argv, char **envp)
 	initalization(line, envp);
 	ft_get_prompt(line);
 	go_to_work(line, argv);
-	ft_exit_with_error(line, NULL, "NULL", 0);
+	ft_exit_with_error(line, NULL, "NULL", line->exit_status);
 	return (line->exit_status);
 }

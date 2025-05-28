@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:40:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/25 23:03:25 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:31:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ char	**redirect_clear(char **func)
 //opens fds and dups the last one to STDOUT
 char	**redirect_stdout(char **cmd)
 {
-	int		i;
-	int		close_flag;
-	char	**fetch;
+	int				i;
+	static int		close_flag;
+	char			**fetch;
 
 	i = 0;
-	close_flag = 0;
 	fetch = ft_cpyarr(cmd);
 	if (!fetch)
 		return (NULL);
@@ -39,7 +38,7 @@ char	**redirect_stdout(char **cmd)
 		{
 			if (!ft_arr_srch(">", fetch + i) || !ft_arr_srch(">>", fetch + i))
 				close_flag = 1;
-			if (open_stdout(fetch + i, close_flag) == -1)
+			if (open_stdout(fetch + i, &close_flag) == -1)
 				return (redirect_clear(fetch));
 			fetch = del_arr(fetch, fetch[i]);
 			fetch = del_arr(fetch, fetch[i]);
@@ -122,7 +121,7 @@ char	**redirect_stdin(t_read *line, char **cmd, int track)
 	fetch = ft_cpyarr(cmd);
 	ft_farray (cmd);
 	if (!ft_fetcharr(fetch, "<"))
-	return (fetch);
+		return (fetch);
 	if (!fetch)
 		return (NULL);
 	counter = chk_stdin(fetch, line);

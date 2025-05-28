@@ -3,31 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   env_and_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:03:03 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 18:27:09 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:32:40 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
+
+static int	check_name_of_key_number(char **arr, char *fetch)
+{
+	int	i;
+
+	i = 0;
+	if (!fetch)
+		return (0);
+	if (!arr)
+		return (0);
+	while (arr[i])
+	{
+		if (check_name(arr[i], fetch, ft_strlen(fetch)))
+			return (i);
+		i++;
+	}
+	return (0);
+}
 
 char	**rplc_env(char *fnd, char **old_arr, char *rplc)
 {
 	char	**new_arr;
 	int		i;
 
-	i = -1;
+	i = 0;
 	if (!old_arr || *old_arr == NULL)
 		return (NULL);
 	if (!fnd || !rplc)
 		return (old_arr);
-	while (old_arr[++i] != NULL)
-	{
-		if (ft_strnstr(old_arr[i], fnd, ft_strlen(fnd)) != NULL)
-			break ;
-	}
-	if (old_arr[i] == NULL)
+	i = check_name_of_key_number(old_arr, fnd);
+	if (!i)
 		return (old_arr);
 	free(old_arr[i]);
 	copy_without_quoted(rplc, i, old_arr);
@@ -43,17 +57,13 @@ char	**rplc_export(char *fnd, char **old_arr, char *rplc)
 	char	**new_arr;
 	int		i;
 
-	i = -1;
+	i = 0;
 	if (!old_arr || *old_arr == NULL)
 		return (NULL);
 	if (!fnd || !rplc)
 		return (old_arr);
-	while (old_arr[++i] != NULL)
-	{
-		if (ft_strnstr(old_arr[i], fnd, ft_strlen(fnd)) != NULL)
-			break ;
-	}
-	if (old_arr[i] == NULL)
+	i = check_name_of_key_number(old_arr, fnd);
+	if (!i)
 		return (old_arr);
 	free(old_arr[i]);
 	copy_without_quoted(rplc, i, old_arr);
@@ -65,7 +75,7 @@ char	**rplc_export(char *fnd, char **old_arr, char *rplc)
 	return (new_arr);
 }
 
-static	char	*check_name(const char *big, const char *little, size_t len)
+char	*check_name(const char *big, const char *little, size_t len)
 {
 	size_t	c;
 
@@ -83,7 +93,7 @@ static	char	*check_name(const char *big, const char *little, size_t len)
 	{
 		if (big[c] == little[c])
 			c++;
-		else if (big[c] != little[c] && big[c] != '=')
+		else if (big[c] != little[c])
 			return (NULL);
 	}
 	if (big[c] == '=' || big[c] == '\0')

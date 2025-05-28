@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 13:36:16 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:03:13 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_length(char *str)
 	j = 0;
 	while (!comper(str[i]))
 	{
-		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
+		if ((str[i] == '"' || str[i] == '\''))
 		{
 			c = str[i];
 			i++;
@@ -46,7 +46,7 @@ static char	*fill_string(char *str, char *s)
 	j = 0;
 	while (!comper(str[i]))
 	{
-		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
+		if ((str[i] == '"' || str[i] == '\''))
 		{
 			fill_in_side_quoted(str, s, &i, &j);
 		}

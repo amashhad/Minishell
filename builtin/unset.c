@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:44:24 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 08:33:13 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:25:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,30 @@ void	ft_handle_unset(t_read *line, char **cmd)
 			ft_exit_with_error(line, "Error in export command", "enviro", 1);
 		i++;
 	}
+}
+
+int	is_odd(char *str)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '"')
+		{
+			j++;
+		}
+		if (str[i] == '\'')
+		{
+			k++;
+		}
+		i++;
+	}
+	if ((j % 2) != 0 || (k % 2) != 0)
+		return (1);
+	return (0);
 }
