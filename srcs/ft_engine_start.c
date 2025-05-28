@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_engine_start.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 19:16:19 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:41:44 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,12 @@ void	terminal_shell(t_read *line)
 	if (line->exit_status != 2)
 	{
 		if (!line->tokens || *line->tokens == NULL)
+		{
+			free (line->line);
+			line->pand->result = NULL;
+			line->line = NULL;
 			return ;
+		}
 		ft_checktokens(line);
 		if (exit_code != line->exit_status)
 			return ;

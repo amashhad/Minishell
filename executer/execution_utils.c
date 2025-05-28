@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/25 22:49:54 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:45:53 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void	execute(t_read *line, char **cmd, char **env, int track)
 	if (!redirect)
 		ft_exit_with_error(line, NULL, NULL, 1);
 	if (builtin_part1(line, redirect) != 10)
+	{
+		ft_farray(redirect);
 		ft_exit_with_error(line, NULL, 0, 2);
+	}
 	if (!ft_extra_chk(line, redirect[0]))
 		exve = ft_strdup(redirect[0]);
 	else

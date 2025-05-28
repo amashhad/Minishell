@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:37:16 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 19:20:56 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:42:09 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	string_tokenizer(t_tok *token)
 		{
 			token->c = token->input[token->i];
 			token->i++;
-			while ((token->input[token->i] != token->c
-					|| (token->input[token->i] == token->c))
+			while ((token->input[token->i] != token->c)
 				&& token->input[token->i] != '\0')
 				token->i++;
 		}

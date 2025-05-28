@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exeution.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 22:20:23 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:42:24 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ int	key_loop(t_read *line)
 int	is_there_redirection(t_read *line)
 {
 	int		i;
-	//char	*srch;
 
 	i = 0;
-	//srch = NULL;
 	while (line->piper[0][i] != NULL)
 	{
 		if (check_redirections(line->piper[0][i]))

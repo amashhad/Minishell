@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 23:44:12 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/25 21:59:00 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:19:59 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**edit_arr(char **arr, char **new_arr, char *str)
 	limit = 1;
 	while (arr[i])
 	{
-		if (limit > 0 && ft_strstr(arr[i], str))
+		if (limit > 0 && !ft_strcmp(arr[i], str))
 			limit--;
 		else
 		{

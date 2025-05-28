@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/22 18:26:31 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:55:33 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_quoted(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
+		if ((str[i] == '"' || str[i] == '\''))
 		{
 			c = str[i];
 			while (str[i] != '\0')

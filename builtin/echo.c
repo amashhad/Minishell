@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 16:58:56 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:54:37 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	void	print_arg(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
+		if ((str[i] == '"' || str[i] == '\''))
 		{
 			c = str[i];
 			i++;
