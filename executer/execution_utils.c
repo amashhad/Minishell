@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 20:38:30 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:53:08 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,18 @@ static char	**execute_utilns(t_read *line,
 	return (redirect);
 }
 
-void	execute(t_read *line, char **cmd, char **env, int track)
+static char	*fill_exve(t_read *line, char **env, char **redirect)
 {
-	char			*exve;
-	char			**redirect;
-	static int		exit_stat;
+	char	*exve;
 
-	redirect = NULL;
-	redirect = execute_utilns(line, redirect, cmd, track);
-	if (!redirect)
-		ft_exit_with_error(line, "NULL", "NULL", exit_stat);
+	exve = NULL;
 	if (!ft_extra_chk(line, redirect[0]))
 		exve = get_key(redirect[0], 0);
 	else
 	{
 		exve = get_key(redirect[0], 0);
-		exve = ft_find_executable(line, env, exve);
+		if (exve)
+			exve = ft_find_executable(line, env, exve);
 	}
 	if (!exve)
 	{
@@ -68,6 +64,22 @@ void	execute(t_read *line, char **cmd, char **env, int track)
 		ft_exit_with_error(line, ft_strjoin("Minisehll: command ",
 				" doesn't exist"), "NULL", 127);
 	}
+	return (exve);
+}
+
+void	execute(t_read *line, char **cmd, char **env, int track)
+{
+	char			*exve;
+	char			**redirect;
+	static int		exit_stat;
+
+	redirect = NULL;
+	exve = NULL;
+	redirect = execute_utilns(line, redirect, cmd, track);
+	if (!redirect)
+		ft_exit_with_error(line, "NULL", "NULL", exit_stat);
+	exve = fill_exve(line, env, redirect);
+	//close(line->heredocs[0]);
 	exit_stat = execve(exve, redirect, env);
 	free(exve);
 	ft_farray(redirect);

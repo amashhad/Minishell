@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chdir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:14:34 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 21:40:11 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 19:44:54 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static	void	ft_path(t_read *line, char **cmd)
 	if (dir < 0)
 	{
 		ft_printf("Minishell: cd: %s: No such file or directory\n", cmd[1]);
+		line->exit_status = 1;
 		return ;
 	}
 	old_pwd = ft_strjoin("OLDPWD=", line->cwd);

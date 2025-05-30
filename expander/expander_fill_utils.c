@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_fill_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:33:23 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 15:49:37 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 12:25:43 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ size_t	count_malloc(t_expand *pand)
 			count_arrow(pand);
 		if (pand->input[pand->i] == '$')
 			dollar_malloc_expander(pand);
+		if (pand->input[pand->i] == '"')
+			double_quoted(pand);
 		single_quoted(pand);
 		if (pand->quoted)
 		{

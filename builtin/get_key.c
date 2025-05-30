@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 19:49:20 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:15:38 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ char	*get_key(char *str, int c)
 		return (NULL);
 	j = key_loop(serch);
 	if (j == 0)
+	{
+		free (serch);
 		return (NULL);
+	}
 	ret = malloc(sizeof(char ) * (j + 1));
 	if (!ret)
 	{

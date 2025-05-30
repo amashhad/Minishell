@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 15:54:37 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:28:50 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 static	void	print_arg(char *str)
 {
-	char	c;
+	//char	c;
 	int		i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '"' || str[i] == '\''))
-		{
-			c = str[i];
-			i++;
-			while (str[i] != c)
-			{
-				write(1, &str[i], 1);
-				i++;
-			}
-		}
-		else
+		// if ((str[i] == '"' || str[i] == '\''))
+		// {
+		// 	c = str[i];
+		// 	i++;
+		// 	while (str[i] != c)
+		// 	{
+		// 		write(1, &str[i], 1);
+		// 		i++;
+		// 	}
+		// }
+		//else
 			write(1, &str[i], 1);
 		i++;
 	}
@@ -54,17 +54,17 @@ static	void	go_to_print(char **cmd, int j)
 	int	i;
 
 	i = j;
-	while (cmd[i])
-	{
-		if (check_quoted(cmd[i]))
-			i++;
-		else
-		{
-			ft_putstr_fd("syntax error", 2);
-			return ;
-		}
-	}
-	i = j;
+	// while (cmd[i])
+	// {
+	// 	if (check_quoted(cmd[i]))
+	// 		i++;
+	// 	else
+	// 	{
+	// 		ft_putstr_fd("syntax error", 2);
+	// 		return ;
+	// 	}
+	// }
+	// i = j;
 	while (cmd[i])
 	{
 		if (!check_redirections(cmd[i]))

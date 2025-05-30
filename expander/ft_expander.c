@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:00:51 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 20:25:27 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 13:57:01 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	fill_expander(t_expand *pand)
 			fill_arrow(pand);
 		if (pand->input[pand->i] == '$')
 			dollar_fill_expander(pand);
+		else if (pand->input[pand->i] == '"')
+			fill_double_quoted(pand);
 		else if (pand->input[pand->i] == '\'')
 		{
 			single_quoted(pand);

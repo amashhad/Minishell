@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 22:45:25 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:43:59 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ void	ft_handle_export(t_read *line, char **cmd)
 	{
 		if (check_redirections(cmd[i]))
 			break ;
-		if (!ft_strncmp(cmd[i], "=", 1)
-			|| ft_isdigit(cmd[i][0])
-					|| !ft_strcmp(cmd[i], "="))
+		if (is_valid_export_key(cmd[i]))
 			ft_export_err(line, cmd, i);
 		else
 			ft_export_success(line, cmd, i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 22:23:27 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:30:43 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,8 @@ void	greater_tokenizer(t_tok *token);
 void	pipe_tokenizer(t_tok *token);
 void	dollar_tokenizer(t_tok *token);
 void	string_tokenizer(t_tok *token);
-
+void	double_quoted(t_expand *pand);
+void	fill_double_quoted(t_expand *pand);
 //heredoc
 int		check_heredocs(t_read *line, int heredoc, char ***fetch, int track);
 int		readheredoc(int fd[2], char *fnd, int count);
@@ -178,6 +179,7 @@ int		check_quoted_1(char *serch, int i);
 int		check_quoted_2(char *serch, int i);
 int		check_redirections(char *str);
 int		chk_compare(char c);
+int		is_valid_export_key(const char *str);
 //builtin->char
 char	*ft_getenv(char **enviro, char *env);
 char	**fill_env(char *str, char **old_arr);

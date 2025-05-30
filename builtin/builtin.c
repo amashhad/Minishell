@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/24 20:19:18 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:18:46 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	builtin_part3(t_read *line, char **cmd)
 		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(str, "echo") == 0)
+	else if (ft_strcmp(cmd[0], "echo") == 0)
 	{
 		ft_handle_echo(cmd);
 		free (str);
@@ -92,6 +92,8 @@ int	builtin_part1(t_read *line, char **cmd)
 		str = get_key(cmd[0], 0);
 	if (cmd == NULL)
 		return (1);
+	if (str == NULL)
+		return (0);
 	else if (ft_strcmp(str, "env") == 0)
 	{
 		ft_handle_env(line, cmd);

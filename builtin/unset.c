@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:44:24 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 19:25:38 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:47:47 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,22 @@ int	is_odd(char *str)
 	}
 	if ((j % 2) != 0 || (k % 2) != 0)
 		return (1);
+	return (0);
+}
+
+int	is_valid_export_key(const char *str)
+{
+	int	i = 0;
+
+	if (!str || str[0] == '=')
+		return (1);
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (1);
+	while (str[i] && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (1);
+		i++;
+	}
 	return (0);
 }
