@@ -37,11 +37,14 @@ int	check_quoted(char *str)
 	return (1);
 }
 
-int	is_n(char *str)
+int	is_n(char *cmd)
 {
+	char	*str;
 	int	i;
 
 	i = 0;
+	str = NULL;
+	str = token_without_quoted(cmd);
 	if (!str)
 		return (0);
 	if (str[i] == '-')
@@ -52,9 +55,14 @@ int	is_n(char *str)
 			while (str[i] == 'n')
 				i++;
 			if (str[i] == '\0')
+			{
+				free (str);
 				return (1);
+			}
+			free(str);
 			return (0);
 		}
 	}
+	free(str);
 	return (0);
 }

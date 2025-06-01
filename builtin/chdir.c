@@ -71,8 +71,11 @@ static	void	ft_path(t_read *line, char **cmd)
 {
 	int		dir;
 	char	*old_pwd;
+	char	*str;
 
-	dir = chdir(cmd[1]);
+	str = token_without_quoted(cmd[1]);
+	dir = chdir(str);
+	free(str);
 	if (dir < 0)
 	{
 		ft_printf("Minishell: cd: %s: No such file or directory\n", cmd[1]);
@@ -94,10 +97,26 @@ static	void	ft_path(t_read *line, char **cmd)
 
 void	ft_handle_cd(t_read *line, char **cmd)
 {
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = NULL;
 	if (ft_fetcharr(cmd, "|"))
 		return ;
-	if (cmd[1] == NULL || ft_strcmp("~", cmd[1]) == 0)
+	while (cmd[i])
+		i++;
+	if (i > 2)
+	{
+		ft_putstr_fd("./Minishell: cd: too many arguments\n", 1);
+		return ;
+	}
+	str = token_without_quoted(cmd[1]);
+	if (cmd[1] == NULL || ft_strcmp("~", str) == 0)
+	{
+		free(str);
 		ft_old_cwd(line);
+	}
 	else
 		ft_path(line, cmd);
 }

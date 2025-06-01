@@ -27,7 +27,7 @@ void	add_rplc(t_read *line, char *srch, char *rplc)
 	}
 }
 
-static	int	fill_or_rplc(t_read *line, char **cmd, int i, char *srch)
+static	int	fill_or_rplc(t_read *line, char *cmd, char *srch)
 {
 	if (!srch || !(ft_strcmp(srch, "Malloc Error\n")))
 	{
@@ -35,11 +35,11 @@ static	int	fill_or_rplc(t_read *line, char **cmd, int i, char *srch)
 		return (1);
 	}
 	if (check_name_of_key(line->expo, srch))
-		add_rplc(line, srch, cmd[i]);
+		add_rplc(line, srch, cmd);
 	else
 	{
-		line->enviro = fill_env(cmd[i], line->enviro);
-		line->expo = fill_export(cmd[i], line->expo);
+		line->enviro = fill_env(cmd, line->enviro);
+		line->expo = fill_export(cmd, line->expo);
 		if (!line->expo || !line->enviro)
 		{
 			free(srch);
@@ -50,20 +50,20 @@ static	int	fill_or_rplc(t_read *line, char **cmd, int i, char *srch)
 	return (0);
 }
 
-static void	ft_export_success(t_read *line, char **cmd, int i)
+static void	ft_export_success(t_read *line, char *cmd)
 {
 	char	*srch;
 
 	srch = NULL;
-	if (ft_strchr(cmd[i], '='))
+	if (ft_strchr(cmd, '='))
 	{
-		srch = get_key(cmd[i], '=');
-		if (fill_or_rplc(line, cmd, i, srch))
+		srch = get_key(cmd, '=');
+		if (fill_or_rplc(line, cmd, srch))
 			return ;
 	}
 	else
 	{
-		srch = get_key(cmd[i], 0);
+		srch = get_key(cmd, 0);
 		if (!srch || !(ft_strcmp(srch, "Malloc Error\n")))
 		{
 			printf("The Key Not Valid\n");
@@ -85,19 +85,23 @@ static void	ft_export_err(t_read *line, char **cmd, int i)
 
 void	ft_handle_export(t_read *line, char **cmd)
 {
-	int	i;
+	char	*str;
+	int		i;
 
 	i = 1;
+	str = NULL;
 	if (!cmd[1])
 		ft_addprintarr("export ", line->expo);
 	while (cmd[i])
 	{
 		if (check_redirections(cmd[i]))
 			break ;
-		if (is_valid_export_key(cmd[i]))
+		str = token_without_quoted(cmd[i]);
+		if (is_valid_export_key(str))
 			ft_export_err(line, cmd, i);
 		else
-			ft_export_success(line, cmd, i);
+			ft_export_success(line, str);
+		free(str);
 		i++;
 	}
 }

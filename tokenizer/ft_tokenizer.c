@@ -37,12 +37,10 @@ void	fill_token(t_read *line)
 		line->token->j = 0;
 		while (line->token->count < line->token->i)
 		{
-			if(line->token->input[line->token->count] != line->token->c){
 			line->token->tokens[line->token->k][line->token->j]
 				= line->token->input[line->token->count];
-			line->token->j++;
-			}
 			line->token->count++;
+			line->token->j++;
 		}
 		line->token->tokens[line->token->k][line->token->j] = '\0';
 	}
@@ -107,7 +105,7 @@ char	**ft_tokenizer(t_read *line)
 	fill_tokens(line);
 	line->token->tokens[i] = NULL;
 	i = 0;
-	// ft_printarr(line->token->tokens);
+	ft_printarr(line->token->tokens);
 	
 	if (line->token->error_token == 2)
 	{

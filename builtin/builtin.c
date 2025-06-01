@@ -16,7 +16,7 @@ int	builtin_part2(t_read *line, char **cmd)
 {
 	char	*str;
 
-	str = get_key(cmd[0], 0);
+	str = token_without_quoted(cmd[0]);
 	if (ft_strcmp(str, "export") == 0)
 	{
 		ft_handle_export(line, cmd);
@@ -40,7 +40,7 @@ int	builtin_part4(t_read *line, char **cmd)
 {
 	char	*str;
 
-	str = get_key(cmd[0], 0);
+	str = token_without_quoted(cmd[0]);
 	if (ft_strcmp(str, "pwd") == 0)
 	{
 		ft_get_prompt(line);
@@ -59,14 +59,14 @@ int	builtin_part3(t_read *line, char **cmd)
 {
 	char	*str;
 
-	str = get_key(cmd[0], 0);
+	str = token_without_quoted(cmd[0]);
 	if (ft_strcmp(str, "cd") == 0)
 	{
 		ft_handle_cd(line, cmd);
 		free (str);
 		return (line->exit_status);
 	}
-	else if (ft_strcmp(cmd[0], "echo") == 0)
+	else if (ft_strcmp(str, "echo") == 0)
 	{
 		ft_handle_echo(cmd);
 		free (str);
@@ -89,11 +89,15 @@ int	builtin_part1(t_read *line, char **cmd)
 	if (!cmd[0])
 		return (0);
 	if (cmd[0])
-		str = get_key(cmd[0], 0);
+		str = token_without_quoted(cmd[0]);
 	if (cmd == NULL)
 		return (1);
-	if (str == NULL)
+	if (str == NULL || str[0] == '\0')
+	{
+		free(str);
+		line->exit_status = 127;
 		return (0);
+	}
 	else if (ft_strcmp(str, "env") == 0)
 	{
 		ft_handle_env(line, cmd);

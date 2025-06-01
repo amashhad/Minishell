@@ -14,23 +14,23 @@
 
 static	void	print_arg(char *str)
 {
-	//char	c;
+	char	c;
 	int		i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		// if ((str[i] == '"' || str[i] == '\''))
-		// {
-		// 	c = str[i];
-		// 	i++;
-		// 	while (str[i] != c)
-		// 	{
-		// 		write(1, &str[i], 1);
-		// 		i++;
-		// 	}
-		// }
-		//else
+		if ((str[i] == '"' || str[i] == '\''))
+		{
+			c = str[i];
+			i++;
+			while (str[i] != c)
+			{
+				write(1, &str[i], 1);
+				i++;
+			}
+		}
+		else
 			write(1, &str[i], 1);
 		i++;
 	}
@@ -49,38 +49,21 @@ int	check_redirections(char *str)
 	return (0);
 }
 
-static	void	go_to_print(char **cmd, int j)
+static	void	go_to_print(char **cmd, int i)
 {
-	int	i;
-
-	i = j;
-	// while (cmd[i])
-	// {
-	// 	if (check_quoted(cmd[i]))
-	// 		i++;
-	// 	else
-	// 	{
-	// 		ft_putstr_fd("syntax error", 2);
-	// 		return ;
-	// 	}
-	// }
-	// i = j;
 	while (cmd[i])
 	{
-		if (!check_redirections(cmd[i]))
-			print_arg(cmd[i]);
-		else
-			break ;
+		print_arg(cmd[i]);
 		i++;
-		if (cmd[i] && !check_redirections(cmd[i]))
+		if (cmd[i])
 			ft_putchar(' ');
 	}
 }
 
 void	ft_handle_echo(char **cmd)
 {
-	int	i;
-	int	endl;
+	int		i;
+	int		endl;
 
 	i = 1;
 	endl = 0;
@@ -89,6 +72,7 @@ void	ft_handle_echo(char **cmd)
 		ft_putchar('\n');
 		return ;
 	}
+	
 	while (cmd[i] && is_n(cmd[i]) == 1)
 	{
 		i++;

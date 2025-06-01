@@ -101,3 +101,54 @@ void	fill_double_quoted(t_expand *pand)
 		pand->i++;
 	}
 }
+
+char	*token_without_quoted(char *str)
+{
+	char	*s;
+	char	c;
+	int		i;
+	int		k;
+
+	i = 0;
+	k = 0;
+	s = ft_calloc((ft_strlen(str) + 1), sizeof(char));
+	if (!s)
+		return (NULL);
+	if (!str)
+		return (NULL);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			c = str[i];
+			i++;
+			while (str[i] != c && str[i] != '\0')
+			{
+				s[k] = str[i];
+				i++;
+				k++;
+			}
+			i++;
+		}
+		else
+		{
+			s[k] = str[i];
+			i++;
+			k++;
+		}
+	}
+	s[k] = '\0';
+	return (s);
+}
+
+void	loop_remove(t_read *line)
+{
+	int	i;
+
+	i = 0;
+	while (line->token->tokens[i])
+	{
+		line->token->tokens[i] = token_without_quoted(line->token->tokens[i]);
+		i++;
+	}
+}

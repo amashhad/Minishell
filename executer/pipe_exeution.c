@@ -42,25 +42,25 @@ int	piper_ops(t_read *line)
 
 int	key_loop(t_read *line)
 {
-	//char	*srch;
+	char	*srch;
 	int		i;
 
-	//srch = NULL;
+	srch = NULL;
 	i = 0;
 	while (line->piper[0][i] != NULL)
 	{
-		//srch = get_key(line->piper[0][i], 0);
-		// if (!srch)
-		// 	return (1);
-		if (!ft_strcmp(line->piper[0][i], "echo") || !ft_strcmp(line->piper[0][i], "env")
-			|| !ft_strcmp(line->piper[0][i], "pwd") || !ft_strcmp(line->piper[0][i], "export"))
+		srch = token_without_quoted(line->piper[0][i]);
+		if (!srch)
+			return (1);
+		if (!ft_strcmp(srch, "echo") || !ft_strcmp(srch, "env")
+			|| !ft_strcmp(srch, "pwd") || !ft_strcmp(srch, "export"))
 		{
-			//free(srch);
+			free(srch);
 			piper_ops(line);
 			line->exit_status = 0;
 			return (1);
 		}
-		//free(srch);
+		free(srch);
 		i++;
 	}
 	return (0);

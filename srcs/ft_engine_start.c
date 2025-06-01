@@ -19,7 +19,7 @@ int	syntax_exit_status(t_read *line, char *token, int exit_status, int std)
 	{
 		if (ft_strcmp(token, ">>") || ft_strcmp(token, "<<"))
 		{
-			ft_putendl_fd("bash: syntax error"
+			ft_putendl_fd("bash: syntax error "
 				"near unexpected token `newline'", std);
 			return (line->exit_status);
 		}
@@ -83,7 +83,7 @@ static int	terminal_helper(t_read *line)
 {
 	if (line->exit_status != 0)
 		return (1);
-	if (!line->tokens || *line->tokens == NULL)
+	if (!line->tokens || *line->tokens == NULL || line->tokens[0][0] == '\0')
 	{
 		free (line->line);
 		line->pand->result = NULL;

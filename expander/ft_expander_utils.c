@@ -48,6 +48,7 @@ void	single_quoted(t_expand *pand)
 			pand->count--;
 			pand->i--;
 		}
+		pand->count++;
 		pand->k++;
 		pand->quoted = get_string_expander(pand);
 		pand->string = NULL;

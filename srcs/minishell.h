@@ -130,6 +130,7 @@ size_t	count_malloc(t_expand *pand);
 //expander->char *
 char	*ft_expander(t_read *line, char *last_exit_code, char *argv);
 char	*get_string_expander(t_expand *pand);
+char	*token_without_quoted(char *str);
 //expander->void
 void	ft_free_expander(t_expand *pand);
 void	dollar_malloc_expander(t_expand *pand);
