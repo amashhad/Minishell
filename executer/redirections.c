@@ -40,8 +40,8 @@ char	**redirect_stdout(char **cmd)
 				close_flag = 1;
 			if (open_stdout(fetch + i, &close_flag) == -1)
 				return (redirect_clear(fetch));
-			fetch = del_arr(fetch, fetch[i]);
-			fetch = del_arr(fetch, fetch[i]);
+			fetch = del_arr(fetch, i);
+			fetch = del_arr(fetch, i);
 			if (!fetch)
 				return (NULL);
 			continue ;
@@ -70,8 +70,8 @@ void	stdin_arrow(t_read *line, int counter, char ***fetch)
 					redirect_clear(*(fetch));
 					return ;
 				}
-				*fetch = del_arr(*fetch, (*fetch)[i + 1]);
-				*fetch = del_arr(*fetch, "<");
+				*fetch = del_arr(*fetch, i);
+				*fetch = del_arr(*fetch, i);
 				continue ;
 			}
 		}

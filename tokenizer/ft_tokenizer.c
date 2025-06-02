@@ -105,7 +105,7 @@ char	**ft_tokenizer(t_read *line)
 	fill_tokens(line);
 	line->token->tokens[i] = NULL;
 	i = 0;
-	ft_printarr(line->token->tokens);
+	// ft_printarr(line->token->tokens);
 	
 	if (line->token->error_token == 2)
 	{

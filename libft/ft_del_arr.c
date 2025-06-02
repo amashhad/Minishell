@@ -12,20 +12,16 @@
 
 #include "libft.h"
 
-char	**edit_arr(char **arr, char **new_arr, char *str)
+char	**edit_arr(char **arr, char **new_arr, int index)
 {
 	int	i;
 	int	j;
-	int	limit;
 
 	i = 0;
 	j = 0;
-	limit = 1;
 	while (arr[i])
 	{
-		if (limit > 0 && !ft_strcmp(arr[i], str))
-			limit--;
-		else
+		if(i != index)
 		{
 			new_arr[j] = ft_strdup(arr[i]);
 			j++;
@@ -41,22 +37,20 @@ char	**edit_arr(char **arr, char **new_arr, char *str)
 //returns NULL on error, returns the same array in case str doesn't exist
 //or is not found in the provided array
 //must send NULL terminated array
-char	**del_arr(char **arr, char *str)
+char	**del_arr(char **arr, int index)
 {
 	char	**new_arr;
 
 	new_arr = NULL;
 	if (!arr || !*arr)
 		return (NULL);
-	if (!str || !ft_fetcharr(arr, str))
-		return (arr);
 	new_arr = malloc(sizeof(char *) * ft_arrlen(arr));
 	if (!new_arr)
 	{
 		perror("malloc");
 		return (arr);
 	}
-	new_arr = edit_arr(arr, new_arr, str);
+	new_arr = edit_arr(arr, new_arr, index);
 	ft_farray(arr);
 	return (new_arr);
 }

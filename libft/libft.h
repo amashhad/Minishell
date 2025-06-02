@@ -77,7 +77,7 @@ char	*ft_joinstrjoin(char *left, char *middle, char *right);
 char	**ft_addarr(char *str, char **arr);
 char	**ft_subarr(char *str, char **old_arr);
 char	**ft_srchrarr(char *fnd, char **old_arr, char *rplc);
-char	**del_arr(char **arr, char *str);
+char	**del_arr(char **arr, int index);
 char	*get_value_of_export(const char *big, const char *little, size_t len);
 
 //voids

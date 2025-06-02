@@ -90,8 +90,8 @@ int	builtin_part1(t_read *line, char **cmd)
 		return (0);
 	if (cmd[0])
 		str = token_without_quoted(cmd[0]);
-	if (cmd == NULL)
-		return (1);
+	// if (cmd == NULL)
+	// 	return (1);
 	if (str == NULL || str[0] == '\0')
 	{
 		free(str);

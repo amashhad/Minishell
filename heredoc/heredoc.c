@@ -16,12 +16,20 @@
 char	**remove_heredoc(char **fetch)
 {
 	char	**temp;
+	int		i;
 
 	temp = NULL;
+	i = 0;
 	while (ft_fetcharr(fetch, "<<"))
 	{
-		fetch = del_arr(fetch, fetch[ft_arr_srch("<<", fetch)]);
-		fetch = del_arr(fetch, "<<");
+		if ((ft_strcmp("<<", fetch[i]) == 0))
+		{
+			fetch = del_arr(fetch, i);
+			fetch = del_arr(fetch, i);
+			if (!fetch)
+				return (NULL);
+		}
+		i++;
 	}
 	temp = ft_cpyarr(fetch);
 	ft_farray(fetch);
