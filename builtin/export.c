@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/30 11:43:59 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:00:42 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ static void	ft_export_success(t_read *line, char *cmd)
 	srch = NULL;
 	if (ft_strchr(cmd, '='))
 	{
-		srch = get_key(cmd, '=');
+		srch = token_without_quoted(cmd);
 		if (fill_or_rplc(line, cmd, srch))
 			return ;
 	}
 	else
 	{
-		srch = get_key(cmd, 0);
+		srch = token_without_quoted(cmd);
 		if (!srch || !(ft_strcmp(srch, "Malloc Error\n")))
 		{
 			printf("The Key Not Valid\n");

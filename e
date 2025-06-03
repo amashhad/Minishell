@@ -1,0 +1,15 @@
+builtin
+e
+executer
+expander
+heredoc
+libft
+LICENSE
+Makefile
+minishell
+obj
+readline_curses.supp
+README.md
+s
+srcs
+tokenizer

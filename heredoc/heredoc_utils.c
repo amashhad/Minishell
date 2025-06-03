@@ -6,11 +6,20 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 03:26:33 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 09:16:47 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:21:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
+
+int	syntax_error_heredoc(t_read *line, int fill)
+{
+	if (line->heredocs[fill] > 0)
+		close(line->heredocs[fill]);
+	printf("Minishell: syntax error near unexpected token `<<'\n");
+	errno = 2;
+	return (-1);
+}
 
 //checks for null condition of the line read by heredoc
 int	null_condition_heredoc(char **line, char *fnd)
@@ -74,6 +83,8 @@ int	search_heredoc(t_read *line, char **heredoc, int fill)
 	{
 		if (ft_strcmp(heredoc[i], "<<") == 0 && heredoc[i + 1])
 		{
+			if (ft_strcmp(heredoc[i + 1], "<<") == 0)
+				return (syntax_error_heredoc(line, fill));
 			if (pipe(fd) == -1)
 			{
 				perror("Pipe");

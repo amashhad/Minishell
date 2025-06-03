@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/30 18:18:46 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:21:17 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,11 @@ int	builtin_part3(t_read *line, char **cmd)
 int	builtin_part1(t_read *line, char **cmd)
 {
 	char	*str;
-	int		executed;
 
-	executed = 0;
 	str = NULL;
 	if (!cmd[0])
 		return (0);
-	if (cmd[0])
-		str = token_without_quoted(cmd[0]);
-	// if (cmd == NULL)
-	// 	return (1);
+	str = token_without_quoted(cmd[0]);
 	if (str == NULL || str[0] == '\0')
 	{
 		free(str);
@@ -104,10 +99,6 @@ int	builtin_part1(t_read *line, char **cmd)
 		free (str);
 		return (line->exit_status);
 	}
-	else
-	{
-		free (str);
-		executed = builtin_part3(line, cmd);
-	}
-	return (executed);
+	free (str);
+	return (builtin_part3(line, cmd));
 }

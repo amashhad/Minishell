@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:56:16 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 09:04:41 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:41:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ char	**remove_heredoc(char **fetch)
 	i = 0;
 	while (ft_fetcharr(fetch, "<<"))
 	{
+		if (!*fetch)
+			return (NULL);
 		if ((ft_strcmp("<<", fetch[i]) == 0))
 		{
 			fetch = del_arr(fetch, i);
 			fetch = del_arr(fetch, i);
 			if (!fetch)
 				return (NULL);
+			continue ;
 		}
 		i++;
 	}

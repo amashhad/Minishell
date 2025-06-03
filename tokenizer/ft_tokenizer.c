@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:34:37 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/30 18:51:19 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:55:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ char	**ft_tokenizer(t_read *line)
 	fill_tokens(line);
 	line->token->tokens[i] = NULL;
 	i = 0;
-	// ft_printarr(line->token->tokens);
-	
 	if (line->token->error_token == 2)
 	{
 		ft_putendl_fd("syntax error", 2);

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 19:03:29 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 19:23:59 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:40:04 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	open_stdout(char **cmd, int *close_flag)
 	if (ft_strcmp(">", cmd[0]) == 0)
 		fd = open(cmd[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else
-		fd = open(cmd[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+		fd = open(cmd[1], O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 	{
 		perror(cmd[1]);

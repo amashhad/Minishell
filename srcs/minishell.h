@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/30 14:30:43 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:40:49 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	count_arrow(t_expand *pand);
 void	go_to_check_error_arrow(t_read *line);
 void	go_to_check_arrow_two(t_read *line);
 void	go_to_check_arrow(t_read *line);
+void	double_quoted(t_expand *pand);
 
 //tokenizer
 //tokenizer->int

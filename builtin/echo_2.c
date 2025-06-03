@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 15:55:33 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:26:00 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ int	check_quoted(char *str)
 int	is_n(char *cmd)
 {
 	char	*str;
-	int	i;
+	int		i;
 
 	i = 0;
-	str = NULL;
 	str = token_without_quoted(cmd);
 	if (!str)
 		return (0);

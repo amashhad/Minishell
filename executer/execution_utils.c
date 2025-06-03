@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/30 18:53:08 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:34:54 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ static char	*fill_exve(t_read *line, char **env, char **redirect)
 
 	exve = NULL;
 	if (!ft_extra_chk(line, redirect[0]))
-		exve = get_key(redirect[0], 0);
+		exve = token_without_quoted(redirect[0]);
 	else
 	{
-		exve = get_key(redirect[0], 0);
+		exve = token_without_quoted(redirect[0]);
 		if (exve)
 			exve = ft_find_executable(line, env, exve);
 	}
 	if (!exve)
 	{
 		ft_farray(redirect);
-		ft_exit_with_error(line, ft_strjoin("Minisehll: command ",
+		ft_exit_with_error(line, ft_strjoin("Minisehll: command",
 				" doesn't exist"), "NULL", 127);
 	}
 	return (exve);
@@ -79,7 +79,7 @@ void	execute(t_read *line, char **cmd, char **env, int track)
 	if (!redirect)
 		ft_exit_with_error(line, "NULL", "NULL", exit_stat);
 	exve = fill_exve(line, env, redirect);
-	//close(line->heredocs[0]);
+	close_heredocs(line->heredocs, line->piper_len);
 	exit_stat = execve(exve, redirect, env);
 	free(exve);
 	ft_farray(redirect);

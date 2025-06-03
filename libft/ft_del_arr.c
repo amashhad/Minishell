@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 23:44:12 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 15:19:59 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:02:06 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**edit_arr(char **arr, char **new_arr, int index)
 	j = 0;
 	while (arr[i])
 	{
-		if(i != index)
+		if (i != index)
 		{
 			new_arr[j] = ft_strdup(arr[i]);
 			j++;

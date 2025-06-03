@@ -22,7 +22,7 @@ EXECUTER_SRCS	=	minishell_execute execution_err_handle execution_utils \
 EXPANDER_DIR	=	expander
 EXPANDER_SRCS	=	ft_expander expander_compare expander_fill_utils \
 					expander_free ft_expander_utils \
-					expander_syntax_err arrow_expander \
+					expander_syntax_err arrow_expander expander_compare_utils\
 
 TOKENIZER_DIR	=	tokenizer
 TOKENIZER_SRCS	=	ft_tokenizer tokenizer_utils free_tokens \

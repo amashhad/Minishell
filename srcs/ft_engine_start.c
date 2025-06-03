@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 21:32:22 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 22:42:53 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:54:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,27 @@ void	ft_checktokens(t_read *line)
 void	ft_checkredirect(t_read *line)
 {
 	static char	*redirections[] = {">", ">>", "<<", "<", NULL};
+	int			i;
 
-	if (ft_arr_srch(line->tokens[0], redirections)
-		&& ft_arrlen(line->tokens) < 2)
+	i = 0;
+	while (line->piper[i])
 	{
-		syntax_exit_status(line, line->tokens[0], 2, 2);
-		return ;
-	}
-	if (ft_arr_srch(line->tokens[ft_arrlen(line->tokens) - 1], redirections)
-		|| (ft_arr_srch(line->tokens[ft_arrlen(line->tokens)
-					- 1], redirections)))
-	{
-		syntax_exit_status(line, line->tokens[ft_arrlen(line->tokens)
-			- 1], 2, 2);
-		return ;
+		if (ft_arr_srch(line->piper[i][0], redirections)
+			&& ft_arrlen(line->piper[i]) < 2)
+		{
+			syntax_exit_status(line, line->piper[i][0], 2, 2);
+			return ;
+		}
+		if (ft_arr_srch(line->piper[i][ft_arrlen(line->piper[i])
+				- 1], redirections)
+			|| (ft_arr_srch(line->piper[i][ft_arrlen(line->piper[i])
+						- 1], redirections)))
+		{
+			syntax_exit_status(line, line->piper[i][ft_arrlen(line->piper[i])
+				- 1], 2, 2);
+			return ;
+		}
+		i++;
 	}
 }
 
@@ -105,10 +112,10 @@ void	terminal_shell(t_read *line)
 		ft_checktokens(line);
 		if (exit_code != line->exit_status)
 			return ;
-		ft_checkredirect(line);
+		prepare_piper(line);
 		if (exit_code != line->exit_status)
 			return ;
-		prepare_piper(line);
+		ft_checkredirect(line);
 		if (exit_code != line->exit_status)
 			return ;
 		heredoc_handler(line);
