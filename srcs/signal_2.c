@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 19:42:10 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:22:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	handle_sigint3(int sig)
 {
 	(void)sig;
-	signal(SIGINT, SIG_DFL);
-	write(1, "\n", 1);
 }
 
 void	ft_signal3(int mod)

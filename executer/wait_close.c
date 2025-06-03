@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:53:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 17:10:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:27:17 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	wait_children(t_read *line, int *status, int pingpong[2][2], pid_t pid)
 				sig = WTERMSIG(*status);
 				if (sig == SIGQUIT)
 					write(1, "Quit (core dumped)\n", 20);
+				else if (sig == SIGINT)
+					write(1, "\n", 1);
 				line->exit_status = 128 + sig;
 			}
 			else if (WIFEXITED(*status))

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:36:32 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 19:41:11 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:38:13 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	last_cmd(t_read *line, int read[2], int write[2], int cmd)
 		dup2(read[0], STDIN_FILENO);
 		close(read[0]);
 	}
+	setup_signals(2);
 	execute(line, line->piper[cmd], line->enviro, cmd);
 }
 
@@ -48,11 +49,11 @@ void	cmd_loop(t_read *line, int track, int pingpong[2][2])
 		ft_errmsg(line, pingpong, "Fork Failed\n", 1);
 	if (pid == 0)
 	{
-		ft_signal2(2);
+		setup_signals(2);
 		cmd_chain(line, pingpong[track % 2],
 			pingpong[(track + 1) % 2], track);
 	}
-	ft_signal3(3);
+	setup_signals(3);
 }
 
 void	cmd_chain(t_read *line, int write[2], int read[2], int cmd)
