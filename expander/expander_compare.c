@@ -6,11 +6,27 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:43:02 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 14:01:18 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:43:43 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_expander.h"
+
+static void	quotes_loop(t_expand *pand)
+{
+	while (pand->input[pand->i] != '"'
+		&& pand->input[pand->i] != '\0')
+	{
+		if (pand->input[pand->i] == '$')
+			dollar_fill_expander(pand);
+		else
+		{
+			pand->result[pand->i_result] = pand->input[pand->i];
+			pand->i_result++;
+			pand->i++;
+		}
+	}
+}
 
 void	fill_double_quoted(t_expand *pand)
 {
@@ -19,18 +35,7 @@ void	fill_double_quoted(t_expand *pand)
 		pand->result[pand->i_result] = pand->input[pand->i];
 		pand->i_result++;
 		pand->i++;
-		while (pand->input[pand->i] != '"'
-			&& pand->input[pand->i] != '\0')
-		{
-			if (pand->input[pand->i] == '$')
-				dollar_fill_expander(pand);
-			else
-			{
-				pand->result[pand->i_result] = pand->input[pand->i];
-				pand->i_result++;
-				pand->i++;
-			}
-		}
+		quotes_loop(pand);
 		if (pand->input[pand->i] == '\0')
 		{
 			pand->pand_error = 2;

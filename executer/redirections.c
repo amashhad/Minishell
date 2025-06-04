@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:40:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 19:31:01 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:52:24 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	stdin_arrow(t_read *line, int counter, char ***fetch)
 		{
 			if ((*fetch)[(i) + 1])
 			{
-				if (counter != 2 && line->old_fd > 0)
+				if (counter != 2 || line->old_fd > 0)
 					close(line->old_fd);
 				line->old_fd = open_stdin((*fetch)[i + 1]);
 				if (line->old_fd < 0)
@@ -84,26 +84,24 @@ int	chk_stdin(char **cmd, t_read *line)
 {
 	int	i;
 	int	heredoc;
-	int	redirect;
+	int	stdinput;
 
 	heredoc = 0;
-	redirect = 0;
+	stdinput = 0;
 	i = 0;
 	line->old_fd = 0;
 	while (cmd[i])
 	{
 		if (ft_strcmp(cmd[i], "<") == 0)
-			redirect++;
+			stdinput = i;
 		else if (ft_strcmp(cmd[i], "<<") == 0)
-			heredoc++;
+			heredoc = i;
 		i++;
 	}
-	if (heredoc > redirect)
+	if (heredoc > stdinput)
 		return (1);
-	else if (redirect > heredoc)
+	else if (stdinput > heredoc)
 		return (2);
-	else if ((heredoc == redirect) && (redirect == 0))
-		return (0);
 	return (0);
 }
 
