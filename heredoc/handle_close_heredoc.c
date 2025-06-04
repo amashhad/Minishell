@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 02:37:10 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 09:17:29 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:18:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,16 @@ void	close_heredocs(int *heredocs, int len)
 //prints the delimiter and reads heredoc w/readline function
 //then writes into the pipe, saves the prev fd in case of multi-heredoc
 //inside the command line
-int	readheredoc(int fd[2], char *fnd, int count)
+int	readheredoc(t_read *line, int fd[2], char *fnd, int count)
 {
-	char		*line;
 	static int	prev_fd;
 
-	line = NULL;
 	if (prev_fd > 0 && count > 0)
 	{
 		close(prev_fd);
 		prev_fd = 0;
 	}
-	fill_heredoc(fd[1], fd[0], fnd, &line);
+	fill_heredoc(fd[1], fd[0], fnd, line);
 	close(fd[1]);
 	prev_fd = fd[0];
 	return (0);

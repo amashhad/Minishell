@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 03:26:33 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 19:21:20 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:21:39 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ int	syntax_error_heredoc(t_read *line, int fill)
 }
 
 //checks for null condition of the line read by heredoc
-int	null_condition_heredoc(char **line, char *fnd)
+int	null_condition_heredoc(t_read *line, char *fnd)
 {
-	if (ft_strcmp(*line, fnd) == 0 || !*line)
+	if (ft_strcmp(line->heredoc_dst, fnd) == 0 || !line->heredoc_dst)
 	{
-		free(*line);
+		free(line->heredoc_dst);
+		line->heredoc_dst = NULL;
 		return (1);
 	}
 	else
@@ -41,7 +42,7 @@ void	dup2_close_heredoc(int dup_fd, int fd2)
 }
 
 //fills heredoc
-void	fill_heredoc(int fd, int fd2, char *fnd, char **line)
+void	fill_heredoc(int fd, int fd2, char *fnd, t_read *line)
 {
 	int	dup_fd;
 
@@ -51,7 +52,7 @@ void	fill_heredoc(int fd, int fd2, char *fnd, char **line)
 	ft_putendl_fd(fnd, dup_fd);
 	while (1)
 	{
-		*line = readline(">");
+		line->heredoc_dst = readline(">");
 		if (g_sig == 2)
 		{
 			dup2_close_heredoc(dup_fd, fd2);
@@ -59,11 +60,11 @@ void	fill_heredoc(int fd, int fd2, char *fnd, char **line)
 		}
 		if (null_condition_heredoc(line, fnd))
 			break ;
-		ft_putendl_fd(*line, fd);
-		free(*line);
-		*line = NULL;
+		ft_putendl_fd(line->heredoc_dst, fd);
+		free(line->heredoc_dst);
+		line->heredoc_dst = NULL;
 	}
-	if (!*line)
+	if (!line->heredoc_dst)
 		printf("minishell: warning: here-document"
 			" delimited by end-of-file (wanted `%s')\n", fnd);
 	close(dup_fd);
@@ -90,7 +91,7 @@ int	search_heredoc(t_read *line, char **heredoc, int fill)
 				perror("Pipe");
 				return (-1);
 			}
-			readheredoc(fd, heredoc[i + 1], count++);
+			readheredoc(line, fd, heredoc[i + 1], count++);
 			if (g_sig == 2)
 				break ;
 			line->heredocs[fill] = fd[0];

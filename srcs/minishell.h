@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 19:40:49 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:25:13 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_read
 	int			exit_status;
 	int			heredocs[256];
 	int			old_fd;
+	char		*heredoc_dst;
 	char		*prompt;
 	char		*line;
 	char		*cwd;
@@ -163,13 +164,12 @@ void	double_quoted(t_expand *pand);
 void	fill_double_quoted(t_expand *pand);
 //heredoc
 int		check_heredocs(t_read *line, int heredoc, char ***fetch, int track);
-int		readheredoc(int fd[2], char *fnd, int count);
+int		readheredoc(t_read *line, int fd[2], char *fnd, int count);
 int		search_heredoc(t_read *line, char **heredoc, int fill);
 char	**remove_heredoc(char **fetch);
 void	heredoc_handler(t_read *line);
 void	close_heredocs(int *heredocs, int len);
-int		readheredoc(int fd[2], char *fnd, int count);
-void	fill_heredoc(int fd, int fd2, char *fnd, char **line);
+void	fill_heredoc(int fd, int fd2, char *fnd, t_read *line);
 
 //builtin
 //builtin->int
