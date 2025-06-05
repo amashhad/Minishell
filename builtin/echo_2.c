@@ -6,36 +6,11 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 13:26:00 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:12:16 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-
-int	check_quoted(char *str)
-{
-	size_t	i;
-	char	c;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if ((str[i] == '"' || str[i] == '\''))
-		{
-			c = str[i];
-			while (str[i] != '\0')
-			{
-				i++;
-				if (str[i] == c)
-					break ;
-				if (str[i] == '\0')
-					return (0);
-			}
-		}
-		i++;
-	}
-	return (1);
-}
 
 int	is_n(char *cmd)
 {

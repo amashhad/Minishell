@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:44:24 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 13:29:49 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:23:50 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,6 @@ void	ft_handle_unset(t_read *line, char **cmd)
 	}
 }
 
-int	is_odd(char *str)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '"')
-		{
-			j++;
-		}
-		if (str[i] == '\'')
-		{
-			k++;
-		}
-		i++;
-	}
-	if ((j % 2) != 0 || (k % 2) != 0)
-		return (1);
-	return (0);
-}
-
 int	is_valid_export_key(const char *str)
 {
 	int	i;
@@ -69,6 +43,34 @@ int	is_valid_export_key(const char *str)
 	while (str[i] && str[i] != '=')
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	is_valid_export_value(const char *str)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	c = '\0';
+	while (str[i] != '\0')
+	{
+		while (str[i] == '"' || str[i] == '\'')
+		{
+			c = str[i];
+			i++;
+			while (str[i] != c && str[i] != '\0')
+				i++;
+			if (str[i] == '\0')
+				break ;
+			i++;
+		}
+		if (str[i] == '\0')
+			break ;
+		if (str[i] == '|' || str[i] == '&')
 			return (1);
 		i++;
 	}

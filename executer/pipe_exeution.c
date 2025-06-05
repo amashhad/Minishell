@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:20:44 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 21:26:05 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:36:33 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ int	piper_ops(t_read *line)
 	if (pid == -1)
 		ft_errmsg(line, pingpong, "Fork Failed\n", 1);
 	if (pid == 0)
-	{
-		//setup_signals(2);
 		last_cmd(line, pingpong[(track + 1) % 2], pingpong[(track) % 2], track);
-	}
 	setup_signals(3);
 	wait_children(line, &status, pingpong, pid);
 	return (line->exit_status);

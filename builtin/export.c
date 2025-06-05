@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/04 21:54:17 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:04:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,14 @@ static void	ft_export_success(t_read *line, char *cmd)
 	srch = NULL;
 	if (ft_strchr(cmd, '='))
 	{
-		srch = get_key(cmd, '=');
+		srch = get_key(cmd);
 		if (fill_or_rplc(line, cmd, srch))
 			return ;
 	}
 	else
 	{
-		srch = get_key(cmd, 0);
-		if (!srch || !(ft_strcmp(srch, "Malloc Error\n")))
-		{
-			printf("The Key Not Valid\n");
-			return ;
-		}
-		if (!(check_name_of_key(line->expo, srch)))
-			line->expo = ft_addarr(srch, line->expo);
-		free (srch);
+		if (!(check_name_of_key(line->expo, cmd)))
+			line->expo = ft_addarr(cmd, line->expo);
 	}
 }
 
@@ -98,6 +91,8 @@ void	ft_handle_export(t_read *line, char **cmd)
 			break ;
 		str = token_without_quoted(cmd[i]);
 		if (is_valid_export_key(str))
+			ft_export_err(line, cmd, i);
+		else if (is_valid_export_value(cmd[i]))
 			ft_export_err(line, cmd, i);
 		else
 			ft_export_success(line, str);

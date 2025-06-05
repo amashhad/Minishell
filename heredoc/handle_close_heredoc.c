@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 02:37:10 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/04 22:18:41 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:42:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,15 @@ void	heredoc_handler(t_read *line)
 			return ;
 		}
 		i++;
+	}
+}
+
+void	free_line(t_read *line)
+{
+	if (line->line)
+	{
+		free (line->line);
+		line->line = NULL;
+		line->pand->result = NULL;
 	}
 }

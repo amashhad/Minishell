@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 15:42:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:57:59 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	go_to_work(t_read *line, char **argv)
 		line->line = readline(line->prompt);
 		if (g_sig == 1)
 			line->exit_status = 130;
+		g_sig = 0;
 		add_history(line->line);
 		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
 		line->tokens = ft_tokenizer(line);
@@ -58,7 +59,8 @@ void	go_to_work(t_read *line, char **argv)
 			free (line->line);
 			line->pand->result = NULL;
 		}
-		g_sig = 0;
+		if (g_sig != 2)
+			g_sig = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 18:34:54 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:03:57 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static char	**execute_utilns(t_read *line,
 {
 	redirect = redirect_stdout(cmd);
 	if (!redirect)
-		ft_exit_with_error(line, NULL, NULL, 1);
+		ft_exit_with_error(line, NULL, NULL, 0);
 	redirect = redirect_stdin(line, redirect, track);
 	if (!redirect)
-		ft_exit_with_error(line, NULL, NULL, 1);
+		ft_exit_with_error(line, NULL, NULL, 0);
 	if (builtin_part1(line, redirect) != 10)
 	{
 		ft_farray(redirect);

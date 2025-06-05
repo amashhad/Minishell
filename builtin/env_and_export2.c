@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:03:03 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 22:32:40 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:35:24 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**rplc_env(char *fnd, char **old_arr, char *rplc)
 	if (!i)
 		return (old_arr);
 	free(old_arr[i]);
-	copy_without_quoted(rplc, i, old_arr);
+	old_arr[i] = ft_strdup(fnd);
 	new_arr = ft_cpyarr(old_arr);
 	if (!new_arr)
 		return (NULL);
@@ -66,7 +66,7 @@ char	**rplc_export(char *fnd, char **old_arr, char *rplc)
 	if (!i)
 		return (old_arr);
 	free(old_arr[i]);
-	copy_without_quoted(rplc, i, old_arr);
+	old_arr[i] = ft_strdup(rplc);
 	add_quoted_for_value(old_arr, i);
 	new_arr = ft_cpyarr(old_arr);
 	if (!new_arr)

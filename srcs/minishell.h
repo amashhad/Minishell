@@ -6,17 +6,12 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/04 22:25:13 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:07:15 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-//heredoc identifiers enums
-# define HEREDOC_FINISH -255
-# define HEREDOC_FAIL -1
-# define HEREDOC_SUCCESS -100
 
 # include <stdio.h>
 # include <errno.h>
@@ -74,7 +69,6 @@ typedef struct s_read
 	int			exit_status;
 	int			heredocs[256];
 	int			old_fd;
-	char		*heredoc_dst;
 	char		*prompt;
 	char		*line;
 	char		*cwd;
@@ -170,27 +164,23 @@ char	**remove_heredoc(char **fetch);
 void	heredoc_handler(t_read *line);
 void	close_heredocs(int *heredocs, int len);
 void	fill_heredoc(int fd, int fd2, char *fnd, t_read *line);
+void	free_line(t_read *line);
 
 //builtin
 //builtin->int
 int		builtin_part1(t_read *line, char **cmd);
-int		check_quoted(char *str);
 int		is_n(char *str);
-int		is_odd(char *str);
-int		check_quoted_1(char *serch, int i);
-int		check_quoted_2(char *serch, int i);
 int		check_redirections(char *str);
-int		chk_compare(char c);
 int		is_valid_export_key(const char *str);
+int		is_valid_export_value(const char *str);
 //builtin->char
 char	*ft_getenv(char **enviro, char *env);
 char	**fill_env(char *str, char **old_arr);
 char	**fill_export(char *str, char **old_arr);
 char	**rplc_env(char *fnd, char **old_arr, char *rplc);
 char	**rplc_export(char *fnd, char **old_arr, char *rplc);
-char	*get_key(char *str, int c);
+char	*get_key(char *str);
 char	*check_name_of_key(char **arr, char *fetch);
-char	*get_serch(char *str, int c);
 char	*check_name(const char *big, const char *little, size_t len);
 
 //builtin->void
@@ -199,10 +189,7 @@ void	ft_handle_echo(char **cmd);
 void	ft_handle_export(t_read *line, char **cmd);
 void	ft_handle_unset(t_read *line, char **cmd);
 void	ft_handle_env(t_read *line, char **cmd);
-void	*copy_without_quoted(char *str, int size, char **arr);
 void	*add_quoted_for_value(char **arr, int size);
-void	count_in_side_quoted(char *str, char c, int *i, int *j);
-void	fill_in_side_quoted(char *str, char *s, int *i, int *j);
 void	add_rplc(t_read *line, char *srch, char *rplc);
 
 //signals(void)

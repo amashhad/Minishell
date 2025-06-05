@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 03:26:33 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/04 22:21:39 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:41:42 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,21 @@ int	syntax_error_heredoc(t_read *line, int fill)
 //checks for null condition of the line read by heredoc
 int	null_condition_heredoc(t_read *line, char *fnd)
 {
-	if (ft_strcmp(line->heredoc_dst, fnd) == 0 || !line->heredoc_dst)
+	if (ft_strcmp(line->line, fnd) == 0 || !line->line)
 	{
-		free(line->heredoc_dst);
-		line->heredoc_dst = NULL;
-		return (1);
+		if (!line->line)
+		{
+			printf("minishell: warning: here-document"
+				" delimited by end-of-file (wanted `%s')\n", fnd);
+			return (1);
+		}
+		else
+		{
+			free(line->line);
+			line->line = NULL;
+			line->pand->result = NULL;
+			return (1);
+		}
 	}
 	else
 		return (0);
@@ -52,7 +62,10 @@ void	fill_heredoc(int fd, int fd2, char *fnd, t_read *line)
 	ft_putendl_fd(fnd, dup_fd);
 	while (1)
 	{
-		line->heredoc_dst = readline(">");
+		free_line(line);
+		line->line = readline(">");
+		line->line = ft_expander(line,
+				ft_itoa(line->exit_status), "./minishell");
 		if (g_sig == 2)
 		{
 			dup2_close_heredoc(dup_fd, fd2);
@@ -60,13 +73,10 @@ void	fill_heredoc(int fd, int fd2, char *fnd, t_read *line)
 		}
 		if (null_condition_heredoc(line, fnd))
 			break ;
-		ft_putendl_fd(line->heredoc_dst, fd);
-		free(line->heredoc_dst);
-		line->heredoc_dst = NULL;
+		ft_putendl_fd(line->line, fd);
+		free(line->line);
+		line->line = NULL;
 	}
-	if (!line->heredoc_dst)
-		printf("minishell: warning: here-document"
-			" delimited by end-of-file (wanted `%s')\n", fnd);
 	close(dup_fd);
 }
 

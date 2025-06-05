@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 08:51:48 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/04 22:37:10 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:43:14 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	initalization_struct_tok(t_read *line)
 	line->token->input = NULL;
 	line->token->tokens = NULL;
 }
+
 void	line_malloc_init(t_read *line, char **envp)
 {
 	if (!envp || !*envp)
@@ -84,10 +85,8 @@ void	initalization(t_read *line, char **envp)
 	line->line = NULL;
 	line->prompt = NULL;
 	line->tokens = NULL;
-	line->heredoc_dst = NULL;
 	line->cwd = NULL;
 	line->piper = NULL;
-	line->heredoc_dst = NULL;
 	line->exit_status = 0;
 	line->piper_len = 0;
 	line->i_error = 0;

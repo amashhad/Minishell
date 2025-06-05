@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:34:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 04:25:06 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:56:04 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	write(1, "\n", 1);
+	if (g_sig != 2)
+	{
+		g_sig = 1;
+		write(1, "\n", 1);
+	}
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	g_sig = 1;
 }
 
 void	ft_signal(int mod)

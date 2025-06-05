@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:18:04 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/30 18:15:29 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:35:44 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
-
-char	*get_serch(char *str, int c)
-{
-	char	*serch;
-	int		i;
-
-	i = 0;
-	if (c == 0)
-	{
-		serch = ft_strdup(str);
-	}
-	if (c != 0)
-	{
-		serch = rev_strchr(str, c);
-	}
-	if (check_quoted_1(serch, i) || check_quoted_2(serch, i))
-	{
-		free (serch);
-		return (NULL);
-	}
-	return (serch);
-}
 
 static char	*fill_str(char *str, char *arr, int i, int j)
 {
@@ -96,7 +74,7 @@ char	**fill_export(char *str, char **old_arr)
 		i++;
 	}
 	ft_farray(old_arr);
-	copy_without_quoted(str, size, arr);
+	arr[i] = ft_strdup(str);
 	add_quoted_for_value(arr, size);
 	arr[size + 1] = NULL;
 	return (arr);
