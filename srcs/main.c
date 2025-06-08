@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/08 22:39:15 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/08 23:17:02 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ volatile sig_atomic_t	g_sig;
 
 void	big_o_banner(void)
 {
-	ft_putendl_fd(" ____      0      ____________             ", 1);
-	ft_putendl_fd("||   )    ___    /   _________|          ____", 1);
-	ft_putendl_fd("||  /    |   |   |  |        _   ___    (    )", 1);
-	ft_putendl_fd("||  \\    |   |   |  |_______| | |___|   (    )   ", 1);
-	ft_putendl_fd("||___)   |___|   |________  __|         (____) ", 1);
-	ft_putendl_fd("              (BIG - O Minishell)       \n", 1);
+	ft_putendl_fd("\033[38;5;240m ____    (0)   "
+		"  __________                ", 1);
+	ft_putendl_fd("\033[38;5;240m|    )    __  "
+		"  (   _______)             _____", 1);
+	ft_putendl_fd("\033[38;5;240m|  _/    (  ) "
+		"  |  |        _    ___    (  _  )", 1);
+	ft_putendl_fd("\033[38;5;240m|   \\    |  | "
+		"  |  |_______| |  (___)   ( (_) )  ", 1);
+	ft_putendl_fd("\033[38;5;240m|____)   (__) "
+		"  |____________|          (_____)  ", 1);
+	ft_putendl_fd("\033[0m                 "
+		"(BIG - O Minishell)       \n", 1);
 }
 
 void	ft_get_prompt(t_read *line)
