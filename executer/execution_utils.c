@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/05 19:03:57 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/08 23:27:30 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*fill_exve(t_read *line, char **env, char **redirect)
 	if (!exve)
 	{
 		ft_farray(redirect);
-		ft_exit_with_error(line, ft_strjoin("Minisehll: command",
+		ft_exit_with_error(line, ft_strjoin("Minishell: command",
 				" doesn't exist"), "NULL", 127);
 	}
 	return (exve);
