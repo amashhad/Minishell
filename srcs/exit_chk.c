@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:59:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 19:59:16 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:16:23 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_numeric(int i, t_read *line)
 	i++;
 	if (line->tokens[i])
 	{
-		line->exit_status = 1;
+		line->exit_status = 127;
 		ft_putendl_fd("Minishell: exit: too many arguments", 2);
 		return (0);
 	}

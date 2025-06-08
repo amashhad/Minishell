@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:43:02 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/04 14:43:43 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/05 21:43:12 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,26 +86,15 @@ char	*token_without_quoted(char *str)
 	i = 0;
 	k = 0;
 	c = '\0';
+	s = NULL;
+	if (!str)
+		return (NULL);
 	s = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 	if (!s)
 	{
 		perror("Calloc");
 		return (NULL);
 	}
-	if (!str)
-		return (NULL);
 	quote_chk_loop(s, str, c, k);
 	return (s);
-}
-
-void	loop_remove(t_read *line)
-{
-	int	i;
-
-	i = 0;
-	while (line->token->tokens[i])
-	{
-		line->token->tokens[i] = token_without_quoted(line->token->tokens[i]);
-		i++;
-	}
 }

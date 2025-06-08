@@ -6,13 +6,23 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/05 15:57:59 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/08 22:39:15 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 volatile sig_atomic_t	g_sig;
+
+void	big_o_banner(void)
+{
+	ft_putendl_fd(" ____      0      ____________             ", 1);
+	ft_putendl_fd("||   )    ___    /   _________|          ____", 1);
+	ft_putendl_fd("||  /    |   |   |  |        _   ___    (    )", 1);
+	ft_putendl_fd("||  \\    |   |   |  |_______| | |___|   (    )   ", 1);
+	ft_putendl_fd("||___)   |___|   |________  __|         (____) ", 1);
+	ft_putendl_fd("              (BIG - O Minishell)       \n", 1);
+}
 
 void	ft_get_prompt(t_read *line)
 {
@@ -73,6 +83,7 @@ int	main(int argc, char **argv, char **envp)
 		exit (0);
 	(void) argc;
 	(void) argv;
+	big_o_banner();
 	initalization(line, envp);
 	ft_get_prompt(line);
 	go_to_work(line, argv);
