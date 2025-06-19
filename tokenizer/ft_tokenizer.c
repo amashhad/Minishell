@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:34:37 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/05 21:19:06 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/20 01:17:13 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ size_t	count(t_tok *token)
 		string_tokenizer(token);
 		pipe_tokenizer(token);
 		greater_tokenizer(token);
-		dollar_tokenizer(token);
 	}
 	return (token->index++);
 }
@@ -80,10 +79,6 @@ void	fill_tokens(t_read *line)
 		line->token->k = line->token->index;
 		line->token->count = line->token->i;
 		greater_tokenizer(line->token);
-		fill_token(line);
-		line->token->k = line->token->index;
-		line->token->count = line->token->i;
-		dollar_tokenizer(line->token);
 		fill_token(line);
 	}
 }
@@ -110,5 +105,6 @@ char	**ft_tokenizer(t_read *line)
 		ft_putendl_fd("syntax error", 2);
 		line->exit_status = 2;
 	}
+	ft_printarr(line->token->tokens);
 	return (line->token->tokens);
 }

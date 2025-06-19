@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_value_of_export.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:59:19 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/23 09:13:56 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/20 01:05:17 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_expander.h"
 
-char	*get_value_of_export(const char *big, const char *little, size_t len)
+char	*get_value_of_export(const char *big, const char *little)
 {
 	size_t	c;
 
@@ -24,13 +24,11 @@ char	*get_value_of_export(const char *big, const char *little, size_t len)
 	}
 	if (!*little)
 		return (NULL);
-	if (len == 0)
-		return (NULL);
 	while (little[c] != '\0')
 	{
 		if (big[c] == little[c])
 			c++;
-		else if (big[c] != little[c] && big[c] != '=')
+		else if (big[c] != little[c])
 			return (NULL);
 	}
 	if (big[c] == '=')

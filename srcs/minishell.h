@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/05 19:07:15 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/20 01:18:08 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ size_t	count_malloc(t_expand *pand);
 char	*ft_expander(t_read *line, char *last_exit_code, char *argv);
 char	*get_string_expander(t_expand *pand);
 char	*token_without_quoted(char *str);
+char	*get_value_of_export(const char *big, const char *little);
 //expander->void
 void	ft_free_expander(t_expand *pand);
 void	dollar_malloc_expander(t_expand *pand);
@@ -152,7 +153,6 @@ void	initialize_tok(t_tok *token);
 void	ft_free_tokenizer(t_tok *token);
 void	greater_tokenizer(t_tok *token);
 void	pipe_tokenizer(t_tok *token);
-void	dollar_tokenizer(t_tok *token);
 void	string_tokenizer(t_tok *token);
 void	double_quoted(t_expand *pand);
 void	fill_double_quoted(t_expand *pand);

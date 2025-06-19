@@ -6,7 +6,7 @@
 /*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:37:16 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/28 15:42:09 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 01:17:39 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	comper(char c)
 	if (ft_isspace(c))
 		return (1);
 	if (c == '\0')
-		return (1);
-	if (c == '$')
 		return (1);
 	return (0);
 }
@@ -47,15 +45,6 @@ void	greater_tokenizer(t_tok *token)
 void	pipe_tokenizer(t_tok *token)
 {
 	if (token->input[token->i] == '|')
-	{
-		token->i++;
-		token->index++;
-	}
-}
-
-void	dollar_tokenizer(t_tok *token)
-{
-	if (token->input[token->i] == '$')
 	{
 		token->i++;
 		token->index++;

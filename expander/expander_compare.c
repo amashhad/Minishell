@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_compare.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:43:02 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/05 21:43:12 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:25:10 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static void	quotes_loop(t_expand *pand)
 
 void	fill_double_quoted(t_expand *pand)
 {
+	int	mark;
+
+	mark = 0;
 	if (pand->input[pand->i] == '"')
 	{
 		pand->result[pand->i_result] = pand->input[pand->i];
@@ -38,10 +41,13 @@ void	fill_double_quoted(t_expand *pand)
 		quotes_loop(pand);
 		if (pand->input[pand->i] == '\0')
 		{
+			pand->result[pand->i_result] = pand->input[pand->i];
 			pand->pand_error = 2;
 			pand->i--;
+			mark = 1;
 		}
-		pand->result[pand->i_result] = pand->input[pand->i];
+		if (mark == 0)
+			pand->result[pand->i_result] = pand->input[pand->i];
 		pand->i_result++;
 		pand->i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_chk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:59:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/05 19:16:23 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/20 01:43:46 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_numeric(int i, t_read *line)
 	srch = 0;
 	if (!line->tokens[i])
 		return (1);
-	while (line->tokens[i][srch] && ft_isdigit(line->tokens[i][srch]))
+	while ((line->tokens[i][srch] && ft_isdigit(line->tokens[i][srch])) || line->tokens[i][srch] == '-')
 		srch++;
 	if (line->tokens[i][srch] && !ft_isdigit(line->tokens[i][srch]))
 	{

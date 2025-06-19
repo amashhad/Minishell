@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 21:09:59 by amashhad          #+#    #+#             */
-/*   Updated: 2025/05/13 21:34:47 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:42:18 by alhamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*go_to_get(char **arr, char *fetch)
 		return (NULL);
 	while (arr[i])
 	{
-		if (get_value_of_export(arr[i], fetch, ft_strlen(fetch)))
-			return (get_value_of_export(arr[i], fetch, ft_strlen(fetch)));
+		if (get_value_of_export(arr[i], fetch))
+			return (get_value_of_export(arr[i], fetch));
 		i++;
 	}
 	return (NULL);
