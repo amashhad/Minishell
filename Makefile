@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC		=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 RM		=	rm -rf
 SRC		= 	main exit_chk ft_exit_error signal signal_2 initalization\
 			ft_engine_start $(EXECUTER_SRCS) $(EXPANDER_SRCS) $(TOKENIZER_SRCS) $(HEREDOC_SRCS) $(BUILTIN_SRCS)\

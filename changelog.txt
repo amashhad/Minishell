@@ -1,0 +1,4 @@
+Version 1.01:
+--Fixed	invalid free in heredoc whereas anything you input in heredoc causes invalid free
+--Fixed	incorrect commands being executed when there are multiple (/), eg: /////////ls
+--Fixed	history adding whitespaces to the history list

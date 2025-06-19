@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 03:26:33 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/05 18:41:42 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:23:00 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	fill_heredoc(int fd, int fd2, char *fnd, t_read *line)
 		if (null_condition_heredoc(line, fnd))
 			break ;
 		ft_putendl_fd(line->line, fd);
-		free(line->line);
-		line->line = NULL;
 	}
 	close(dup_fd);
 }

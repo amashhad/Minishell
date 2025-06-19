@@ -6,17 +6,44 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/08 23:27:30 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:27:45 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/minishell.h"
+
+//checks if there are extra backslashes (//) behind the command
+size_t	chk_back_slash(char *cmd)
+{
+	int	i;
+	int	cnt;
+
+	i = 0;
+	cnt = 0;
+	if (!ft_strchr(cmd, '/'))
+		return (0);
+	while (cmd[i])
+	{
+		if (cmd[i] == '/')
+			cnt++;
+		if (cnt == 1 && ft_isalnum(cmd[i + 1]))
+			return (0);
+		if (cnt == 1)
+			return (1);
+		if (cmd[i] != '/')
+			cnt = 0;
+		i++;
+	}
+	return (0);
+}
 
 //checks if the command exists in relative path
 int	ft_extra_chk(t_read *line, char *fcommand)
 {
 	if (!fcommand)
 		execution_free(line, 0, NULL);
+	if (chk_back_slash(fcommand))
+		return (-1);
 	if (access(fcommand, F_OK) == 0)
 	{
 		if (access(fcommand, X_OK) == -1)
@@ -50,18 +77,24 @@ static char	*fill_exve(t_read *line, char **env, char **redirect)
 	char	*exve;
 
 	exve = NULL;
-	if (!ft_extra_chk(line, redirect[0]))
+	if (ft_extra_chk(line, redirect[0]) == 0)
 		exve = token_without_quoted(redirect[0]);
-	else
+	else if (ft_extra_chk(line, redirect[0]) == 1)
 	{
 		exve = token_without_quoted(redirect[0]);
 		if (exve)
 			exve = ft_find_executable(line, env, exve);
 	}
+	else
+	{
+		ft_farray(redirect);
+		ft_exit_with_error(line, ft_strjoin("Minisehll: command",
+				" doesn't exist"), "NULL", 127);
+	}
 	if (!exve)
 	{
 		ft_farray(redirect);
-		ft_exit_with_error(line, ft_strjoin("Minishell: command",
+		ft_exit_with_error(line, ft_strjoin("Minisehll: command",
 				" doesn't exist"), "NULL", 127);
 	}
 	return (exve);

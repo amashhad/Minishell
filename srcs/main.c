@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:02:20 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/08 23:17:02 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:33:58 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	go_to_work(t_read *line, char **argv)
 		if (g_sig == 1)
 			line->exit_status = 130;
 		g_sig = 0;
-		add_history(line->line);
+		if (line->line && line->line[0])
+			add_history(line->line);
 		line->line = ft_expander(line, ft_itoa(line->exit_status), argv[0]);
 		line->tokens = ft_tokenizer(line);
 		if (ft_exit_shell(line))
