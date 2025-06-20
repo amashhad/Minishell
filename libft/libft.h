@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:57:01 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/20 00:44:05 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 09:16:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char	**ft_addarr(char *str, char **arr);
 char	**ft_subarr(char *str, char **old_arr);
 char	**ft_srchrarr(char *fnd, char **old_arr, char *rplc);
 char	**del_arr(char **arr, int index);
-
 
 //voids
 void	*ft_memchr(const void *s, int c, size_t n);

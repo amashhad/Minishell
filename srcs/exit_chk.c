@@ -6,15 +6,15 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:59:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/20 07:29:05 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/20 09:17:41 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void line_atoi(t_read *line, char *str, int *fill)
+void	line_atoi(t_read *line, char *str, int *fill)
 {
-	char *ptr;
+	char	*ptr;
 
 	ptr = str;
 	if (!str)
@@ -28,7 +28,7 @@ void line_atoi(t_read *line, char *str, int *fill)
 	{
 		if (!ft_isdigit(*ptr))
 			ft_exit_with_error(line, ft_joinstrjoin("minishell: exit: ",
-				str, " numeric argument required"), NULL, 2);
+					str, " numeric argument required"), NULL, 2);
 		ptr++;
 	}
 	*fill = ft_atoi(str);
@@ -48,12 +48,12 @@ static int	ft_numeric(int i, t_read *line)
 	}
 	if (numeric >= 0)
 	{
-		line->exit_status = (numeric%256);
+		line->exit_status = (numeric % 256);
 		return (1);
 	}
 	else
 	{
-		line->exit_status = ((numeric + 256)%256);
+		line->exit_status = ((numeric + 256) % 256);
 		return (1);
 	}
 }

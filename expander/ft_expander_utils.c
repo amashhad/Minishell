@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expander_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:31:31 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/20 00:08:59 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 09:16:08 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	single_quoted(t_expand *pand)
 			pand->count--;
 			pand->i--;
 		}
-		// pand->count++;
 		pand->k++;
 		pand->quoted = get_string_expander(pand);
 		pand->string = NULL;
