@@ -3,41 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   exit_chk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:59:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/20 01:43:46 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 07:29:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void line_atoi(t_read *line, char *str, int *fill)
+{
+	char *ptr;
+
+	ptr = str;
+	if (!str)
+		return ;
+	if (*ptr == '+' || *ptr == '-')
+		ptr++;
+	if (!ft_isdigit(*ptr))
+		ft_exit_with_error(line, ft_joinstrjoin("minishell: exit: ",
+				str, "numeric argument required"), NULL, 2);
+	while (*ptr)
+	{
+		if (!ft_isdigit(*ptr))
+			ft_exit_with_error(line, ft_joinstrjoin("minishell: exit: ",
+				str, " numeric argument required"), NULL, 2);
+		ptr++;
+	}
+	*fill = ft_atoi(str);
+}
+
 static int	ft_numeric(int i, t_read *line)
 {
-	int		srch;
+	int	numeric;
 
-	srch = 0;
-	if (!line->tokens[i])
-		return (1);
-	while ((line->tokens[i][srch] && ft_isdigit(line->tokens[i][srch])) || line->tokens[i][srch] == '-')
-		srch++;
-	if (line->tokens[i][srch] && !ft_isdigit(line->tokens[i][srch]))
+	numeric = 1;
+	line_atoi(line, line->tokens[i], &numeric);
+	if (line->tokens[i] && line->tokens[i + 1])
 	{
-		line->exit_status = 2;
-		ft_putstr_fd("bash: exit: ", 2);
-		ft_putstr_fd(line->tokens[i], 2);
-		ft_putendl_fd(" : numeric argument required", 2);
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		line->exit_status = 1;
+		return (-1);
+	}
+	if (numeric >= 0)
+	{
+		line->exit_status = (numeric%256);
 		return (1);
 	}
-	line->exit_status = (ft_atol(line->tokens[i]) % 256);
-	i++;
-	if (line->tokens[i])
+	else
 	{
-		line->exit_status = 127;
-		ft_putendl_fd("Minishell: exit: too many arguments", 2);
-		return (0);
+		line->exit_status = ((numeric + 256)%256);
+		return (1);
 	}
-	return (1);
 }
 
 int	ft_exit_shell(t_read *line)

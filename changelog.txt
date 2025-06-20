@@ -1,9 +1,11 @@
-Version 1.01:
+Version 1.10:
 --Fixed	invalid free in heredoc whereas anything you input in heredoc causes invalid free.
 --Fixed	incorrect commands being executed when there are multiple (/), eg: /////////ls.
 --Fixed	history adding whitespaces to the history list.
-Version 1.02
+Version 1.20:
 --Fixed	infinite Loop in expander, brought by trying to expand similar invalid expanders, eg: $USER1, $PATHSSSSS.
 --Reworked "char *get_value_of_export", now it no longer needs a size to search for, and is no longer a libft function.
 --Reworked how tokenizer interacts with $, now it is not considered a token, whereas before it was considered a token, resulting in a wrong command.
 --Reworked how redirections take input, now the file to open/close is taken without ""/'' or similar troublesome identifiers, resulting to much similar behavior to bash.
+Version	1.21:
+--Fixed	a small issue with exit code, exit (-num), Exit (alnum)(num) and exit (num) now all work as expected
