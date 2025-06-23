@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 06:14:49 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/03 13:21:17 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:23:39 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	builtin_part1(t_read *line, char **cmd)
 	if (str == NULL || str[0] == '\0')
 	{
 		free(str);
+		ft_putendl_fd("Minishell: command doesn't exist", 2);
 		line->exit_status = 127;
 		return (0);
 	}

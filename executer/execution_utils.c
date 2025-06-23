@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alhamdan <alhamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:04:43 by amashhad          #+#    #+#             */
-/*   Updated: 2025/06/20 01:28:55 by alhamdan         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:24:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ static char	*fill_exve(t_read *line, char **env, char **redirect)
 	else
 	{
 		ft_farray(redirect);
-		ft_exit_with_error(line, ft_strjoin("Minisehll: command",
+		ft_exit_with_error(line, ft_strjoin("Minishell: command",
 				" doesn't exist"), "NULL", 127);
 	}
 	if (!exve)
 	{
 		ft_farray(redirect);
-		ft_exit_with_error(line, ft_strjoin("Minisehll: command",
+		ft_exit_with_error(line, ft_strjoin("Minishell: command",
 				" doesn't exist"), "NULL", 127);
 	}
 	return (exve);
